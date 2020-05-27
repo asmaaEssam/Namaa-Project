@@ -45,10 +45,7 @@ const Schema= new mongoose.Schema({
         type:String,
         required:true
     },
-    employees:{
-        type: [{type: Schema.ObjectId, ref: 'User'}],
-        required: true
-    }
+    employees:[{type: mongoose.Schema.ObjectId, ref: 'User'}]
     
 })
 

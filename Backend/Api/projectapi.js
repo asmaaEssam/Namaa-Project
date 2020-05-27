@@ -16,9 +16,9 @@ projectRouter.get('/',async (req,res,next)=>{
 //Add Project
 projectRouter.post('/add',async (req,res,next)=>{
     try{
-        const {category,name,owner,manger,location,start_date,end_date,status} = req.body;
+        const {category,name,owner,manager,location,start_date,end_date,status} = req.body;
         const newProject = new Project({
-            category,name,owner,manger,location,start_date,end_date,status
+            category,name,owner,manager,location,start_date,end_date,status
         });
         const savedProject = await newProject.save();
         res.status(201).send(savedProject.toJSON())
@@ -35,7 +35,7 @@ projectRouter.post('/edit/:id',async (req,res,next)=>{
     const  isValidOperation = updates.every((update)=> allowedUpdates.includes(update))
     if (!isValidOperation) return  new Error('Invalid updates !')
     try {
-    const  updatedProject  =  await  Project.findByIdAndUpdate(req.params.id, req.body, { new:  true, runValidators:  true })
+    const  updatedProject  =  await  Project.findByIdAndUpdate(req.params.id, req.body, { new:  true, runValidators:  true,useFindAndModify:false })
     if (!updatedProject) return  new Error('Project Not Found')
     res.status(201).send(updatedProject)
     
@@ -56,3 +56,5 @@ projectRouter.get('/:id', async(req,res,next)=>{
         res.status(400).send(err)
     }
 })
+
+module.exports =  projectRouter ;

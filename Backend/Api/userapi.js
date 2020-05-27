@@ -2,12 +2,12 @@ const express = require("express");
 const User = require("../models/usermodel");
 const bcrypt = require("bcryptjs");
 const userRouter = express.Router();
-userRouter.use(function (req, res, next) {
-    console.log("Time:", Date.now());
-    console.log(req.url);
-    console.log("Request Type:", req.method);
-    next();
-  });
+// userRouter.use(function (req, res, next) {
+//     console.log("Time:", Date.now());
+//     console.log(req.url);
+//     console.log("Request Type:", req.method);
+//     next();
+//   });
   const saltRound = 10;
   userRouter.post("/register",async (req, res, next) => {
     const { username, password,role } = req.body;
@@ -34,4 +34,4 @@ userRouter.use(function (req, res, next) {
     }
     res.status(500).send("Internal server error");
   });
-  module.exports = { userRouter };
+  module.exports =  userRouter ;
