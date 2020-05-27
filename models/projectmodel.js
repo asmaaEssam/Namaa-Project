@@ -46,7 +46,7 @@ const Schema= new mongoose.Schema({
         required:true
     },
     employees:{
-        type: [String],
+        type: [{type: Schema.ObjectId, ref: 'User'}],
         required: true
     }
     
