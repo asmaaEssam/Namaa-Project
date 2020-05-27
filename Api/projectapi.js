@@ -40,6 +40,19 @@ projectRouter.post('/edit/:id',async (req,res,next)=>{
     res.status(201).send(updatedProject)
     
     }catch(error) {
-    res.status(400).send(error)
+        //next(error)
+        res.status(400).send(error)
+    }
+})
+
+//Get A Project By ID
+
+projectRouter.get('/:id', async(req,res,next)=>{
+    try{
+        const project = await Project.find({ _id: req.params.id});
+        if (!project) return new Error('Project Not Found');
+        res.status(200).send(project);
+    }catch(err){
+        res.status(400).send(err)
     }
 })
