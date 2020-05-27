@@ -27,3 +27,19 @@ projectRouter.post('/add',async (req,res,next)=>{
         next(err);
     }
 })
+
+//Edit Project
+projectRouter.post('/edit/:id',async (req,res,next)=>{
+    const  updates = Object.keys(req.body)
+    const  allowedUpdates = ['category','name','owner','manager','location','start_date','end_date','status']
+    const  isValidOperation = updates.every((update)=> allowedUpdates.includes(update))
+    if (!isValidOperation) return  new Error('Invalid updates !')
+    try {
+    const  updatedProject  =  await  Project.findByIdAndUpdate(req.params.id, req.body, { new:  true, runValidators:  true })
+    if (!updatedProject) return  new Error('Project Not Found')
+    res.status(201).send(updatedProject)
+    
+    }catch(error) {
+    res.status(400).send(error)
+    }
+})
