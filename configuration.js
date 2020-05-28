@@ -1,5 +1,5 @@
 require('dotenv').config()
-const requiredEnvs=["DB_HOST","PORT","LINK"]
+const requiredEnvs=["DB_HOST","PORT","LINK",'JWT_SECRET']
 requiredEnvs.forEach(env => {
     if(!process.env[env])
 {
