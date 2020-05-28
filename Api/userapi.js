@@ -13,10 +13,11 @@ userRouter.use(function (req, res, next) {
  const saltRound=10;
  userRouter.post("/register",async (req, res, next) => {
   const token = req.headers.authorization;
-  jwt.verify(token,process.env.JWT_SECRET, function (err, decoded) {
+  jwt.verify(token,process.env.JWT_SECRET, async  function (err, decoded) {
     const _id = decoded._id;
-    if ( _id!= "5ecf2eaadad5b62c28ebfc31") {
-      res.send("User is not authorized");}
+    const user = await User.findOne({_id:_id}).exec();
+    if (user.role!="admin") {
+      res.send("User is not authorized")}
       else{
   const { name, username, password, role } = req.body;
   //const hashedpassword = await bcrypt.hash(password, saltRound);
@@ -61,9 +62,10 @@ userRouter.get("/", (req, res, next) => {
   
     
     const token = req.headers.authorization;
-    jwt.verify(token, process.env.JWT_SECRET, (err,decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET,async function (err,decoded) {
       const _id = decoded._id;
-      if ( _id!= "5ecf2eaadad5b62c28ebfc31") {
+      const user = await User.findOne({_id:_id}).exec();
+      if (user.role !="admin") {
         res.send("User is not authorized");
       }
       else{
@@ -80,9 +82,10 @@ userRouter.get("/", (req, res, next) => {
 userRouter.delete("/:id", (req, res, next) => {
   
     const token = req.headers.authorization;
-    jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+    jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
       const _id = decoded._id;
-      if (_id!= "5ecf2eaadad5b62c28ebfc31") {
+      const user = await User.findOne({_id:_id}).exec();
+      if (user.role!="admin") {
         res.send("User is not authorized");
       } else {
         User.findByIdAndDelete({ _id: req.url.slice(4) }, (err, data) => {
@@ -98,25 +101,22 @@ userRouter.delete("/:id", (req, res, next) => {
 userRouter.patch("/:id", (req, res, next) => {
   
     const token = req.headers.authorization;
-    jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+    jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
       const _id = decoded._id;
-      if (_id!= "5ecf2eaadad5b62c28ebfc31") {
-        res.send("Not Authorized invalid token");
+      const user = await User.findOne({_id:_id}).exec();
+      if (user.role!="admin") {
+        res.send("User is not authorized");
       } else {
         if (req.body.username == ""|| req.body.name==""||req.body.role==""||req.body.password=="") {
           res.send("Invalid Editing");
         } else {
-          const update = { username: req.body.username,name:req.body.name,role:req.body.role,password:password.req.body };
+          const update = { username: req.body.username,name:req.body.name,role:req.body.role,password:req.body.password };
           User.findByIdAndUpdate({ _id:req.url.slice(4)}, update).exec();
         }
 
-        res.send({
-          msg: "user was edited successfully",
-          username: req.body.username,
-          name:req.body.name,
-          role:req.body.role,
-          password:req.body.password
-        });
+        res.send(
+           "user was edited successfully"
+        );
       }
     })
       })
