@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Table from './Table'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -31,13 +32,6 @@ TabPanel.propTypes = {
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,12 +63,12 @@ export default function VerticalMenu() {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab label="Projects" {...a11yProps(0)} />
-        <Tab label="Departments" {...a11yProps(1)} />
-        <Tab label="Reports" {...a11yProps(2)} />
+        <Tab label="Projects"/>
+        <Tab label="Departments"/>
+        <Tab label="Reports"/>
       </Tabs>
       <TabPanel value={value} index={0}>
-        Projects
+        <Table/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Departments
