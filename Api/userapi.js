@@ -106,7 +106,7 @@ userRouter.patch("/:id", (req, res, next) => {
         if (req.body.username == ""|| req.body.name==""||req.body.role==""||req.body.password=="") {
           res.send("Invalid Editing");
         } else {
-          const update = { username: req.body.username,name:req.body.name,role:req.body.role,password:password.req.body };
+          const update = { username: req.body.username,name:req.body.name,role:req.body.role,password:req.body.password };
           User.findByIdAndUpdate({ _id:req.url.slice(4)}, update).exec();
         }
 
