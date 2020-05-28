@@ -5,7 +5,14 @@ import axios from 'axios'
 export default function MaterialTableDemo() {
 
   const [state, setState] = useState({
-    columns: [],
+    columns: [{ title: 'Category', field: 'category' },
+    { title: 'Name', field: 'name' },
+    { title: 'Owner', field: 'owner' },
+    { title: 'Manager', field: 'manager' },
+    { title: 'Status', field: 'status' },
+    { title: 'Start Date', field: 'start_date', type: 'date' },
+    { title: 'End Date', field: 'end_date', type:'date' },
+],
     data: [
     ],
   });
@@ -15,20 +22,22 @@ export default function MaterialTableDemo() {
       const result = await axios.get(
         '/projects/',
       );
-      setState({columns: [
-        { title: 'Category', field: 'category' },
-        { title: 'Name', field: 'name' },
-        { title: 'Owner', field: 'owner' },
-        { title: 'Manager', field: 'manager' },
-        { title: 'Status', field: 'status' },
-        { title: 'Start Date', field: 'start_date', type: 'date' },
-        { title: 'End Date', field: 'end_date', type:'date' },
-      ],
+      setState({columns: state.columns,
     data: result.data});
     };
  
     fetchData();
   }, []);
+
+   async function addProject (newProict){
+       console.log("hii y 2lpy")
+    const result = await axios.post(
+      '/projects/add',newProict
+    );
+    console.log(result.data)
+    setState({columns: state.columns,
+  data:[...state.data , result.data]});
+  };
 
   return (
     <MaterialTable
@@ -40,12 +49,13 @@ export default function MaterialTableDemo() {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              setState((prevState) => {
-                const data = [...prevState.data];
-                data.push(newData);
-                return { ...prevState, data };
-              });
-            },10000 );
+              addProject(newData)
+            //   setState((prevState) => {
+            //     const data = [...prevState.data];
+            //     data.push(newData);
+            //     return { ...prevState, data };
+            //   });
+            },0 );
           }),
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve) => {
@@ -58,7 +68,7 @@ export default function MaterialTableDemo() {
                   return { ...prevState, data };
                 });
               }
-            }, 600);
+            }, 0);
           }),
         onRowDelete: (oldData) =>
           new Promise((resolve) => {
