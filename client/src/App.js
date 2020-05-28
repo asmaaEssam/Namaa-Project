@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Tabs from './components/Tabs'
+import Bar from './components/Bar'
 
 function App() {
   return (
     <div className="App">
-      <Tabs/>
+      <Bar/>
     </div>
   );
 }
