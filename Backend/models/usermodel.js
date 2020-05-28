@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-var authz = require('mongoose-authorization');
 const Schema= new mongoose.Schema({
     username:{
         type:String,
@@ -27,14 +26,6 @@ const Schema= new mongoose.Schema({
   }
     
 })
-Schema.permissions = {
-  
-  admin: {
-    write: ['username','password','role'],
-    create: true,
-  }
-  
-};
-Schema.plugin(authz);
+
 const User= mongoose.model('User', Schema)
 module.exports=User;
