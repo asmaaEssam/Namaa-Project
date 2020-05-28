@@ -101,7 +101,7 @@ userRouter.patch("/:id", (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
       const _id = decoded._id;
       if (_id!= "5ecf2eaadad5b62c28ebfc31") {
-        res.send("Not Authorized invalid token");
+        res.send("User is not authorized");
       } else {
         if (req.body.username == ""|| req.body.name==""||req.body.role==""||req.body.password=="") {
           res.send("Invalid Editing");
