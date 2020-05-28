@@ -47,7 +47,7 @@ userRouter.use(function (req, res, next) {
       return jwt.sign(
         { _id: user.id},
         process.env.JWT_SECRET,
-        {expiresIn:"60m"},
+        {expiresIn:"1440m"},
         (err, token) => {
           return res.send({ token });
         }
