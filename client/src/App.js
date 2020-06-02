@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Bar from './components/Bar'
 import VerticalMenu from './components/VerticalMenu';
-import {Route , BrowserRouter} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProjectProfile from './components/ProjectProfile'
 
 function App() {
@@ -26,8 +26,10 @@ function App() {
   };
 
   return (
+    <BrowserRouter>
+      <Switch>
     <div className="App">
-      <BrowserRouter>
+     
       <Route exact path='/' render={props =>
         <>
         <Bar addMenu = {triggerAddMenuState}/>
@@ -35,8 +37,9 @@ function App() {
         </>
         } />
       <Route path='/project/:projectid' component= {ProjectProfile}/>
-        </BrowserRouter>
     </div>
+    </Switch>
+    </BrowserRouter>
   );
 }
 
