@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Table from './Table'
 
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VerticalMenu() {
+export default function VerticalMenu(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -68,7 +70,7 @@ export default function VerticalMenu() {
         <Tab label="Reports"/>
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Table/>
+        <Table state= {props.state} setState= {props.setState}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Departments
