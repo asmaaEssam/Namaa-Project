@@ -34,7 +34,7 @@ projectRouter.post('/add',async (req,res,next)=>{
 })
 
 //Edit Project
-projectRouter.post('/edit/:id',async (req,res,next)=>{
+projectRouter.patch('/edit/:id',async (req,res,next)=>{
     const  updates = Object.keys(req.body)
     const  allowedUpdates = ['category','name','owner','manager','location','start_date','end_date','status']
     const  isValidOperation = updates.every((update)=> allowedUpdates.includes(update))
