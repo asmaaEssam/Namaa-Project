@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Bar from "./components/Bar";
 import VerticalMenu from "./components/VerticalMenu";
-<<<<<<< HEAD
 // import UserProject from "./components/userProjects";
 import ProjectsMap from "./components/projectsMap";
 import LandingPage from "./components/LandingPage";
-=======
 import UserProject from "./components/userProjects";
-import ProjectProfile from './components/ProjectProfile'
+import ProjectProfile from './components/ProjectProfile';
+import Admin from './layouts/Admin';
 
->>>>>>> 037279daef558caca3fdefb64bd80da954ebd9a4
 function App() {
   const [isAddMenuState, setIsAddMenuState] = useState(false);
   const [state, setState] = useState({
@@ -37,38 +35,28 @@ function App() {
     <div className="App">
     <Route
           path={"/dataEntry"}
-<<<<<<< HEAD
           render={() => <ProjectsMap></ProjectsMap>}
-        ></Route>
+        />
         <Route
           path="/landing"
           render={() => <LandingPage></LandingPage>}
-        ></Route>
-
-        <Route
-          path={"/"}
-          render={() => (
-            <div className="App">
-              <Bar addMenu={triggerAddMenuState} />
-
-              {isAddMenuState && <VerticalMenu />}
-            </div>
-          )}
-        ></Route>
-      </Switch>
-=======
-          render={() => <UserProject></UserProject>}
         />
-      <Route exact path='/' render={props =>
+        <Route
+          path="/dashboard"
+          render={() => <Admin/>}
+        />
+
+          {/* render={() => <UserProject></UserProject>}
+        /> */}
+      {/* <Route exact path='/' render={props =>
         <>
         <Bar addMenu = {triggerAddMenuState}/>
         {isAddMenuState && <VerticalMenu state={state} setState={setState} />}
         </>
-        } />
+        } /> */}
       <Route path='/project/:projectid' component= {ProjectProfile}/>
     </div>
     </Switch>
->>>>>>> 037279daef558caca3fdefb64bd80da954ebd9a4
     </BrowserRouter>
   );
 }
