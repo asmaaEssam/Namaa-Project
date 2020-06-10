@@ -25,7 +25,7 @@ import {
   chartExample4
 } from "../variables/charts";
 
-import Map from '../components/Map';
+import DashboardMap from '../components/Map';
 import Chart from '../components/chart';
 
 class Dashboard extends React.Component {
@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
           <Col lg="4">
               <Card className="card-chart">
               <CardBody>
-                <Map/>
+                <DashboardMap/>
               </CardBody>
               </Card>
           </Col>
