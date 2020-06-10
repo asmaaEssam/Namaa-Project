@@ -31,7 +31,7 @@ const Schema= new mongoose.Schema({
     },
     location: {
         type: pointSchema,
-        // required: true
+        //required: true
       },
     start_date:{
         type : Date,
@@ -50,3 +50,4 @@ const Schema= new mongoose.Schema({
 })
 
 module.exports= mongoose.model('Project', Schema)
+

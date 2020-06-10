@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema= new mongoose.Schema({
   name:{
 type:String,
-required:[true, 'name is required'],
-unique:true,
+required:[true, 'Name is required'],
+unique:[true,"Name is not available"],
 minlength:4,
 maxlength:15
   },
     username:{
         type:String,
-        required:[true, 'username is required'],
-        unique:true,
+        required:[true, 'Username is required'],
+        unique:[true,"Username is not available"],
         minlength: 3,
         maxlength:10
         
@@ -18,6 +18,7 @@ maxlength:15
     },
     password:{
         type: String,
+        unique:true,
     validate: {
       validator: function(v) {
         return /[A-Z]/
