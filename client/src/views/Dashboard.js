@@ -27,6 +27,8 @@ import {
 
 import DashboardMap from '../components/Map';
 import Chart from '../components/chart';
+import Donut from "../components/PieChart";
+import RadialChart from "../components/RadialChart";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -45,7 +47,8 @@ class Dashboard extends React.Component {
       <div id= 'dashboard'>
           <Row>
           <Col lg="4">
-              <Chart chartExample= {chartExample1[this.state.bigChartData]} bigChartData={this.state.bigChartData} setBgChartData= {this.setBgChartData} />
+            <Donut/>
+              {/* <Chart chartExample= {chartExample1[this.state.bigChartData]} bigChartData={this.state.bigChartData} setBgChartData= {this.setBgChartData} /> */}
           </Col>
           <Col lg="4">
               <Card className="card-chart">
@@ -55,7 +58,8 @@ class Dashboard extends React.Component {
               </Card>
           </Col>
           <Col lg="4">
-          <Chart chartExample= {chartExample2.data} bigChartData={this.state.bigChartData} setBgChartData= {this.setBgChartData} />
+            <RadialChart/>
+          {/* <Chart chartExample= {chartExample2.data} bigChartData={this.state.bigChartData} setBgChartData= {this.setBgChartData} /> */}
           </Col>
           </Row>
           <Row>
