@@ -13,6 +13,7 @@ footpathRouter.use(function (req, res, next) {
 
 footpathRouter.post('/add', async (req,res,next)=>{
     try {
+
         const {assetname,location,dateofsurvey,surveyorname,pothole,cracks,erosion,slipperySurface,fallenBranches,QualityOfCurbing
         ,degreeOfCleanliness,conditionofDrains,pedestrians_Sainage_Condition,generalCondition  } = req.body;
         const newdata = {
@@ -32,6 +33,7 @@ footpathRouter.post('/add', async (req,res,next)=>{
           generalCondition:generalCondition
 
         }
+       
         Footpath.create(newdata)
           .then((data) => {
             res.send(data);

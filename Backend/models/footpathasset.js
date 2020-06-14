@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const pointSchema = new mongoose.Schema({
+const lineSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ["Point"],
+    enum: ["LineString"],
    required: true
   },
   coordinates: {
@@ -16,7 +16,7 @@ const Schema = new mongoose.Schema({
     type: String,   //required: [true],
   },
   location: {
-    type: pointSchema,
+    type: lineSchema,
     //required: [true],
   },
   projectname: [
