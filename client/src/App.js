@@ -2,29 +2,26 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Bar from "./components/Bar";
 import VerticalMenu from "./components/VerticalMenu";
-<<<<<<< HEAD
-// import UserProject from "./components/userProjects";
-import ProjectsMap from "./components/projectsMap";
-import LandingPage from "./components/LandingPage";
-=======
 import UserProject from "./components/userProjects";
-import ProjectProfile from './components/ProjectProfile'
+import ProjectProfile from "./components/ProjectProfile";
+import LandingPage from "./components/LandingPage";
+import Forms from "./components/Forms";
+import ProjectsMap from "./components/projectsMap";
 
->>>>>>> 037279daef558caca3fdefb64bd80da954ebd9a4
 function App() {
   const [isAddMenuState, setIsAddMenuState] = useState(false);
   const [state, setState] = useState({
-    columns: [{ title: 'Category', field: 'category' },
-    { title: 'Name', field: 'name' },
-    { title: 'Owner', field: 'owner' },
-    { title: 'Manager', field: 'manager' },
-    { title: 'Status', field: 'status' },
-    { title: 'Start Date', field: 'start_date', type: 'date' },
-    { title: 'End Date', field: 'end_date', type:'date' },
-],
-    data: [
+    columns: [
+      { title: "Category", field: "category" },
+      { title: "Name", field: "name" },
+      { title: "Owner", field: "owner" },
+      { title: "Manager", field: "manager" },
+      { title: "Status", field: "status" },
+      { title: "Start Date", field: "start_date", type: "date" },
+      { title: "End Date", field: "end_date", type: "date" },
     ],
-    project :[]
+    data: [],
+    project: [],
   });
 
   function triggerAddMenuState() {
@@ -34,16 +31,15 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-    <div className="App">
-    <Route
+        <Route
           path={"/dataEntry"}
-<<<<<<< HEAD
           render={() => <ProjectsMap></ProjectsMap>}
         ></Route>
         <Route
           path="/landing"
           render={() => <LandingPage></LandingPage>}
         ></Route>
+        <Route path="/menna" render={() => <Forms></Forms>}></Route>
 
         <Route
           path={"/"}
@@ -56,19 +52,6 @@ function App() {
           )}
         ></Route>
       </Switch>
-=======
-          render={() => <UserProject></UserProject>}
-        />
-      <Route exact path='/' render={props =>
-        <>
-        <Bar addMenu = {triggerAddMenuState}/>
-        {isAddMenuState && <VerticalMenu state={state} setState={setState} />}
-        </>
-        } />
-      <Route path='/project/:projectid' component= {ProjectProfile}/>
-    </div>
-    </Switch>
->>>>>>> 037279daef558caca3fdefb64bd80da954ebd9a4
     </BrowserRouter>
   );
 }
