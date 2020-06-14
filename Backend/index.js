@@ -15,6 +15,11 @@ app.use("/users", userRouter);
 app.use("/projects", projectRouter);
 app.use("/footpath", footpathRouter);
 app.use("/cycleway", cyclewayRouter);
-// app.listen(process.env.PORT,()=>{
-//     console.log('server listening on port ' + PORT +' at '+ LINK)
-// })
+
+app.use(function (error, req, res, next) {
+  console.log(error.message);
+  if (req.statusCode <= 500) {
+    res.json({ message: error.message });
+  }
+  res.status(500).send("Internal server error");
+});

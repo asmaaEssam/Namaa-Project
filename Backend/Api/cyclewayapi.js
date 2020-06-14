@@ -10,6 +10,7 @@ cyclewayRouter.post("/", async (req, res, next) => {
 
     const newCycleway = new Cycleway({ cyclewayName, geometry });
     const createdCycleway = await newCycleway.save();
+    //push asset to project
     return res.status(201).send(createdCycleway.toJSON());
   } catch (err) {
     next(err);

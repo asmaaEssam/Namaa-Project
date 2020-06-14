@@ -1,4 +1,5 @@
 const express = require("express");
+//const auth = require("../validation/authorization");
 const User = require("../models/usermodel");
 const { JWT_SECRET } = require("../configuration");
 const bcrypt = require("bcryptjs");
@@ -11,82 +12,60 @@ userRouter.use(function (req, res, next) {
   console.log("Request Type:", req.method);
   next();
 });
-
 const saltRound = 10;
 userRouter.post("/register", async (req, res, next) => {
   const token = req.headers.authorization;
   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
     const _id = decoded._id;
     const user = await User.findOne({ _id: _id }).exec();
+
     if (user.role != "admin") {
-      res.send("User is not authorized");
+      throw new Error("User is not authorized");
     } else {
-      const { name, username, password, role } = req.body;
-      //const hashedpassword = await bcrypt.hash(password, saltRound);
-      const newuser = {
-        name: name,
-        username: username,
-        password: password,
-        role: role,
-      };
-      User.create(newuser).then((data) => {
-        res.send("post successed");
-      });
+      try {
+        if (user.role != "admin") {
+          throw new Error("User is not authorized");
+        } else {
+          const { name, username, password, role } = req.body;
+          //const hashedpassword = await bcrypt.hash(password, saltRound);
+          const newuser = {
+            name: name,
+            username: username,
+            password: password,
+            role: role,
+          };
+          User.create(newuser)
+            .then((data) => {
+              res.send(data);
+            })
+            .catch((error) => {
+              req.statusCode = 405;
+              next(error);
+            });
+        }
+      } catch (error) {
+        req.statusCode = 405;
+        next(error);
+      }
     }
   });
 });
 
-//fadwa's login
-userRouter.post(
-  "/login",
-
-  async (req, res, next) => {
-    const {
-      body: { username, password },
-    } = req;
-    try {
-      const user = await User.findOne({ username });
-      if (!user)
-        throw new customError({
-          message: "user does not exist",
-          status: 404,
-        });
-      const isMatch = await bcrypt.compare(password, user.password);
-
-      if (isMatch) {
-        //generate token
-        jwt.sign(
-          { username },
-          JWT_SECRET,
-          { expiresIn: "60m" },
-          (err, token) => {
-            if (err) throw new customError({ message: "problem signing in" });
-            // const instance = _.omit(user.toJSON(), "password", "__v");
-            return res.status(200).send({ user, token: token });
-          }
-        );
-      } else {
-        throw new customError({ message: "either un or pw is wrong" });
-      }
-    } catch (Error) {
-      console.log(Error);
-      next(Error.message);
-    }
-  }
-);
-
-//fadwa's get user's projects list
-//TODO validation
-userRouter.get("/:employeeId", async (req, res, next) => {
+userRouter.post("/login", async (req, res, next) => {
   try {
-    const { employeeId } = req.params;
-    if (employeeId) {
-      //TODO authentication
-      const employeeProjects = await User.findOne(
-        { _id: employeeId },
-        { projects: 1, _id: 0 }
-      ).populate("projects");
-      return res.status(200).send(employeeProjects.projects);
+    const { username, password } = req.body;
+    const user = await User.findOne({ username: username, password: password });
+    //const isMatch = await bcrypt.compare(password, user.password);
+
+    if (user) {
+      return jwt.sign(
+        { _id: user.id },
+        process.env.JWT_SECRET,
+        { expiresIn: "60m" },
+        (err, token) => {
+          return res.send({ token });
+        }
+      );
     }
     //TODO pagination
     const allprojects = await Project.find();
@@ -95,46 +74,29 @@ userRouter.get("/:employeeId", async (req, res, next) => {
     next(error);
   }
 });
-
-//  userRouter.post("/login", async (req, res, next) => {
-//   try {
-//     const { username, password } = req.body;
-//     const user = await User.findOne({ username: username,password:password });
-//     //const isMatch = await bcrypt.compare(password, user.password);
-
-//     if (user) {
-//       return jwt.sign(
-//         { _id: user.id},
-//         process.env.JWT_SECRET,
-//         {expiresIn:"60m"},
-//         (err, token) => {
-//           return res.send({ token });
-//         }
-//       );
-//     }
-//     throw new Error("username or password is wrong");
-//   } catch (error) {
-//     next(error);
-//   }
-// })
 userRouter.get("/", (req, res, next) => {
   const token = req.headers.authorization;
   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
     const _id = decoded._id;
     const user = await User.findOne({ _id: _id }).exec();
-    if (user.role != "admin") {
-      res.send("User is not authorized");
-    } else {
-      User.find(
-        {},
-        { name: 1, id: 1, username: 1, role: 1, password: 1 },
-        (err, data) => {
-          if (err) {
-            return next(err);
+
+    try {
+      if (user.role != "admin") {
+        throw new Error("User is not authorized");
+      } else {
+        User.find(
+          {},
+          { name: 1, id: 1, username: 1, role: 1, password: 1 },
+          (err, data) => {
+            if (err) {
+              return next(err);
+            }
+            res.send(data);
           }
-          res.send(data);
-        }
-      );
+        );
+      }
+    } catch (err) {
+      next(err);
     }
   });
 });
@@ -144,53 +106,51 @@ userRouter.delete("/:id", (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
     const _id = decoded._id;
     const user = await User.findOne({ _id: _id }).exec();
-    if (user.role != "admin") {
-      res.send("User is not authorized");
-    } else {
-      User.findByIdAndDelete({ _id: req.url.slice(4) }, (err, data) => {
-        if (err) {
-          return next(err);
-        } else {
-          res.send("deleted successfully");
-        }
-      });
+
+    try {
+      if (user.role != "admin") {
+        throw new Error("User is not authorized");
+      } else {
+        User.findByIdAndDelete({ _id: req.params.id }, async (err, data) => {
+          if (err) {
+            return next(err);
+          } else {
+            const users = await User.find();
+            res.send(users);
+          }
+        });
+      }
+    } catch (err) {
+      next(err);
     }
   });
 });
-userRouter.patch("/:id", (req, res, next) => {
+userRouter.patch("/:id", async (req, res, next) => {
   const token = req.headers.authorization;
   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
     const _id = decoded._id;
     const user = await User.findOne({ _id: _id }).exec();
-    if (user.role != "admin") {
-      res.send("User is not authorized");
-    } else {
-      if (
-        req.body.username == "" ||
-        req.body.name == "" ||
-        req.body.role == "" ||
-        req.body.password == ""
-      ) {
-        res.send("Invalid Editing");
+
+    try {
+      if (user.role != "admin") {
+        throw new Error("User is not authorized");
       } else {
         const update = {
           username: req.body.username,
           name: req.body.name,
           role: req.body.role,
-          password: req.body.password,
         };
-        User.findByIdAndUpdate({ _id: req.url.slice(4) }, update).exec();
-      }
+        await User.findByIdAndUpdate({ _id: req.params.id }, update, {
+          runValidators: true,
+        }).exec();
 
-      res.send("user was edited successfully");
+        const users = await User.find();
+
+        res.send(users);
+      }
+    } catch (err) {
+      next(err);
     }
   });
 });
-userRouter.use(function (err, req, res, next) {
-  console.error(err.stack);
-  if (error.status <= 500) {
-    return res.status(err.status).send(err.message);
-  }
-  res.status(500).send("Internal server error");
-});
-module.exports = { userRouter };
+module.exports = userRouter;

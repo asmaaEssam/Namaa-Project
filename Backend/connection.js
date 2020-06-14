@@ -8,8 +8,8 @@ if (err){
     process.exit()
 }
 console.log("Connected Successfully to Database")
-app.listen(PORT,()=>{
-        console.log('server listening on port ' + PORT +' at '+LINK)
+app.listen( 200,()=>{
+        console.log('server listening on port ' + 200 +' at '+LINK)
     })
 })
 

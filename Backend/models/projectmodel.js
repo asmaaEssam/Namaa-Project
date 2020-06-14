@@ -31,7 +31,7 @@ const Schema = new mongoose.Schema({
   },
   location: {
     type: pointSchema,
-    // required: true
+    //required: true
   },
   start_date: {
     type: Date,
@@ -44,11 +44,8 @@ const Schema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    default: "in progress",
   },
   employees: [{ type: mongoose.Schema.ObjectId, ref: "User" }],
 });
 
-const Project = mongoose.model("Project", Schema);
-
-module.exports = Project;
+module.exports = mongoose.model("Project", Schema);

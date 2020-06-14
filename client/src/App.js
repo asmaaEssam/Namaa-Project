@@ -8,7 +8,8 @@ import LandingPage from "./components/LandingPage";
 import UserProject from "./components/userProjects";
 import ProjectProfile from "./components/ProjectProfile";
 import Admin from "./layouts/Admin";
-
+import './index.css';
+import Forms from './Forms';
 function App() {
   const [isAddMenuState, setIsAddMenuState] = useState(false);
   const [state, setState] = useState({
