@@ -1,7 +1,6 @@
 
 const express= require("express")
-const User = require("../models/usermodel");
-
+const lineSchema= require('../models/footpathasset')
 const Footpath= require('../models/footpathasset')
 const footpathRouter = express.Router();
 footpathRouter.use(function (req, res, next) {
@@ -13,15 +12,16 @@ footpathRouter.use(function (req, res, next) {
 
 footpathRouter.post('/add', async (req,res,next)=>{
     try {
-
-        const {assetname,location,dateofsurvey,surveyorname,pothole,cracks,erosion,slipperySurface,fallenBranches,QualityOfCurbing
+        const {assetname,geometry,dateofsurvey,image,surveyorname,pothole,cracks,erosion,slipperySurface,fallenBranches,QualityOfCurbing
         ,degreeOfCleanliness,conditionofDrains,pedestrians_Sainage_Condition,generalCondition  } = req.body;
+        
         const newdata = {
             assetname:assetname ,
-            location : location,
+            geometry : geometry,
             dateofsurvey : dateofsurvey,
             surveyorname:surveyorname,
           pothole:pothole,
+          image:image,
           cracks:cracks,
           erosion:erosion,
           slipperySurface:slipperySurface,
@@ -48,4 +48,23 @@ footpathRouter.post('/add', async (req,res,next)=>{
       }
     
 })
+
+footpathRouter.get("/", (req, res, next) => {
+      try {
+       
+        Footpath.find(
+          {},
+          (err, data) => {
+            if (err) {
+              return next(err);
+            }
+            res.send(data);
+          }
+        );
+      } catch (err) {
+        next(err);
+      }
+    
+  
+});
 module.exports = footpathRouter;

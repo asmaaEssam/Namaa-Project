@@ -1,27 +1,32 @@
 const mongoose = require("mongoose");
 const lineSchema = new mongoose.Schema({
+  
   type: {
     type: String,
     enum: ["LineString"],
    required: true
   },
   coordinates: {
-    type: [Number],
+    type: [[Number]],
     required: true
   },
 });
+
 
 const Schema = new mongoose.Schema({
   assetname: {
     type: String,   //required: [true],
   },
-  location: {
-    type: lineSchema,
-    //required: [true],
+  geometry: 
+    {type:lineSchema}    
+  ,
+  image:{
+    data: Buffer, 
+    contentType: String
   },
   projectname: [
     { type: mongoose.Schema.ObjectId, ref: "Project" },
-    { required: [true, "Surveyor's name is required"] },
+    { required: true },
   ],
 surveyorname:{
 type:String
@@ -73,4 +78,5 @@ type:String
   },
 });
 const FootPath = mongoose.model("FootPath", Schema);
+module.exports= lineSchema;
 module.exports = FootPath;

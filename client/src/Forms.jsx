@@ -3,12 +3,12 @@ import Maps from "./maps";
 import "./index.css";
 import confirm from "reactstrap-confirm";
 
-import { FormGroup, Label, Input, Button, Card, CardBody } from "reactstrap";
+import { FormGroup, Label, Input,CustomInput, Button, Card, CardBody } from "reactstrap";
 import axios from "axios";
 const Forms = () => {
   var state = {};
   var emptyInput=[];
-  
+
   const inputHandler = (event) => {
     state[event.target.name] = event.target.value;
     emptyInput.push (event.target)
@@ -19,14 +19,14 @@ const clearState= ()=>{
   emptyInput.map( x => x.value="" )
 
 }
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event,id) => {
     event.preventDefault();
     let result = await confirm({
       message: "Are you sure you want to add this data?"
     });
     console.log(result);
     await axios
-      .post("http://localhost:200/footpath/add", state)
+      .post(`http://localhost:200/footpath/add/${id}`, state)
       .then(() => {
         //console.log(res.data);
        
@@ -41,7 +41,7 @@ const clearState= ()=>{
     <>
       <div className="container">
         <div className="mapboxgl-canvas">
-          <Maps />
+          <Maps  />
         </div>
         <div className="input">
           <Card>
@@ -65,10 +65,21 @@ const clearState= ()=>{
                       placeholder="Employee Name"
                       id="surveyorname"
                       name="surveyorname"
-                      value={state.surveyorname}
                       onChange={inputHandler}
                     />
                   </FormGroup>
+                 
+                  <FormGroup className="col-md-4">
+                    <Label for="geometry"></Label>
+                    <Input
+                      type="hidden"
+                      placeholder="Employee Name"
+                      id="surveyorname"
+                      name="surveyorname"
+                      onChange={inputHandler}
+                    />
+                  </FormGroup>
+         
                   <FormGroup>
                     <Label for="dateofsurvey">Date of survey</Label>
                     <Input
@@ -128,6 +139,7 @@ const clearState= ()=>{
                       id="fallenBranches"
                       onChange={inputHandler}
                     />
+                    
                   </FormGroup>
                   <FormGroup className="col-md-5">
                     <Label for="QualityOfCurbing">Quality of curbing</Label>
@@ -184,6 +196,12 @@ const clearState= ()=>{
                     </FormGroup>
                   </div>
                 </div>
+                <div >
+                  <FormGroup>
+        <Label for="image">Add Image</Label>
+        <CustomInput type="file" id="image"  name="image" onChange={inputHandler} />
+      </FormGroup>
+      </div>
                 <Button type="submit" color="primary">
                   Add
                 </Button>
@@ -197,6 +215,7 @@ const clearState= ()=>{
 };
 
 export default Forms;
+
 
 
 
