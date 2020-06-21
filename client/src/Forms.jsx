@@ -1,47 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import Maps from "./maps";
 import "./index.css";
 import confirm from "reactstrap-confirm";
 
-import { FormGroup, Label, Input,CustomInput, Button, Card, CardBody } from "reactstrap";
+import {
+  FormGroup,
+  Label,
+  Input,
+  CustomInput,
+  Button,
+  Card,
+  CardBody,
+} from "reactstrap";
 import axios from "axios";
 const Forms = () => {
-  var state = {};
-  var emptyInput=[];
+  const [state, setState] = useState({});
+  var emptyInput = [];
 
-  const inputHandler = (event) => {
-    state[event.target.name] = event.target.value;
-    emptyInput.push (event.target)
-
-  };
-
-const clearState= ()=>{
-  emptyInput.map( x => x.value="" )
-
-}
-  const handleSubmit = async (event,id) => {
-    event.preventDefault();
-    let result = await confirm({
-      message: "Are you sure you want to add this data?"
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
     });
-    console.log(result);
-    await axios
-      .post(`http://localhost:200/footpath/add/${id}`, state)
-      .then(() => {
-        //console.log(res.data);
-       
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      clearState()
   };
+  const setStateToFeature = (feature) => {
+    setState(feature);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:200/footpath/add", state)
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // const handleChange = (event) => {
+  //   state[event.target.name] = event.target.value;
+  //   emptyInput.push(event.target);
+  // };
+
+  const clearState = () => {
+    emptyInput.map((x) => (x.value = ""));
+  };
+  // const handleSubmit = async (event, id) => {
+  //   event.preventDefault();
+  //   let result = await confirm({
+  //     message: "Are you sure you want to add this data?",
+  //   });
+  //   console.log(result);
+  //   await axios
+  //     .post(`http://localhost:200/footpath/add/`, state)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  //   clearState();
+  // };
 
   return (
     <>
       <div className="container">
         <div className="mapboxgl-canvas">
-          <Maps  />
+          <Maps setStateToFeature={setStateToFeature} />
         </div>
         <div className="input">
           <Card>
@@ -55,7 +82,7 @@ const clearState= ()=>{
                       placeholder="Asset Name"
                       id="assetname"
                       name="assetname"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
@@ -65,10 +92,10 @@ const clearState= ()=>{
                       placeholder="Employee Name"
                       id="surveyorname"
                       name="surveyorname"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
-                 
+
                   <FormGroup className="col-md-4">
                     <Label for="geometry"></Label>
                     <Input
@@ -76,17 +103,17 @@ const clearState= ()=>{
                       placeholder="Employee Name"
                       id="surveyorname"
                       name="surveyorname"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
-         
+
                   <FormGroup>
                     <Label for="dateofsurvey">Date of survey</Label>
                     <Input
                       type="date"
                       name="dateofsurvey"
                       id="dateofsurvey"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
                 </div>
@@ -97,7 +124,7 @@ const clearState= ()=>{
                       type="text"
                       name="cracks"
                       id="cracks"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
@@ -106,7 +133,7 @@ const clearState= ()=>{
                       type="text"
                       name="pothole"
                       id="pothole"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
@@ -115,7 +142,7 @@ const clearState= ()=>{
                       type="text"
                       name="erosion"
                       id="erosion"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
                 </div>
@@ -126,7 +153,7 @@ const clearState= ()=>{
                       type="text"
                       name="slipperySurface"
                       id="slipperySurface"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
                   </FormGroup>
                   <FormGroup className="col-md-5">
@@ -137,17 +164,16 @@ const clearState= ()=>{
                       type="text"
                       name="fallenBranches"
                       id="fallenBranches"
-                      onChange={inputHandler}
+                      onChange={handleChange}
                     />
-                    
                   </FormGroup>
                   <FormGroup className="col-md-5">
                     <Label for="QualityOfCurbing">Quality of curbing</Label>
                     <Input
                       type="text"
-                      name="fallenBranches"
-                      id="fallenBranches"
-                      onChange={inputHandler}
+                      name="QualityOfCurbing"
+                      id="QualityOfCurbing"
+                      onChange={handleChange}
                     />
                   </FormGroup>
                   <div className="form-row">
@@ -159,7 +185,7 @@ const clearState= ()=>{
                         type="text"
                         name="degreeOfCleanliness"
                         id="degreeOfCleanliness"
-                        onChange={inputHandler}
+                        onChange={handleChange}
                       />
                     </FormGroup>
 
@@ -169,7 +195,7 @@ const clearState= ()=>{
                         type="text"
                         name="conditionofDrains"
                         id="conditionofDrains"
-                        onChange={inputHandler}
+                        onChange={handleChange}
                       />
                     </FormGroup>
                   </div>
@@ -182,7 +208,7 @@ const clearState= ()=>{
                         type="text"
                         name="pedestrians_Sainage_Condition"
                         id="pedestrians_Sainage_Condition"
-                        onChange={inputHandler}
+                        onChange={handleChange}
                       />
                     </FormGroup>
                     <FormGroup className="col-md-5">
@@ -191,17 +217,22 @@ const clearState= ()=>{
                         type="text"
                         name="generalCondition"
                         id="generalCondition"
-                        onChange={inputHandler}
+                        onChange={handleChange}
                       />
                     </FormGroup>
                   </div>
                 </div>
-                <div >
+                <div>
                   <FormGroup>
-        <Label for="image">Add Image</Label>
-        <CustomInput type="file" id="image"  name="image" onChange={inputHandler} />
-      </FormGroup>
-      </div>
+                    <Label for="image">Add Image</Label>
+                    <CustomInput
+                      type="file"
+                      id="image"
+                      name="image"
+                      onChange={handleChange}
+                    />
+                  </FormGroup>
+                </div>
                 <Button type="submit" color="primary">
                   Add
                 </Button>
@@ -215,9 +246,3 @@ const clearState= ()=>{
 };
 
 export default Forms;
-
-
-
-
-
- 

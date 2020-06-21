@@ -1,10 +1,10 @@
 import React from "react";
 import DrawControl from "react-mapbox-gl-draw";
-import ReactMapboxGl, { Layer, Popup, Feature} from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Popup, Feature } from "react-mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import mapboxgl, { map } from "mapbox-gl";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { render } from "@testing-library/react";
 import { colors } from "@material-ui/core";
@@ -15,36 +15,28 @@ const Map = ReactMapboxGl({
 });
 
 function Maps(props) {
-  
-   const [state, setState] = useState([]);
- 
+  const [state, setState] = useState([]);
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchData = async (res) => {
-
       await axios
-        .get("http://localhost:200/footpath/",{})
+        .get("http://localhost:200/footpath/", {})
         .then((res) => {
           console.log(res.data);
-          setState(res.data)
-
+          setState(res.data);
         })
         .catch((error) => {
           console.log(error);
         });
-        
     };
     fetchData();
-    
-  console.log(state)
-  }, []);
-useEffect(()=>{
- 
-})
 
+    console.log(state);
+  }, []);
+  useEffect(() => {});
 
   const onDrawCreate = (features) => {
-    console.log(features)
+    console.log(features);
   };
   const onDrawUpdate = ({ features }) => {
     console.log(features);
@@ -57,19 +49,15 @@ useEffect(()=>{
         //onClick={this._onClickMap}
         center={[31.639448, 30.101757]}
         zoom={[15]}
-        
         style="mapbox://styles/mapbox/satellite-streets-v11" // eslint-disable-line
         containerStyle={{
           height: "600px",
           width: "50vw",
         }}
       >
-        
         <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
 
         <Layer
-        
-       
           type="line"
           layout={{
             "line-join": "round",
@@ -78,13 +66,15 @@ useEffect(()=>{
           paint={{
             "line-color": "blue",
             "line-width": 5,
-            
-          }}// eslint-disable-next-line
-          
+          }} // eslint-disable-next-line
         >
           {state.map((p) => (
-            <Feature{...p} coordinates={p.geometry.coordinates}  />
-          )) }
+            <Feature
+              onClick={() => props.setStateToFeature(p)}
+              {...p}
+              coordinates={p.geometry.coordinates}
+            />
+          ))}
         </Layer>
       </Map>
     </div>
