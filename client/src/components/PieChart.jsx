@@ -2,51 +2,49 @@ import React, { useState,useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import axios from 'axios';
 
-const Donut=()=> {
+const Donut=(props)=> {
+  let arr = [props.series["1"],props.series["2"],props.series["3"],props.series["4"]];
+  const sum = arr.reduce(function(a, b){
+    return a + b;
+    }, 0)
+    const seriesArr = arr.map(x=> parseInt((x/sum) *100))
     const [state,setState] = useState({
-        series: [44, 55, 41, 17, 15],
+        series:seriesArr,
         options: {
+          labels: ['Very Good', 'Good', 'Fair', 'Poor'],
           chart: {
-            width: 380,
+            width: 250,
             type: 'donut',
             // sparkline: { enabled: true }
           },
           dataLabels: {
-            enabled: false
+            enabled: false,
           },
           fill: {
             type: 'gradient',
           },
           legend: {
-            formatter: function(val, opts) {
-              return val + " - " + opts.w.globals.series[opts.seriesIndex]
-            }
+            onItemClick: {
+              toggleDataSeries: true
+          },
+          onItemHover: {
+              highlightDataSeries: true
+          },
+            labels: {
+              useSeriesColors: true
+          },
+            formatter: function(seriesName, opts) {
+              return [seriesName + ' - ' +opts.w.globals.series[opts.seriesIndex]+ '%']
+          }
           },
             tooltip: {
             enabled: true,
             }
-
-        //   responsive: [{
-        //     breakpoint: 480,
-        //     options: {
-        //       chart: {
-        //         width: 100
-        //       },
-        //       legend: {
-        //         position: 'bottom'
-        //       }
-        //     }
-        //   }]
         }
     });
-
-    //   useEffect(() => {
-    //       const {data}= axios.get('/projects');
-
-    //   }, [])
       return (
-        <div className="donut">
-          <Chart options={state.options} series={state.series} type="donut" width="380" />
+        <div className="chart">
+          <Chart options={state.options} series={state.series} type="donut" />
         </div>
       );
 }

@@ -1,95 +1,73 @@
 import React, { useEffect,useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
+import Chart from 'react-apexcharts';
 
-const RadialChart=()=>{
+const RadialChart=(props)=>{
+  const series = parseInt(props.overallPerformance)
     const [state,setState] = useState({
-        series: [60],
-        options: {
-          chart: {
-            height: 350,
-            type: 'radialBar',
-            toolbar: {
-              show: true
-            }
-          },
-          plotOptions: {
-            radialBar: {
-              startAngle: -135,
-              endAngle: 225,
-               hollow: {
-                margin: 0,
-                size: '60%',
-                background: '#fff',
-                image: undefined,
-                imageOffsetX: 0,
-                imageOffsetY: 0,
-                position: 'front',
-                dropShadow: {
-                  enabled: true,
-                  top: 3,
-                  left: 0,
-                  blur: 4,
-                  opacity: 0.24
+            series: [series],
+            options: {
+              chart: {
+                type: 'radialBar',
+                offsetY: -20,
+                sparkline: {
+                  enabled: true
                 }
               },
-              track: {
-                background: '#fff',
-                strokeWidth: '30%',
-                margin: 0, // margin is in pixels
-                dropShadow: {
-                  enabled: true,
-                  top: -3,
-                  left: 0,
-                  blur: 4,
-                  opacity: 0.35
-                }
-              },
-          
-              dataLabels: {
-                show: true,
-                name: {
-                  offsetY: -10,
-                  show: true,
-                  color: '#888',
-                  fontSize: '17px'
-                },
-                value: {
-                  formatter: function(val) {
-                    return parseInt(val);
+              plotOptions: {
+                radialBar: {
+                  startAngle: -90,
+                  endAngle: 90,
+                  hollow: {
+                    size: '30%',
                   },
-                  color: '#111',
-                  fontSize: '36px',
-                  show: true,
+                  track: {
+                    background: "#e7e7e7",
+                    strokeWidth: '50%',
+                    margin: 30, // margin is in pixels
+                    dropShadow: {
+                      enabled: true,
+                      top: 2,
+                      left: 0,
+                      color: '#999',
+                      opacity: 1,
+                      blur: 2
+                    }
+                  },
+                  dataLabels: {
+                    name: {
+                      show: false,
+                    },
+                    value: {
+                      offsetY: -2,
+                      fontSize: '20px',
+                      color: "#e7e7e7"
+                    }
+                  }
                 }
-              }
-            }
-          },
-          fill: {
-            type: 'gradient',
-            gradient: {
-              shade: 'dark',
-              type: 'horizontal',
-              shadeIntensity: 0.5,
-              gradientToColors: ['#2dce89'],
-              inverseColors: true,
-              opacityFrom: 1,
-              opacityTo: 1,
-              stops: [0, 100]
-            }
-            // #e14eca
-          },
-          stroke: {
-            lineCap: 'round'
-          },
-          labels: ['Percent'],
-        },
-      
-      
+              },
+              grid: {
+                padding: {
+                  top: -10
+                }
+              },
+              fill: {
+                type: 'gradient',
+                gradient: {
+                  shade: 'light',
+                  shadeIntensity: 0.4,
+                  inverseColors: false,
+                  opacityFrom: 1,
+                  opacityTo: 1,
+                  stops: [0, 50, 53, 91]
+                },
+              },
+              labels: ['Performance'],
+            },
       })
 
     return (
         <div id="chart">
-        <ReactApexChart options={state.options} series={state.series} type="radialBar" height={350} />
+        <Chart options={state.options} series={state.series} type="radialBar" />
         </div>
     )}
 
