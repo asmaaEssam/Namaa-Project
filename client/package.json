@@ -27,9 +27,11 @@
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-mapbox-gl": "^4.8.6",
+    "react-mapbox-gl-draw": "^2.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "reactstrap": "^8.4.1"
+    "reactstrap": "^8.4.1",
+    "reactstrap-confirm": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
