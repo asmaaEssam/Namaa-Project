@@ -3,7 +3,7 @@ const express = require("express");
 const app = require("./connection");
 const cors = require("cors");
 
-const { userRouter } = require("./Api/userapi");
+const userRouter = require("./Api/userapi");
 const projectRouter = require("./Api/projectapi");
 const footpathRouter = require("./Api/footpathapi");
 const cyclewayRouter = require("./Api/cyclewayapi");

@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Table from './Table'
-import Userui from './Userui'
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Table from "./Table";
+import Userui from "./Userui";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    display: 'flex',
+    display: "flex",
     height: 224,
   },
   tabs: {
@@ -63,17 +63,17 @@ export default function VerticalMenu(props) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab label="Projects"/>
-        <Tab label="Departments"/>
-        <Tab label="Reports"/>
+        <Tab label="Projects" />
+        <Tab label="Departments" />
+        <Tab label="Reports" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Table/>
-        
+        <Table state={props.state} setState={props.setState} />
+        <Table />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Departments
-        <Userui/>
+        <Userui />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Reports

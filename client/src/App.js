@@ -8,8 +8,10 @@ import LandingPage from "./components/LandingPage";
 import UserProject from "./components/userProjects";
 import ProjectProfile from "./components/ProjectProfile";
 import Admin from "./layouts/Admin";
-import './index.css';
-import Forms from './Forms';
+import "./index.css";
+import Forms from "./Forms";
+import Dashboard from "./views/Dashboard";
+import LoginPage from "./components/LoginPage";
 function App() {
   const [isAddMenuState, setIsAddMenuState] = useState(false);
   const [state, setState] = useState({
@@ -32,21 +34,33 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path={"/dataEntry"} render={() => <ProjectsMap></ProjectsMap>} />
-        <Route path="/landing" render={() => <LandingPage></LandingPage>} />
-        <Route path="/dashboard" render={() => <Admin />} />
+      <div className="App">
+        <Switch>
+          <Route path="/dashboard" render={() => <Dashboard />} />
+          <Route
+            path="/login"
+            render={(props) => <LoginPage {...props} />}
+          ></Route>
 
-        {/* render={() => <UserProject></UserProject>}
+          {/* render={() => <UserProject></UserProject>}
         /> */}
-        {/* <Route exact path='/' render={props =>
+          {/* <Route exact path='/' render={props =>
         <>
         <Bar addMenu = {triggerAddMenuState}/>
         {isAddMenuState && <VerticalMenu state={state} setState={setState} />}
         </>
         } /> */}
-        <Route path="/project/:projectid" component={ProjectProfile} />
-      </Switch>
+          {/* <Route path="/project/:projectid" component={ProjectProfile} /> */}
+          <Route
+            path="/projects"
+            render={(props) => <ProjectsMap {...props}></ProjectsMap>}
+          />
+
+          <Route path="/dataEntry" render={() => <Forms></Forms>} />
+
+          <Route path="/" render={() => <LandingPage></LandingPage>} />
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }
