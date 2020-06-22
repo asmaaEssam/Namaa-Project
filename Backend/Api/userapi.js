@@ -51,29 +51,69 @@ userRouter.post("/register", async (req, res, next) => {
   });
 });
 
-userRouter.post("/login", async (req, res, next) => {
-  try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username: username, password: password });
-    //const isMatch = await bcrypt.compare(password, user.password);
+// userRouter.post("/login", async (req, res, next) => {
+//   try {
+//     const { username, password } = req.body;
+//     const user = await User.findOne({ username: username, password: password });
+//     //const isMatch = await bcrypt.compare(password, user.password);
 
-    if (user) {
-      return jwt.sign(
-        { _id: user.id },
-        process.env.JWT_SECRET,
-        { expiresIn: "60m" },
-        (err, token) => {
-          return res.send({ token });
-        }
-      );
+//     if (user) {
+//       return jwt.sign(
+//         { _id: user.id },
+//         process.env.JWT_SECRET,
+//         { expiresIn: "60m" },
+//         (err, token) => {
+//           return res.send({ token });
+//         }
+//       );
+//     }
+//     //TODO pagination
+//     const allprojects = await Project.find();
+//     return res.status(200).send(allprojects);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+// login
+userRouter.post(
+  "/login",
+
+  async (req, res, next) => {
+    const {
+      body: { username, password },
+    } = req;
+    console.log(username);
+    try {
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(500).send("username or password are incorrect");
+      }
+      const isMatch = await bcrypt.compare(password, user.toJSON().password);
+
+      if (isMatch) {
+        // generate token
+        const sanitizedUser = _.omit(
+          user,
+          "password",
+          "__v",
+
+          "_id"
+        );
+        const id = user._id;
+        const token = jwt.sign({ id }, JWT_SECRET, { expiresIn: "60m" });
+        return res.status(200).send({ user: sanitizedUser, token });
+      }
+      throw new customError({
+        message: "either username or password are wrong",
+        status: 500,
+      });
+    } catch (err) {
+      next(err);
     }
-    //TODO pagination
-    const allprojects = await Project.find();
-    return res.status(200).send(allprojects);
-  } catch (error) {
-    next(error);
   }
-});
+);
+
 userRouter.get("/", (req, res, next) => {
   const token = req.headers.authorization;
   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {

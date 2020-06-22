@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ComponentsNavbar from "../components/IndexNavbar";
 import Footer from "./Footer";
 import Carousel from "react-bootstrap/Carousel";
+import ExamplesNavbar from "./ExamplesNavbar.js";
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +29,7 @@ const Map = ReactMapboxGl({
   accessToken:
     "pk.eyJ1IjoiZmFkd2FtYWhtb3VkIiwiYSI6ImNrYW94djcwaDB2MGsycnBmNzk2b2drOG4ifQ.PheG-NUHPUAizAxxdUNJZA",
 });
-const ProjectsMap = () => {
+const ProjectsMap = (props) => {
   const classes = useStyles();
 
   const [state, setState] = useState([]);
@@ -36,7 +37,7 @@ const ProjectsMap = () => {
   useEffect(() => {
     //TODO currentUser in context or redux
     const fetchData = async () => {
-      const { data } = await axios.get(`/projects`, {});
+      const { data } = await axios.get(`http://localhost:200/projects`, {});
       setState(data);
     };
     console.log(state);
@@ -47,7 +48,7 @@ const ProjectsMap = () => {
   return (
     // in render()
     <React.Fragment>
-      <ComponentsNavbar></ComponentsNavbar>
+      <ExamplesNavbar></ExamplesNavbar>
       <Box className={classes.root}>
         <Map
           style="mapbox://styles/mapbox/light-v10"
@@ -83,6 +84,9 @@ const ProjectsMap = () => {
           {state[0] !== undefined ? (
             state.map((p, i) => (
               <Popup
+                onClick={() => {
+                  props.history.push("/dataEntry");
+                }}
                 coordinates={p.location.coordinates}
                 offset={{
                   "bottom-left": [12, -38],
