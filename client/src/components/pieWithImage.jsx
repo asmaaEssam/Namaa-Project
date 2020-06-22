@@ -1,12 +1,17 @@
 import React, { useState,useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import axios from 'axios';
 
 const PieWithImage =(props)=> {
+    let arr = [props.series["in use"],props.series["dismissed"],props.series["removed"]];
+    const sum = arr.reduce(function(a, b){
+      return a + b;
+      }, 0)
+      const seriesArr = arr.map(x=> parseInt((x/sum) *100))
     const [state,setState] = useState( {
       
-        series: [44, 33, 54],
+        series: seriesArr,
         options: {
+          labels: ['In-Use', 'Dismissed', 'Removed'],
           chart: {
             width: 130,
             type: 'pie',
@@ -16,7 +21,7 @@ const PieWithImage =(props)=> {
             type: 'image',
             opacity: 0.85,
             image: {
-               src: ['../assets/img/inuse.jpg','../assets/img/ryan.jpg','../assets/img/julie.jpeg'],
+               src: ['./inuse.jpg','./inuse.jpg','../assets/img/julie.jpeg'],
               width: 25,
               imagedHeight: 25
             },
@@ -26,6 +31,20 @@ const PieWithImage =(props)=> {
           },
           dataLabels: {
             enabled: false
+          },
+          legend: {
+            onItemClick: {
+              toggleDataSeries: true
+          },
+          onItemHover: {
+              highlightDataSeries: true
+          },
+            labels: {
+              useSeriesColors: true
+          },
+            formatter: function(seriesName, opts) {
+              return [seriesName + ' - ' +opts.w.globals.series[opts.seriesIndex]+ '%']
+          }
           },
           responsive: [{
             breakpoint: 480,
