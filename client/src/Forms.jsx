@@ -14,8 +14,22 @@ import {
 } from "reactstrap";
 import axios from "axios";
 const Forms = () => {
-  const [state, setState] = useState({});
-  var emptyInput = [];
+  const [state, setState] = useState({
+    assetname: "",
+    surveyorname: "",
+    dateofsurvey: "",
+    pothole: "",
+    erosion: "",
+    cracks: "",
+    slipperySurface: "",
+    fallenBranches: "",
+    QualityOfCurbing: "",
+    degreeOfCleanliness: "",
+    conditionofDrains: "",
+    pedestrians_Sainage_Condition: "",
+    generalCondition: "",
+    image: "",
+  });
 
   const handleChange = (e) => {
     setState({
@@ -25,10 +39,15 @@ const Forms = () => {
   };
   const setStateToFeature = (feature) => {
     setState(feature);
+    console.log(feature);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let result = confirm({
+      message: "Are you sure you want to add this data?",
+    });
+    console.log(result);
     axios
       .post("http://localhost:200/footpath/add", state)
       .then(({ data }) => {
@@ -38,31 +57,6 @@ const Forms = () => {
         console.log(err);
       });
   };
-
-  // const handleChange = (event) => {
-  //   state[event.target.name] = event.target.value;
-  //   emptyInput.push(event.target);
-  // };
-
-  const clearState = () => {
-    emptyInput.map((x) => (x.value = ""));
-  };
-  // const handleSubmit = async (event, id) => {
-  //   event.preventDefault();
-  //   let result = await confirm({
-  //     message: "Are you sure you want to add this data?",
-  //   });
-  //   console.log(result);
-  //   await axios
-  //     .post(`http://localhost:200/footpath/add/`, state)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   clearState();
-  // };
 
   return (
     <>
@@ -95,18 +89,6 @@ const Forms = () => {
                       onChange={handleChange}
                     />
                   </FormGroup>
-
-                  <FormGroup className="col-md-4">
-                    <Label for="geometry"></Label>
-                    <Input
-                      type="hidden"
-                      placeholder="Employee Name"
-                      id="surveyorname"
-                      name="surveyorname"
-                      onChange={handleChange}
-                    />
-                  </FormGroup>
-
                   <FormGroup>
                     <Label for="dateofsurvey">Date of survey</Label>
                     <Input
