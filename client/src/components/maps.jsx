@@ -21,15 +21,15 @@ function Maps() {
   //   console.log(evt.lngLat);
   // })
   return (
-    <div id="dataentryMap">
+    <div>
       <Map
       //onClick={this._onClickMap}
       center={[31.6306, 30.0917]}
       zoom={[13]}
-        style='mapbox://styles/asma163/ckbgkzh7457611io4q6k872re' // eslint-disable-line
+        style='mapbox://styles/mapbox/satellite-v9' // eslint-disable-line
         containerStyle={{
           height: "500px",
-          width: "45vw",
+          width: "47vw",
           
         }}
       >

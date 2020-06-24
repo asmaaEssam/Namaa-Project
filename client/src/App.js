@@ -9,10 +9,11 @@ import UserProject from "./components/userProjects";
 import ProjectProfile from "./components/ProjectProfile";
 import Admin from "./layouts/Admin";
 import DataEntry from './layouts/DataEntry';
+import Login from './layouts/Login'
 import "./index.css";
-import Forms from "./components/Forms";
+// import Forms from "./components/Forms";
 import ExamplesNavbar from './components/ExamplesNavbar'
-import LoginPage from "./components/LoginPage";
+// import LoginPage from "./components/LoginPage";
 function App() {
   const [isAddMenuState, setIsAddMenuState] = useState(false);
   const [state, setState] = useState({
@@ -40,7 +41,7 @@ function App() {
           <Route path="/dashboard" render={() => <Admin />} />
           <Route
             path="/login"
-            render={(props) => <LoginPage {...props} />}
+            render={(props) => <Login {...props} />}
           ></Route>
 
           {/* render={() => <UserProject></UserProject>}
