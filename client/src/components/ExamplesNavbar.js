@@ -32,6 +32,9 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faFacebook, faInstagram,faTwitter } from "@fortawesome/free-brands-svg-icons"
+
 class PagesNavbar extends React.Component {
   constructor(props) {
     super(props);
@@ -87,24 +90,6 @@ class PagesNavbar extends React.Component {
         expand="lg"
       >
         <Container>
-          <div className="navbar-translate">
-            <NavbarBrand to="/" id="navbar-brand" tag={Link}>
-              <span>BLK• </span>
-              Design System React
-            </NavbarBrand>
-            <UncontrolledTooltip placement="bottom" target="navbar-brand">
-              Designed and Coded by Creative Tim
-            </UncontrolledTooltip>
-            <button
-              aria-expanded={this.state.collapseOpen}
-              className="navbar-toggler navbar-toggler"
-              onClick={this.toggleCollapse}
-            >
-              <span className="navbar-toggler-bar bar1" />
-              <span className="navbar-toggler-bar bar2" />
-              <span className="navbar-toggler-bar bar3" />
-            </button>
-          </div>
           <Collapse
             className={"justify-content-end " + this.state.collapseOut}
             navbar
@@ -114,11 +99,6 @@ class PagesNavbar extends React.Component {
           >
             <div className="navbar-collapse-header">
               <Row>
-                <Col className="collapse-brand" xs="6">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    BLK•React
-                  </a>
-                </Col>
                 <Col className="collapse-close text-right" xs="6">
                   <button
                     aria-expanded={this.state.collapseOpen}
@@ -139,7 +119,7 @@ class PagesNavbar extends React.Component {
                   target="_blank"
                   title="Follow us on Twitter"
                 >
-                  <i className="fab fa-twitter" />
+                  <FontAwesomeIcon icon={faTwitter} />
                   <p className="d-lg-none d-xl-none">Twitter</p>
                 </NavLink>
               </NavItem>
@@ -151,7 +131,7 @@ class PagesNavbar extends React.Component {
                   target="_blank"
                   title="Like us on Facebook"
                 >
-                  <i className="fab fa-facebook-square" />
+                  <FontAwesomeIcon icon={faFacebook} />
                   <p className="d-lg-none d-xl-none">Facebook</p>
                 </NavLink>
               </NavItem>
@@ -163,7 +143,7 @@ class PagesNavbar extends React.Component {
                   target="_blank"
                   title="Follow us on Instagram"
                 >
-                  <i className="fab fa-instagram" />
+                  <FontAwesomeIcon icon={faInstagram} />
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
               </NavItem>
@@ -174,7 +154,7 @@ class PagesNavbar extends React.Component {
                     color="primary"
                     target="_blank"
                   >
-                    <i className="tim-icons icon-spaceship" /> Login
+                   Login
                   </Button>
                 </Link>
               </NavItem>

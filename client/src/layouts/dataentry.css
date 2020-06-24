@@ -1,0 +1,15 @@
+#dataentry{
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+    justify-content: space-evenly;
+}
+#xx{
+    margin-left: 15px;
+}
+/* #hi{
+    color: 'yellow'
+} */
+#dataentryMap{
+    width: 40%;
+}

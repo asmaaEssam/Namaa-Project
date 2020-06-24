@@ -1,8 +1,5 @@
 import React from "react";
-import Maps from "./maps";
-import "./index.css";
 import confirm from "reactstrap-confirm";
-
 import { FormGroup, Label, Input, Button, Card, CardBody } from "reactstrap";
 import axios from "axios";
 const Forms = () => {
@@ -38,18 +35,12 @@ const clearState= ()=>{
   };
 
   return (
-    <>
-      <div className="container">
-        <div className="mapboxgl-canvas">
-          <Maps />
-        </div>
-        <div className="input">
+    <div id='xx'>
           <Card>
             <CardBody>
               <form onSubmit={handleSubmit}>
                 <div className="form-row">
                   <FormGroup className="col-md-4">
-                    <Label for="assetname">Asset Name</Label>
                     <Input
                       type="text"
                       placeholder="Asset Name"
@@ -59,7 +50,6 @@ const clearState= ()=>{
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
-                    <Label for="surveyorname">Employee Name</Label>
                     <Input
                       type="text"
                       placeholder="Employee Name"
@@ -70,116 +60,110 @@ const clearState= ()=>{
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="dateofsurvey">Date of survey</Label>
                     <Input
                       type="date"
                       name="dateofsurvey"
                       id="dateofsurvey"
                       onChange={inputHandler}
+                      placeholder="Date of survey"
                     />
                   </FormGroup>
                 </div>
                 <div className="form-row">
                   <FormGroup className="col-md-4">
-                    <Label for="cracks">Cracks</Label>
                     <Input
                       type="text"
                       name="cracks"
                       id="cracks"
                       onChange={inputHandler}
+                      placeholder="Cracks"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
-                    <Label for="pothole">Potehole condition</Label>
                     <Input
                       type="text"
                       name="pothole"
                       id="pothole"
                       onChange={inputHandler}
+                      placeholder="Potehole condition"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
-                    <Label for="erosion">Erosion </Label>
                     <Input
                       type="text"
                       name="erosion"
                       id="erosion"
                       onChange={inputHandler}
+                      placeholder="Erosion"
                     />
                   </FormGroup>
                 </div>
                 <div>
                   <FormGroup className="col-md-5">
-                    <Label for="slipperySurface">Slippery Surface</Label>
                     <Input
                       type="text"
                       name="slipperySurface"
                       id="slipperySurface"
                       onChange={inputHandler}
+                      placeholder="Slippery Surface"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-5">
-                    <Label for="fallenBranches">
-                      Fallen Branches percentage
-                    </Label>
                     <Input
                       type="text"
                       name="fallenBranches"
                       id="fallenBranches"
                       onChange={inputHandler}
+                      placeholder="Fallen Branches percentage"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-5">
-                    <Label for="QualityOfCurbing">Quality of curbing</Label>
                     <Input
                       type="text"
                       name="fallenBranches"
                       id="fallenBranches"
                       onChange={inputHandler}
+                      placeholder="Quality of curbing"
                     />
                   </FormGroup>
                   <div className="form-row">
                     <FormGroup className="col-md-5">
-                      <Label for="degreeOfCleanliness">
-                        Degree of cleanliness
-                      </Label>
                       <Input
                         type="text"
                         name="degreeOfCleanliness"
                         id="degreeOfCleanliness"
                         onChange={inputHandler}
+                      placeholder="Degree of cleanliness"
                       />
                     </FormGroup>
 
                     <FormGroup className="col-md-5">
-                      <Label for="conditionofDrains">Condition of drains</Label>
                       <Input
                         type="text"
                         name="conditionofDrains"
                         id="conditionofDrains"
                         onChange={inputHandler}
+                        placeholder="Condition of drains"
                       />
                     </FormGroup>
                   </div>
                   <div className="form-row">
                     <FormGroup className="col-md-5">
-                      <Label for="pedestrians_Sainage_Condition">
-                        Condition of sainage
-                      </Label>
                       <Input
                         type="text"
                         name="pedestrians_Sainage_Condition"
                         id="pedestrians_Sainage_Condition"
                         onChange={inputHandler}
+                      placeholder="Condition of sainage"
                       />
                     </FormGroup>
                     <FormGroup className="col-md-5">
-                      <Label for="generalCondition">General Condition</Label>
                       <Input
                         type="text"
                         name="generalCondition"
                         id="generalCondition"
                         onChange={inputHandler}
+                      placeholder="General Condition"
                       />
                     </FormGroup>
                   </div>
@@ -190,9 +174,7 @@ const clearState= ()=>{
               </form>
             </CardBody>
           </Card>
-        </div>
-      </div>
-    </>
+          </div>
   );
 };
 
