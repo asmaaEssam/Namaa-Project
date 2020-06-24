@@ -21,6 +21,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import ExamplesNavbar from './ExamplesNavbar'
 
 class LoginPage extends React.Component {
   state = {
@@ -112,6 +113,7 @@ class LoginPage extends React.Component {
   render() {
     return (
       <>
+      <ExamplesNavbar/>
         <div className="wrapper">
           <div className="page-header">
             <div className="page-header-image" />

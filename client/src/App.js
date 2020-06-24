@@ -8,9 +8,10 @@ import LandingPage from "./components/LandingPage";
 import UserProject from "./components/userProjects";
 import ProjectProfile from "./components/ProjectProfile";
 import Admin from "./layouts/Admin";
+import DataEntry from './layouts/DataEntry';
 import "./index.css";
-import Forms from "./Forms";
-import Dashboard from "./views/Dashboard";
+import Forms from "./components/Forms";
+import ExamplesNavbar from './components/ExamplesNavbar'
 import LoginPage from "./components/LoginPage";
 function App() {
   const [isAddMenuState, setIsAddMenuState] = useState(false);
@@ -36,7 +37,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route path="/dashboard" render={() => <Dashboard />} />
+          <Route path="/dashboard" render={() => <Admin />} />
           <Route
             path="/login"
             render={(props) => <LoginPage {...props} />}
@@ -56,9 +57,9 @@ function App() {
             render={(props) => <ProjectsMap {...props}></ProjectsMap>}
           />
 
-          <Route path="/dataEntry" render={() => <Forms></Forms>} />
+          <Route path="/dataEntry" render={() => <DataEntry/>} />
 
-          <Route path="/" render={() => <LandingPage></LandingPage>} />
+          <Route path="/" render={() => <><ExamplesNavbar/><LandingPage/></>} />
         </Switch>
       </div>
     </BrowserRouter>

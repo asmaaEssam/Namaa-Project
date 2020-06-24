@@ -48,7 +48,7 @@ const ProjectsMap = (props) => {
   return (
     // in render()
     <React.Fragment>
-      <ExamplesNavbar></ExamplesNavbar>
+      {/* <ExamplesNavbar></ExamplesNavbar> */}
       <Box className={classes.root}>
         <Map
           style="mapbox://styles/mapbox/light-v10"

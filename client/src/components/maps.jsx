@@ -5,8 +5,7 @@ import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 
 
 const Map = ReactMapboxGl({
-  accessToken:
-    "pk.eyJ1IjoibWVubmFheW1hbiIsImEiOiJja2I1anpjNXIwdGpmMnJvOXJiZWNzMm90In0.doC5cK7Oe_4O5kHls6lhWg"
+  accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
 });
 
 
@@ -22,15 +21,15 @@ function Maps() {
   //   console.log(evt.lngLat);
   // })
   return (
-    <div>
-      <h2>Welcome to react-mapbox-gl-draw</h2>
+    <div id="dataentryMap">
       <Map
       //onClick={this._onClickMap}
-      center={[31.662533,30.096655]}
-        style="mapbox://styles/mapbox/streets-v9" // eslint-disable-line
+      center={[31.6306, 30.0917]}
+      zoom={[13]}
+        style='mapbox://styles/asma163/ckbgkzh7457611io4q6k872re' // eslint-disable-line
         containerStyle={{
-          height: "600px",
-          width: "50vw",
+          height: "500px",
+          width: "45vw",
           
         }}
       >

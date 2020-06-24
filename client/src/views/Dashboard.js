@@ -139,7 +139,7 @@ class Dashboard extends React.Component {
           <Col lg="3">
               <Card className="card-chart">
                 <CardBody>
-                  <h4 style={{textAlign:'center'}}><i className="tim-icons icon-delivery-fast text-primary" />{" "}Customer Satisfication</h4>
+                  <h4 style={{textAlign:'center'}}><i className="tim-icons icon-delivery-fast text-primary" />{" "}Customer Satisfaction</h4>
                   <h3 style={{textAlign:'center', color: "#e14eca"}}>75 %</h3>
                 </CardBody>
               </Card>
