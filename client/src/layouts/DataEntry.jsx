@@ -15,18 +15,19 @@ import {
 
 const DataEntry = () => {
     return ( 
-    <div id='dataentry'>
+    <div>
         <ExamplesNavbar/>
-        <Row>
-                <div>
-                    <Card>
+        
+                <div className="page-header">
+                    <div className="content" id='dataentry'>
+                    <Card id="dataentryMap">
                         <CardBody>
                             <Maps/>
                         </CardBody>
-                    </Card>
+                    </Card> 
+                    <Forms/>
+                    </div>
                 </div>
-            <Forms/>
-        </Row>
         </div>
      );
 }

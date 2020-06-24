@@ -59,15 +59,16 @@ class LoginPage extends React.Component {
         username: this.state.username,
         password: this.state.password,
       };
-
+      console.log(user)
       // login request
       axios
-        .post(`http://localhost:200/users/login`, user)
+        .post(`http://localhost:2000/users/login`, user)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
-          this.props.history.push("/projects");
+          this.props.history.push("/dashboard");
         })
         .catch((error) => {
+          console.log(error)
           this.setState({
             ...this.state,
             status: "username or password are incorrect",
@@ -113,27 +114,20 @@ class LoginPage extends React.Component {
   render() {
     return (
       <>
-      <ExamplesNavbar/>
-        <div className="wrapper">
-          <div className="page-header">
-            <div className="page-header-image" />
-            <div className="content">
-              <Container>
-                <Row>
-                  <Col className="offset-lg-0 offset-md-3" lg="5" md="6">
+              <Container id='container'>
                     <Form
                       method="post"
                       onSubmit={this.handleSubmit}
-                      style={{ display: "flex", flexDirection: "column" }}
+                      
                       className="form"
                     >
-                      <Card className="card-register">
-                        <CardHeader>
-                          <CardImg
+                      <Card className="card-register" id='loginForm'>
+                        <CardHeader >
+                          {/* <CardImg
                             alt="..."
                             src={"./assets/img/square-purple-1.png"}
-                          />
-                          <CardTitle tag="h4">Login</CardTitle>
+                          /> */}
+                          <CardTitle tag="h4" style={{color:"#f4f5f7", textAlign:'center'}}>Login</CardTitle>
                         </CardHeader>
                         <CardBody>
                           <InputGroup
@@ -208,7 +202,8 @@ class LoginPage extends React.Component {
                             </span>
                           )}
                         </CardBody>
-                        <CardFooter>
+                        <CardFooter style={{ display: "flex", 
+                      justifyContent:'center',alignContent:'center' }}>
                           {this.state.status === "loading" ? (
                             <div class="alert alert-default" role="alert">
                               Loading.....
@@ -226,13 +221,11 @@ class LoginPage extends React.Component {
                         </CardFooter>
                       </Card>
                     </Form>
-                  </Col>
-                </Row>
                 <div className="register-bg" />
               </Container>
-            </div>
+            {/* </div>
           </div>
-        </div>
+        </div> */}
       </>
     );
   }

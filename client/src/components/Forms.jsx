@@ -1,6 +1,6 @@
 import React from "react";
 import confirm from "reactstrap-confirm";
-import { FormGroup, Label, Input, Button, Card, CardBody } from "reactstrap";
+import { FormGroup, Label, Input, Button, Card, CardBody, CardHeader, CardFooter } from "reactstrap";
 import axios from "axios";
 const Forms = () => {
   var state = {};
@@ -37,8 +37,14 @@ const clearState= ()=>{
   return (
     <div id='xx'>
           <Card>
+          <form onSubmit={handleSubmit}>
+            <CardHeader>
+              <h2>
+                Feature Data
+              </h2>
+            </CardHeader>
             <CardBody>
-              <form onSubmit={handleSubmit}>
+              
                 <div className="form-row">
                   <FormGroup className="col-md-4">
                     <Input
@@ -59,7 +65,7 @@ const clearState= ()=>{
                       onChange={inputHandler}
                     />
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className="col-md-4">
                     <Input
                       type="date"
                       name="dateofsurvey"
@@ -98,8 +104,8 @@ const clearState= ()=>{
                     />
                   </FormGroup>
                 </div>
-                <div>
-                  <FormGroup className="col-md-5">
+                <div className="form-row">
+                  <FormGroup className="col-md-8">
                     <Input
                       type="text"
                       name="slipperySurface"
@@ -108,7 +114,9 @@ const clearState= ()=>{
                       placeholder="Slippery Surface"
                     />
                   </FormGroup>
-                  <FormGroup className="col-md-5">
+                  </div>
+                  <div className="form-row">
+                  <FormGroup className="col-md-8">
                     <Input
                       type="text"
                       name="fallenBranches"
@@ -117,7 +125,9 @@ const clearState= ()=>{
                       placeholder="Fallen Branches percentage"
                     />
                   </FormGroup>
-                  <FormGroup className="col-md-5">
+                  </div>
+                  <div className="form-row">
+                  <FormGroup className="col-md-8">
                     <Input
                       type="text"
                       name="fallenBranches"
@@ -126,8 +136,9 @@ const clearState= ()=>{
                       placeholder="Quality of curbing"
                     />
                   </FormGroup>
+                  </div>
                   <div className="form-row">
-                    <FormGroup className="col-md-5">
+                    <FormGroup className="col-md-6">
                       <Input
                         type="text"
                         name="degreeOfCleanliness"
@@ -137,7 +148,7 @@ const clearState= ()=>{
                       />
                     </FormGroup>
 
-                    <FormGroup className="col-md-5">
+                    <FormGroup className="col-md-6">
                       <Input
                         type="text"
                         name="conditionofDrains"
@@ -148,7 +159,7 @@ const clearState= ()=>{
                     </FormGroup>
                   </div>
                   <div className="form-row">
-                    <FormGroup className="col-md-5">
+                    <FormGroup className="col-md-6">
                       <Input
                         type="text"
                         name="pedestrians_Sainage_Condition"
@@ -157,7 +168,7 @@ const clearState= ()=>{
                       placeholder="Condition of sainage"
                       />
                     </FormGroup>
-                    <FormGroup className="col-md-5">
+                    <FormGroup className="col-md-6">
                       <Input
                         type="text"
                         name="generalCondition"
@@ -167,12 +178,14 @@ const clearState= ()=>{
                       />
                     </FormGroup>
                   </div>
-                </div>
-                <Button type="submit" color="primary">
+                
+            </CardBody>
+            <CardFooter>
+            <Button type="submit" color="primary">
                   Add
                 </Button>
-              </form>
-            </CardBody>
+            </CardFooter>
+            </form>
           </Card>
           </div>
   );
