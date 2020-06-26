@@ -37,7 +37,8 @@ const ProjectsMap = (props) => {
   useEffect(() => {
     //TODO currentUser in context or redux
     const fetchData = async () => {
-      const { data } = await axios.get(`http://localhost:200/projects`, {});
+      const { data } = await axios.get(`http://localhost:9000/projects`, {});
+      console.log(data)
       setState(data);
     };
     console.log(state);
@@ -48,7 +49,7 @@ const ProjectsMap = (props) => {
   return (
     // in render()
     <React.Fragment>
-      {/* <ExamplesNavbar></ExamplesNavbar> */}
+      <ExamplesNavbar></ExamplesNavbar>
       <Box className={classes.root}>
         <Map
           style="mapbox://styles/mapbox/light-v10"
@@ -85,6 +86,7 @@ const ProjectsMap = (props) => {
             state.map((p, i) => (
               <Popup
                 onClick={() => {
+                  console.log(props.history)
                   props.history.push("/dataEntry");
                 }}
                 coordinates={p.location.coordinates}
@@ -121,8 +123,6 @@ const ProjectsMap = (props) => {
           )}
         </Map>
       </Box>
-
-      <Footer></Footer>
     </React.Fragment>
   );
 };

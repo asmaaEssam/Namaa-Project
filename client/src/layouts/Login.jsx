@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginPage from '../components/LoginPage';
 import ExamplesNavbar from '../components/ExamplesNavbar'
-import './dataentry.css'
+import './layoutStyles.css'
 
 const Login = () => {
     return ( 

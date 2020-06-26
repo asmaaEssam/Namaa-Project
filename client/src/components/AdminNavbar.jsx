@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
@@ -19,7 +18,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFacebook, faInstagram,faTwitter } from "@fortawesome/free-brands-svg-icons"
 
-class PagesNavbar extends React.Component {
+class adminNavbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -143,13 +142,13 @@ class PagesNavbar extends React.Component {
                 </Link>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/project">
+                <NavLink tag={Link} to="/admin/projects">
                   Projects
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/dataEntry">
-                  Data Entry
+                <NavLink tag={Link} to="/admin/departments">
+                  Departments
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -165,4 +164,4 @@ class PagesNavbar extends React.Component {
   }
 }
 
-export default PagesNavbar;
+export default adminNavbar;

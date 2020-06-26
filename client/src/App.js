@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Bar from "./components/Bar";
 import VerticalMenu from "./components/VerticalMenu";
-// import UserProject from "./components/userProjects";
 import ProjectsMap from "./components/projectsMap";
 import LandingPage from "./components/LandingPage";
 import UserProject from "./components/userProjects";
 import ProjectProfile from "./components/ProjectProfile";
-import Admin from "./layouts/Admin";
+import DecisionMaker from "./layouts/decisionMaker";
 import DataEntry from './layouts/DataEntry';
 import Login from './layouts/Login'
+import Admin from './layouts/Admin.jsx'
 import "./index.css";
-// import Forms from "./components/Forms";
 import ExamplesNavbar from './components/ExamplesNavbar'
-// import LoginPage from "./components/LoginPage";
+// import ProjectsMap from './components/projectsMap'
+import AdminProjects from "./layouts/AdminProjects";
+import Footer from "./components/Footer";
+import Departments from "./layouts/Departments";
 function App() {
-  const [isAddMenuState, setIsAddMenuState] = useState(false);
   const [state, setState] = useState({
     columns: [
       { title: "Category", field: "category" },
@@ -30,15 +31,11 @@ function App() {
     project: [],
   });
 
-  function triggerAddMenuState() {
-    setIsAddMenuState(!isAddMenuState);
-  }
-
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route path="/dashboard" render={() => <Admin />} />
+          <Route path="/dashboard" render={() => <DecisionMaker />} />
           <Route
             path="/login"
             render={(props) => <Login {...props} />}
@@ -46,23 +43,24 @@ function App() {
 
           {/* render={() => <UserProject></UserProject>}
         /> */}
-          {/* <Route exact path='/' render={props =>
-        <>
-        <Bar addMenu = {triggerAddMenuState}/>
-        {isAddMenuState && <VerticalMenu state={state} setState={setState} />}
-        </>
-        } /> */}
-          {/* <Route path="/project/:projectid" component={ProjectProfile} /> */}
+          <Route exact path='/admin' render={props => <Admin/>}/>
+          <Route path="/project/:projectid" component={ProjectProfile} />
           <Route
-            path="/projects"
-            render={(props) => <ProjectsMap {...props}></ProjectsMap>}
+            path="/project"
+            render={(props) => <ProjectsMap />}
+          />
+          <Route
+            path="/admin/projects"
+            render={(props) => <AdminProjects {...props} state = {state} setState={setState}/>}
           />
 
           <Route path="/dataEntry" render={() => <DataEntry/>} />
+          <Route path='/admin/departments' component= {Departments}/>
 
           <Route path="/" render={() => <><ExamplesNavbar/><LandingPage/></>} />
         </Switch>
       </div>
+      <Footer/>
     </BrowserRouter>
   );
 }

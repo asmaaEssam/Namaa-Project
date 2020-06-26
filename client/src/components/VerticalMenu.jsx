@@ -69,7 +69,7 @@ export default function VerticalMenu(props) {
       </Tabs>
       <TabPanel value={value} index={0}>
         <Table state={props.state} setState={props.setState} />
-        <Table />
+        {/* <Table /> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
         Departments
