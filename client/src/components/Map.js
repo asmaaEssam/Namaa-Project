@@ -4,12 +4,11 @@ import ReactMapboxGl, { Layer, Popup, Feature } from "react-mapbox-gl";
 import "../assets/scss/blk-design-system-react.scss";
 import "../assets/css/nucleo-icons.css";
 
-const Map = ReactMapboxGl({
-  accessToken:
-  "pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
-});
-const DashboardMap = () => {
+const DashboardMap = (props) => {
 
+  const Map = ReactMapboxGl({
+    accessToken: props.accessToken
+  });
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const { data } = await axios.get(`/projects`, {});
@@ -23,9 +22,9 @@ const DashboardMap = () => {
   return (
     <React.Fragment>
         <Map
-          style="mapbox://styles/asma163/ckbggndq8257h1irya7l12nzw"
+          style= {props.style}
           containerStyle={{
-            height: "44.5vh",
+            height: props.height,
           }}
           center={[31.6306, 30.0917]}
           zoom={[13]}

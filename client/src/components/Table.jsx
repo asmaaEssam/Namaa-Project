@@ -10,7 +10,7 @@ export default function MaterialTableDemo(props) {
 
   const fetchData = async () => {
     const result = await axios.get(
-      'http://localhost:5000/projects/',
+      'http://localhost:9000/projects/',
     );
     setState({columns: state.columns,
   data: result.data});
@@ -22,7 +22,7 @@ export default function MaterialTableDemo(props) {
 
    async function addProject (newProject){
     const result = await axios.post(
-      'http://localhost:5000/projects/add',newProject
+      'http://localhost:9000/projects/add',newProject
     );
     setState({columns: state.columns,
   data:[...state.data , result.data]});
@@ -49,7 +49,7 @@ export default function MaterialTableDemo(props) {
   async function handleClick(project) {
     history.push(`/project/${project._id}`);
     const result = await axios.get(
-      'http://localhost:5000/projects/' + project._id,
+      'http://localhost:9000/projects/' + project._id,
     );
     console.log(result)
     setState({

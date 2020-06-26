@@ -1,13 +1,13 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import AdminNavbar from '../components/AdminNavbar';
+import AdminNavbar from '../components/DesicionMakerNavbar';
 import Dashboard from '../views/Dashboard';
 // core components
 
 var ps;
 
-class Admin extends React.Component {
+class DecisionMaker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,4 +65,4 @@ class Admin extends React.Component {
   }
 }
 
-export default Admin;
+export default DecisionMaker;

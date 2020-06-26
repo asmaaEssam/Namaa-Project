@@ -4,9 +4,15 @@
     /* margin-top: 100px; */
     justify-content: space-around;
 }
+#adminProjects{
+    margin-top: 10%;
+    /* display: flex; */
+
+}
 
 #dataentryMap{
     width: 50%;
+    margin-left: 15px;
 }
 #container{
     width: 40%;

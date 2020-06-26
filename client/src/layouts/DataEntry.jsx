@@ -2,7 +2,7 @@ import React from 'react'
 import ExamplesNavbar from '../components/ExamplesNavbar'
 import Maps from '../components/maps';
 import Forms from '../components/Forms'
-import './dataentry.css';
+import './layoutStyles.css';
 import DashboardMap from '../components/Map';
 import {
     Card,

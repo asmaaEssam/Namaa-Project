@@ -34,7 +34,7 @@ const headers= {Authorization:token}
   
     const fetchData = async () => {
       const result = await axios.get(
-        '/users/', {headers}
+        'http://localhost:9000/users/', {headers}
         
       );
  if (!{headers}){
@@ -51,7 +51,7 @@ const headers= {Authorization:token}
 
   async function addUser (newuser){
  const result = await axios.post(
-   '/users/register',newuser,{headers}
+   'http://localhost:9000/users/register',newuser,{headers}
  )
  alert(result.data.message)
  ///console.log(result.data.message)
@@ -62,7 +62,7 @@ data:[...state.data , result.data]});
 async function deleteUser (id){
  
 const result = await axios.delete(
- `users/${id}`,{headers}
+ `http://localhost:9000/users/${id}`,{headers}
 );
 alert(result.data.message)
 console.log(result.data)
@@ -73,7 +73,7 @@ setState({columns: state.columns,
  async function editUser (id,editedUser){
  
   const result =  await axios.patch(
-   `users/${id}`,editedUser,{headers}
+   `http://localhost:9000/users/${id}`,editedUser,{headers}
   )
   alert(result.data.message)
 //  if(result.data.message!={}){

@@ -132,7 +132,7 @@ class Dashboard extends React.Component {
           <Col lg="6">
               <Card className="card-chart" id= "map">
               <CardBody>
-                <DashboardMap/>
+                <DashboardMap style ="mapbox://styles/asma163/ckbggndq8257h1irya7l12nzw" accessToken="pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA" height="44.5vh" />
               </CardBody>
               </Card>
           </Col>
