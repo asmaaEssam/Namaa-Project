@@ -7,11 +7,11 @@ import LandingPage from "./components/LandingPage";
 import UserProject from "./components/userProjects";
 import ProjectProfile from "./components/ProjectProfile";
 import DecisionMaker from "./layouts/decisionMaker";
-import DataEntry from './layouts/DataEntry';
-import Login from './layouts/Login'
-import Admin from './layouts/Admin.jsx'
+import DataEntry from "./layouts/DataEntry";
+import Login from "./layouts/Login";
+import Admin from "./layouts/Admin.jsx";
 import "./index.css";
-import ExamplesNavbar from './components/ExamplesNavbar'
+import ExamplesNavbar from "./components/ExamplesNavbar";
 // import ProjectsMap from './components/projectsMap'
 import AdminProjects from "./layouts/AdminProjects";
 import Footer from "./components/Footer";
@@ -36,31 +36,35 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/dashboard" render={() => <DecisionMaker />} />
-          <Route
-            path="/login"
-            render={(props) => <Login {...props} />}
-          ></Route>
+          <Route path="/login" render={(props) => <Login {...props} />}></Route>
 
           {/* render={() => <UserProject></UserProject>}
         /> */}
-          <Route exact path='/admin' render={props => <Admin/>}/>
+          <Route exact path="/admin" render={(props) => <Admin />} />
           <Route path="/project/:projectid" component={ProjectProfile} />
-          <Route
-            path="/project"
-            render={(props) => <ProjectsMap />}
-          />
+          <Route path="/project" render={(props) => <ProjectsMap />} />
           <Route
             path="/admin/projects"
-            render={(props) => <AdminProjects {...props} state = {state} setState={setState}/>}
+            render={(props) => (
+              <AdminProjects {...props} state={state} setState={setState} />
+            )}
           />
 
-          <Route path="/dataEntry" render={() => <DataEntry/>} />
-          <Route path='/admin/departments' component= {Departments}/>
+          <Route path="/dataEntry" render={() => <DataEntry />} />
+          <Route path="/admin/departments" component={Departments} />
 
-          <Route path="/" render={() => <><ExamplesNavbar/><LandingPage/></>} />
+          <Route
+            path="/"
+            render={() => (
+              <>
+                <ExamplesNavbar />
+                <LandingPage />
+              </>
+            )}
+          />
         </Switch>
       </div>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }

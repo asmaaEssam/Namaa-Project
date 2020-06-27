@@ -21,7 +21,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import ExamplesNavbar from './ExamplesNavbar'
+import ExamplesNavbar from "./ExamplesNavbar";
 
 class LoginPage extends React.Component {
   state = {
@@ -59,16 +59,16 @@ class LoginPage extends React.Component {
         username: this.state.username,
         password: this.state.password,
       };
-      console.log(user)
+      console.log(user);
       // login request
       axios
-        .post(`http://localhost:2000/users/login`, user)
+        .post(`http://localhost:9000/users/login`, user)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
           this.props.history.push("/dashboard");
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
           this.setState({
             ...this.state,
             status: "username or password are incorrect",
@@ -114,116 +114,109 @@ class LoginPage extends React.Component {
   render() {
     return (
       <>
-              <Container id='container'>
-                    <Form
-                      method="post"
-                      onSubmit={this.handleSubmit}
-                      
-                      className="form"
-                    >
-                      <Card className="card-register" id='loginForm'>
-                        <CardHeader >
-                          {/* <CardImg
+        <Container id="container">
+          <Form method="post" onSubmit={this.handleSubmit} className="form">
+            <Card className="card-register" id="loginForm">
+              <CardHeader>
+                {/* <CardImg
                             alt="..."
                             src={"./assets/img/square-purple-1.png"}
                           /> */}
-                          <CardTitle tag="h4" style={{color:"#f4f5f7", textAlign:'center'}}>Login</CardTitle>
-                        </CardHeader>
-                        <CardBody>
-                          <InputGroup
-                            className={
-                              this.state.errors.username
-                                ? "has-danger"
-                                : classnames({
-                                    "input-group-focus": this.state.emailFocus,
-                                  })
-                            }
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="tim-icons icon-email-85" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              onChange={this.handleValidation}
-                              name="username"
-                              placeholder="username"
-                              type="text"
-                              onFocus={(e) =>
-                                this.setState({ emailFocus: true })
-                              }
-                              onBlur={(e) =>
-                                this.setState({ emailFocus: false })
-                              }
-                            />
-                          </InputGroup>
-                          {this.state.errors.username && (
-                            <span className="errorspan">
-                              {this.state.errors.username}
-                            </span>
-                          )}
-                          <InputGroup
-                            className={
-                              this.state.errors.password
-                                ? "has-danger"
-                                : classnames({
-                                    "input-group-focus": this.state
-                                      .passwordFocus,
-                                  })
-                            }
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="tim-icons icon-lock-circle" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              onChange={this.handleValidation}
-                              name="password"
-                              placeholder="Password"
-                              type="password"
-                              onFocus={(e) =>
-                                this.setState({ passwordFocus: true })
-                              }
-                              onBlur={(e) =>
-                                this.setState({ passwordFocus: false })
-                              }
-                            />
-                          </InputGroup>
-                          {this.state.errors.password && (
-                            <span className="errorspan">
-                              {this.state.errors.password}
-                            </span>
-                          )}
-                          {this.state.status ===
-                            "username or password are incorrect" && (
-                            <span className="errorspan">
-                              {this.state.status}
-                            </span>
-                          )}
-                        </CardBody>
-                        <CardFooter style={{ display: "flex", 
-                      justifyContent:'center',alignContent:'center' }}>
-                          {this.state.status === "loading" ? (
-                            <div class="alert alert-default" role="alert">
-                              Loading.....
-                            </div>
-                          ) : (
-                            <Button
-                              type="submit"
-                              className="btn-round"
-                              color="primary"
-                              size="lg"
-                            >
-                              Login
-                            </Button>
-                          )}
-                        </CardFooter>
-                      </Card>
-                    </Form>
-                <div className="register-bg" />
-              </Container>
-            {/* </div>
+                <CardTitle
+                  tag="h4"
+                  style={{ color: "#f4f5f7", textAlign: "center" }}
+                >
+                  Login
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <InputGroup
+                  className={
+                    this.state.errors.username
+                      ? "has-danger"
+                      : classnames({
+                          "input-group-focus": this.state.emailFocus,
+                        })
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="tim-icons icon-email-85" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    onChange={this.handleValidation}
+                    name="username"
+                    placeholder="username"
+                    type="text"
+                    onFocus={(e) => this.setState({ emailFocus: true })}
+                    onBlur={(e) => this.setState({ emailFocus: false })}
+                  />
+                </InputGroup>
+                {this.state.errors.username && (
+                  <span className="errorspan">
+                    {this.state.errors.username}
+                  </span>
+                )}
+                <InputGroup
+                  className={
+                    this.state.errors.password
+                      ? "has-danger"
+                      : classnames({
+                          "input-group-focus": this.state.passwordFocus,
+                        })
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="tim-icons icon-lock-circle" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    onChange={this.handleValidation}
+                    name="password"
+                    placeholder="Password"
+                    type="password"
+                    onFocus={(e) => this.setState({ passwordFocus: true })}
+                    onBlur={(e) => this.setState({ passwordFocus: false })}
+                  />
+                </InputGroup>
+                {this.state.errors.password && (
+                  <span className="errorspan">
+                    {this.state.errors.password}
+                  </span>
+                )}
+                {this.state.status === "username or password are incorrect" && (
+                  <span className="errorspan">{this.state.status}</span>
+                )}
+              </CardBody>
+              <CardFooter
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                {this.state.status === "loading" ? (
+                  <div class="alert alert-default" role="alert">
+                    Loading.....
+                  </div>
+                ) : (
+                  <Button
+                    type="submit"
+                    className="btn-round"
+                    color="primary"
+                    size="lg"
+                  >
+                    Login
+                  </Button>
+                )}
+              </CardFooter>
+            </Card>
+          </Form>
+          <div className="register-bg" />
+        </Container>
+        {/* </div>
           </div>
         </div> */}
       </>

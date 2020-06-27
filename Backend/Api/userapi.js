@@ -5,6 +5,7 @@ const { JWT_SECRET } = require("../configuration");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const customError = require("../helpers/customError");
+const _ = require("lodash");
 const userRouter = express.Router();
 userRouter.use(function (req, res, next) {
   console.log("Time:", Date.now());
@@ -13,43 +14,69 @@ userRouter.use(function (req, res, next) {
   next();
 });
 const saltRound = 10;
-userRouter.post("/register", async (req, res, next) => {
-  const token = req.headers.authorization;
-  jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
-    const _id = decoded._id;
-    const user = await User.findOne({ _id: _id }).exec();
 
-    if (user.role != "admin") {
-      throw new Error("User is not authorized");
-    } else {
-      try {
-        if (user.role != "admin") {
-          throw new Error("User is not authorized");
-        } else {
-          const { name, username, password, role } = req.body;
-          //const hashedpassword = await bcrypt.hash(password, saltRound);
-          const newuser = {
-            name: name,
-            username: username,
-            password: password,
-            role: role,
-          };
-          User.create(newuser)
-            .then((data) => {
-              res.send(data);
-            })
-            .catch((error) => {
-              req.statusCode = 405;
-              next(error);
-            });
-        }
-      } catch (error) {
-        req.statusCode = 405;
-        next(error);
-      }
+// register
+userRouter.post(
+  "/register",
+
+  async (req, res, next) => {
+    try {
+      const {
+        body: { username, password, role, name },
+      } = req;
+      const newUser = new User({
+        username,
+        password,
+        role,
+        name,
+      });
+
+      // sanitize
+      const createdUser = await newUser.save();
+      const instance = _.omit(createdUser.toJSON(), "password");
+      return res.status(201).send(instance);
+    } catch (error) {
+      next(error);
     }
-  });
-});
+  }
+);
+// userRouter.post("/register", async (req, res, next) => {
+//   const token = req.headers.authorization;
+//   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
+//     const _id = decoded._id;
+//     const user = await User.findOne({ _id: _id }).exec();
+
+//     if (user.role != "admin") {
+//       throw new Error("User is not authorized");
+//     } else {
+//       try {
+//         if (user.role != "admin") {
+//           throw new Error("User is not authorized");
+//         } else {
+//           const { name, username, password, role } = req.body;
+//           //const hashedpassword = await bcrypt.hash(password, saltRound);
+//           const newuser = {
+//             name: name,
+//             username: username,
+//             password: password,
+//             role: role,
+//           };
+//           User.create(newuser)
+//             .then((data) => {
+//               res.send(data);
+//             })
+//             .catch((error) => {
+//               req.statusCode = 405;
+//               next(error);
+//             });
+//         }
+//       } catch (error) {
+//         req.statusCode = 405;
+//         next(error);
+//       }
+//     }
+//   });
+// });
 
 // userRouter.post("/login", async (req, res, next) => {
 //   try {

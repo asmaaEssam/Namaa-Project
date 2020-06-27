@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+const _ = require("lodash");
 const mongoose = require("mongoose");
 const Schema = new mongoose.Schema({
   name: {
@@ -12,7 +14,7 @@ const Schema = new mongoose.Schema({
     required: [true, "Username is required"],
     unique: [true, "Username is not available"],
     minlength: 3,
-    maxlength: 10,
+    maxlength: 20,
   },
   password: {
     type: String,
