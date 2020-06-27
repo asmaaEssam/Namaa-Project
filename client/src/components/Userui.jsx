@@ -26,16 +26,14 @@ export default function MaterialTableDemo() {
   });
   // if(err!={}){alert(err);}
   //console.log(err);
-  const token= localStorage.getItem("token")
-localStorage.setItem(
-  "token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWQ1YmNiOTM3ZWQzZmIxZWM4NTg1NDciLCJpYXQiOjE1OTExODk2NTksImV4cCI6MTU5MTE5MzI1OX0.jEHkFE0bFfhtgDQwgodBFGnODrMBs11-zS7qdIz0Lu4")
-const headers= {Authorization:token}
   useEffect(() => {
-  
+    const token= localStorage.getItem("token")
+    console.log(token)
+    const headers =  {Authorization:token}
+    console.log(headers)
     const fetchData = async () => {
       const result = await axios.get(
-        'http://localhost:9000/users/', {headers}
-        
+        'http://localhost:9000/users/', {headers}      
       );
  if (!{headers}){
       alert(result.data.message)
@@ -50,6 +48,10 @@ const headers= {Authorization:token}
   }, []);
 
   async function addUser (newuser){
+    const token= localStorage.getItem("token")
+    console.log(token)
+    const headers =  {Authorization:token}
+    console.log(headers)
  const result = await axios.post(
    'http://localhost:9000/users/register',newuser,{headers}
  )
@@ -60,7 +62,10 @@ data:[...state.data , result.data]});
 };
 
 async function deleteUser (id){
- 
+  const token= localStorage.getItem("token")
+    console.log(token)
+    const headers =  {Authorization:token}
+    console.log(headers)
 const result = await axios.delete(
  `http://localhost:9000/users/${id}`,{headers}
 );
@@ -71,7 +76,10 @@ setState({columns: state.columns,
 };
 
  async function editUser (id,editedUser){
- 
+  const token= localStorage.getItem("token")
+    console.log(token)
+    const headers =  {Authorization:token}
+    console.log(headers)
   const result =  await axios.patch(
    `http://localhost:9000/users/${id}`,editedUser,{headers}
   )

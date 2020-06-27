@@ -59,13 +59,25 @@ class LoginPage extends React.Component {
         username: this.state.username,
         password: this.state.password,
       };
-      console.log(user);
       // login request
       axios
         .post(`http://localhost:9000/users/login`, user)
         .then((response) => {
+          console.log(response)
           localStorage.setItem("token", response.data.token);
-          this.props.history.push("/dashboard");
+          localStorage.setItem("role", response.data.user.role)
+          if(response.data.user.role==="DecisionMaker")
+          {
+            this.props.history.push("/project", {data: response.data});
+          }
+          else if (response.data.user.role==="DataEntry")
+          {
+            this.props.history.push("/project");
+          }
+          else
+          {
+            this.props.history.push("/admin",{data: response.data});
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -208,7 +220,7 @@ class LoginPage extends React.Component {
                     color="primary"
                     size="lg"
                   >
-                    Login
+                    submit
                   </Button>
                 )}
               </CardFooter>

@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import '../assets/css/style.css'
 // reactstrap components
 import {
   Button,
@@ -28,6 +29,7 @@ class PagesNavbar extends React.Component {
     };
   }
   componentDidMount() {
+    console.log(this.props)
     window.addEventListener("scroll", this.changeColor);
   }
   componentWillUnmount() {
@@ -131,32 +133,73 @@ class PagesNavbar extends React.Component {
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
               </NavItem>
+              {(localStorage.getItem('token'))?
               <NavItem>
-                <Link to={"/login"}>
-                  <Button
-                    className="nav-link d-none d-lg-block"
-                    color="primary"
-                    target="_blank"
-                  >
-                   Login
-                  </Button>
-                </Link>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/project">
+              <Link to={"/home"}>
+                <Button
+                  className="nav-link d-none d-lg-block"
+                  color="primary"
+                  target="_blank"
+                  onClick={()=>{localStorage.removeItem('token')
+                  localStorage.removeItem('role')
+                  }}
+                >
+                 Logout
+                </Button>
+              </Link>
+            </NavItem>: 
+             <NavItem>
+             <Link to={"/login"}>
+               <Button
+                 className="nav-link d-none d-lg-block"
+                 color="secondery"
+                 target="_blank"
+               >
+                Login
+               </Button>
+             </Link>
+           </NavItem>}
+              {(localStorage.getItem('token') && localStorage.getItem('role') === "Admin")? 
+                <NavLink tag={Link} to="/admin/projects" activeClassName = 'active'>
                   Projects
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/dataEntry">
-                  Data Entry
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/dashboard">
-                  Decision Making
-                </NavLink>
-              </NavItem>
+                </NavLink>: null
+               }
+               {(localStorage.getItem('token') && localStorage.getItem('role') === "Admin")? 
+                <NavLink tag={Link} to="/admin/departments">
+                  Departments
+                </NavLink>: null
+               }
+               {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
+              
+                <NavLink tag={Link} to="/project" className="inactive" activeClassName="active">
+                  Public Transport
+                </NavLink> : null
+               }
+               {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
+                <NavLink tag={Link} to="/project" className="inactive" activeClassName="active">
+                  Footpath & Cycleway
+                </NavLink>: null
+               }
+               {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
+                <NavLink tag={Link} to="/project" className="inactive" activeClassName="active">
+                  Storm water
+                </NavLink>: null
+               }
+               {(localStorage.getItem('token') && localStorage.getItem('role') === "DecisionMaker")? 
+                <NavLink tag={Link} to="/project">
+                  Public Transport
+                </NavLink>: null
+               }
+               {(localStorage.getItem('token') && localStorage.getItem('role') === "DecisionMaker")? 
+                <NavLink tag={Link} to="/project">
+                  Footpath & Cycleway
+                </NavLink>: null
+               }
+               {(localStorage.getItem('token') && localStorage.getItem('role') === "DecisionMaker")? 
+                <NavLink tag={Link} to="/project">
+                  Storm water
+                </NavLink>: null
+               }
             </Nav>
           </Collapse>
         </Container>

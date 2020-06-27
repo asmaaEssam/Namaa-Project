@@ -49,8 +49,8 @@ const ProjectsMap = (props) => {
   return (
     // in render()
     <React.Fragment>
-      <ExamplesNavbar></ExamplesNavbar>
-      <Box className={classes.root}>
+      <div style={{marginTop: "10%", marginBottom:"5%", display:"flex", justifyContent:'center'}}>
+      <Box>
         <Map
           style="mapbox://styles/mapbox/light-v10"
           containerStyle={{
@@ -87,7 +87,15 @@ const ProjectsMap = (props) => {
               <Popup
                 onClick={() => {
                   console.log(props.history)
-                  props.history.push("/dataEntry");
+                  if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry')
+                  {
+                    props.history.push("/dataEntry");
+                  } else if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DecisionMaker')
+                  {
+                    props.history.push("/dashboard");
+                  } else {
+                    props.history.push("/home");
+                  }
                 }}
                 coordinates={p.location.coordinates}
                 offset={{
@@ -123,6 +131,8 @@ const ProjectsMap = (props) => {
           )}
         </Map>
       </Box>
+      </div>
+      <Footer/>
     </React.Fragment>
   );
 };

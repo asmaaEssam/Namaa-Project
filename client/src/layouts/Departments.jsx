@@ -1,12 +1,12 @@
 import React from 'react'
 import Users from '../components/Userui.jsx'
-import AdminNavbar from '../components/AdminNavbar.jsx';
+import AdminNavbar from '../components/ExamplesNavbar.js';
 import {Card, CardBody } from 'reactstrap';
+import Footer from '../components/Footer'
 
 const Departments = () => {
     return ( 
         <>
-        <AdminNavbar/>
         <div className='page-header container' id='adminProjects'>
             <Card>
                 <CardBody>
@@ -14,6 +14,7 @@ const Departments = () => {
                 </CardBody>
             </Card>
         </div>
+        <Footer/>
         </>
      );
 }

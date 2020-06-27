@@ -28,8 +28,7 @@ function Maps() {
       zoom={[13]}
         style='mapbox://styles/mapbox/satellite-v9' // eslint-disable-line
         containerStyle={{
-          height: "500px",
-          width: "47vw",
+          height: "39.5vw",
           
         }}
       >

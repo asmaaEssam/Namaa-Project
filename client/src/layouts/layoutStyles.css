@@ -1,7 +1,7 @@
 #dataentry{
     display: flex;
     flex-direction: row;
-    /* margin-top: 100px; */
+    margin-top: 10%;
     justify-content: space-around;
 }
 #adminProjects{
@@ -12,7 +12,8 @@
 
 #dataentryMap{
     width: 50%;
-    margin-left: 15px;
+    margin-right: 15px;
+    height: 42vw;
 }
 #container{
     width: 40%;

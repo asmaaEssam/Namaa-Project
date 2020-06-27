@@ -34,6 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+      <ExamplesNavbar/>
         <Switch>
           <Route path="/dashboard" render={() => <DecisionMaker />} />
           <Route path="/login" render={(props) => <Login {...props} />}></Route>
@@ -42,7 +43,7 @@ function App() {
         /> */}
           <Route exact path="/admin" render={(props) => <Admin />} />
           <Route path="/project/:projectid" component={ProjectProfile} />
-          <Route path="/project" render={(props) => <ProjectsMap />} />
+          <Route path="/project" render={(props) => <ProjectsMap {...props} />} />
           <Route
             path="/admin/projects"
             render={(props) => (
@@ -57,14 +58,13 @@ function App() {
             path="/"
             render={() => (
               <>
-                <ExamplesNavbar />
                 <LandingPage />
               </>
             )}
           />
         </Switch>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

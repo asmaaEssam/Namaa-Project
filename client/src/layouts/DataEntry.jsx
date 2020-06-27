@@ -1,5 +1,6 @@
 import React from 'react'
 import ExamplesNavbar from '../components/ExamplesNavbar'
+import Footer from '../components/Footer'
 import Maps from '../components/maps';
 import Forms from '../components/Forms'
 import './layoutStyles.css';
@@ -13,21 +14,19 @@ import {
     Col,
   } from "reactstrap";
 
-const DataEntry = () => {
+const DataEntry = (props) => {
+    console.log(props)
     return ( 
-    <div>
-        <ExamplesNavbar/>
-        
-                <div className="page-header">
-                    <div className="content" id='dataentry'>
+    <div>        
+                <div className="page-header container" id='dataentry'>
                     <Card id="dataentryMap">
                         <CardBody>
                             <Maps/>
                         </CardBody>
                     </Card> 
                     <Forms/>
-                    </div>
                 </div>
+        <Footer/>
         </div>
      );
 }
