@@ -3,7 +3,7 @@ import{ useState } from "react";
 import confirm from "reactstrap-confirm";
 import { FormGroup, Input, Button, Card, CardBody, CardHeader, CardFooter } from "reactstrap";
 import axios from "axios";
-const Forms = (props) => {
+const Publictransportform = (props) => {
   const [state, setState] = useState({
 });
   const inputHandler = (e) => {
@@ -27,7 +27,7 @@ const Forms = (props) => {
         });
         console.log(result);
     axios
-      .post("http://localhost:9000/footpath/add", state)
+      .post("http://localhost:9000/publictrans/add", state)
       .then(({ data }) => {
         console.log(data);
         
@@ -81,28 +81,28 @@ const Forms = (props) => {
                   <FormGroup className="col-md-4">
                     <Input
                       type="text"
-                      name="cracks"
-                      id="cracks"
+                      name="LevelOf_modal_integration_service"
+                      id="LevelOf_modal_integration_service"
                       onChange={inputHandler}
-                      placeholder="Cracks"
+                      placeholder="Level of modal integration service"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
                     <Input
                       type="text"
-                      name="pothole"
-                      id="pothole"
+                      name="bus_punctuality"
+                      id="bus_punctuality"
                       onChange={inputHandler}
-                      placeholder="Potehole condition"
+                      placeholder="Bus Punctuality"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
                     <Input
                       type="text"
-                      name="erosion"
-                      id="erosion"
+                      name="train_punctuality"
+                      id="train_punctuality"
                       onChange={inputHandler}
-                      placeholder="Erosion"
+                      placeholder="Train Punctuality"
                     />
                   </FormGroup>
                 </div>
@@ -110,10 +110,10 @@ const Forms = (props) => {
                   <FormGroup className="col-md-8">
                     <Input
                       type="text"
-                      name="slipperySurface"
-                      id="slipperySurface"
+                      name="ferry_punctuality"
+                      id="ferry_punctuality"
                       onChange={inputHandler}
-                      placeholder="Slippery Surface"
+                      placeholder="Ferry Punctuality"
                     />
                   </FormGroup>
                   </div>
@@ -121,10 +121,10 @@ const Forms = (props) => {
                   <FormGroup className="col-md-8">
                     <Input
                       type="text"
-                      name="fallenBranches"
-                      id="fallenBranches"
+                      name="perceived_qualityof_service"
+                      id="perceived_qualityof_service"
                       onChange={inputHandler}
-                      placeholder="Fallen Branches percentage"
+                      placeholder="Perceived Quality of Service"
                     />
                   </FormGroup>
                   </div>
@@ -132,10 +132,10 @@ const Forms = (props) => {
                   <FormGroup className="col-md-8">
                     <Input
                       type="text"
-                      name="QualityOfCurbing"
-                      id="QualityOfCurbing"
+                      name="acess_passenger_info"
+                      id="acess_passenger_info"
                       onChange={inputHandler}
-                      placeholder="Quality of curbing"
+                      placeholder="Accessibility of realtime Passenger Information"
                     />
                   </FormGroup>
                   </div>
@@ -143,20 +143,20 @@ const Forms = (props) => {
                     <FormGroup className="col-md-6">
                       <Input
                         type="text"
-                        name="degreeOfCleanliness"
-                        id="degreeOfCleanliness"
+                        name="avail_infowith_ptservice"
+                        id="avail_infowith_ptservice"
                         onChange={inputHandler}
-                      placeholder="Degree of cleanliness"
+                      placeholder="Information Availability to connect with PT service"
                       />
                     </FormGroup>
 
                     <FormGroup className="col-md-6">
                       <Input
                         type="text"
-                        name="conditionofDrains"
-                        id="conditionofDrains"
+                        name="mobilityofInhabitant"
+                        id="mobilityofInhabitant"
                         onChange={inputHandler}
-                        placeholder="Condition of drains"
+                        placeholder="Mobility of Inhabitant"
                       />
                     </FormGroup>
                   </div>
@@ -164,12 +164,24 @@ const Forms = (props) => {
                     <FormGroup className="col-md-6">
                       <Input
                         type="text"
-                        name="pedestrians_Sainage_Condition"
-                        id="pedestrians_Sainage_Condition"
+                        name="passengerDemand"
+                        id="passengerDemand"
                         onChange={inputHandler}
-                      placeholder="Condition of sainage"
+                      placeholder="Passenger Demand "
                       />
                     </FormGroup>
+
+                    <FormGroup className="col-md-6">
+                      <Input
+                        type="text"
+                        name="serviceEffeciency"
+                        id="serviceEffeciency"
+                        onChange={inputHandler}
+                        placeholder="Service Effeciency"
+                      />
+                    </FormGroup>
+                  </div>
+                  <div className="form-row">
                     <FormGroup className="col-md-6">
                       <Input
                         type="text"
@@ -233,4 +245,4 @@ const Forms = (props) => {
   );
 };
 
-export default Forms;
+export default Publictransportform;

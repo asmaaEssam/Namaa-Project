@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 const geometrySchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ["LineString"],
+    enum: ["Point"],
     required: true,
   },
   coordinates: {
-    type: [[Number]],
+    type: [Number],
     required: true,
   },
 });
 
-const cyclewaySchema = new mongoose.Schema({
+const publictransportSchema = new mongoose.Schema({
   asset_name: {
     type: String,
     // required: [true,"Asset name is required"]
@@ -27,34 +27,42 @@ const cyclewaySchema = new mongoose.Schema({
     type: Date,
     // required: [true, "Date of saurvey is required"]
   },
-  Potholes: {
+  LevelOf_modal_integration_service: {
     type: Number,
-    // required: [true, "Potholes is required"]
+    // required: [true,Level Of modal integration service is required]
   },
-  surfaceCracking: {
+  bus_punctuality: {
     type: Number,
-    // required: [true, "surfaceCracking is required"]
   },
-  qualityOfSinage: {
+  train_punctuality: {
     type: Number,
-    // required: [true, "Quality of sinage is required"]
   },
-  overhangingVegetation: {
+  ferry_punctuality: {
     type: Number,
-    // required: [true, "Over hanging vegetation is required"]
   },
- 
-  widthRestrictions: {
+  perceived_qualityof_service: {
     type: Number,
-    // required: [true, "width restrictions is required"]
+    // required: [true, "Perceived Quality Of service is required"]
   },
-  qualityOfLighting: {
+  acess_passenger_info: {
     type: Number,
-    // required: [true, "Quality of lighting is required"]
+    // required: [true, "acess_passenger_info is required"]
   },
-  wornLines: {
+  avail_infowith_ptservice: {
     type: Number,
-    // required: [true, "warn lines condition is required"]
+    // required: [true, " avail_infowith_ptserviceis required"]
+  },
+  mobilityofInhabitant: {
+    type: Number,
+    // required: [true, "mobilityofInhabitant is required"]
+  },
+  passengerDemand: {
+    type: Number,
+    // required: [true, "Passenger Demand is required"]
+  },
+  serviceEffeciency: {
+    type: Number,
+    // required: [true, "Service effeciency is required"]
   },
   Oper_statu: {
     type: String,
@@ -78,5 +86,8 @@ const cyclewaySchema = new mongoose.Schema({
   }
 });
 
-const Cycleway = mongoose.model("Cycleway", cyclewaySchema);
-module.exports = Cycleway;
+const PublicTransport = mongoose.model(
+  "PublicTransport",
+  publictransportSchema
+);
+module.exports = PublicTransport;

@@ -3,7 +3,7 @@ import{ useState } from "react";
 import confirm from "reactstrap-confirm";
 import { FormGroup, Input, Button, Card, CardBody, CardHeader, CardFooter } from "reactstrap";
 import axios from "axios";
-const Forms = (props) => {
+const Cyclewayform = (props) => {
   const [state, setState] = useState({
 });
   const inputHandler = (e) => {
@@ -27,7 +27,7 @@ const Forms = (props) => {
         });
         console.log(result);
     axios
-      .post("http://localhost:9000/footpath/add", state)
+      .post("http://localhost:9000/cycleway/add", state)
       .then(({ data }) => {
         console.log(data);
         
@@ -81,28 +81,28 @@ const Forms = (props) => {
                   <FormGroup className="col-md-4">
                     <Input
                       type="text"
-                      name="cracks"
-                      id="cracks"
+                      name="Potholes"
+                      id="Potholes"
                       onChange={inputHandler}
-                      placeholder="Cracks"
+                      placeholder="Potholes Condition"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
                     <Input
                       type="text"
-                      name="pothole"
-                      id="pothole"
+                      name="surfaceCracking"
+                      id="surfaceCracking"
                       onChange={inputHandler}
-                      placeholder="Potehole condition"
+                      placeholder="Surface Cracking Condition"
                     />
                   </FormGroup>
                   <FormGroup className="col-md-4">
                     <Input
                       type="text"
-                      name="erosion"
-                      id="erosion"
+                      name="qualityOfSinage"
+                      id="qualityOfSinage"
                       onChange={inputHandler}
-                      placeholder="Erosion"
+                      placeholder="Quality of Sinage"
                     />
                   </FormGroup>
                 </div>
@@ -110,10 +110,10 @@ const Forms = (props) => {
                   <FormGroup className="col-md-8">
                     <Input
                       type="text"
-                      name="slipperySurface"
-                      id="slipperySurface"
+                      name="overhangingVegetation"
+                      id="overhangingVegetation"
                       onChange={inputHandler}
-                      placeholder="Slippery Surface"
+                      placeholder="Overhanging Vegetation Degree"
                     />
                   </FormGroup>
                   </div>
@@ -121,10 +121,10 @@ const Forms = (props) => {
                   <FormGroup className="col-md-8">
                     <Input
                       type="text"
-                      name="fallenBranches"
-                      id="fallenBranches"
+                      name="widthRestrictions"
+                      id="widthRestrictions"
                       onChange={inputHandler}
-                      placeholder="Fallen Branches percentage"
+                      placeholder="Width Restrictions"
                     />
                   </FormGroup>
                   </div>
@@ -132,10 +132,10 @@ const Forms = (props) => {
                   <FormGroup className="col-md-8">
                     <Input
                       type="text"
-                      name="QualityOfCurbing"
-                      id="QualityOfCurbing"
+                      name="qualityOfLighting"
+                      id="qualityOfLighting"
                       onChange={inputHandler}
-                      placeholder="Quality of curbing"
+                      placeholder="Quality of Lighting"
                     />
                   </FormGroup>
                   </div>
@@ -153,23 +153,14 @@ const Forms = (props) => {
                     <FormGroup className="col-md-6">
                       <Input
                         type="text"
-                        name="conditionofDrains"
-                        id="conditionofDrains"
+                        name="wornLines"
+                        id="wornLines"
                         onChange={inputHandler}
-                        placeholder="Condition of drains"
+                        placeholder="Worn lines condition"
                       />
                     </FormGroup>
                   </div>
                   <div className="form-row">
-                    <FormGroup className="col-md-6">
-                      <Input
-                        type="text"
-                        name="pedestrians_Sainage_Condition"
-                        id="pedestrians_Sainage_Condition"
-                        onChange={inputHandler}
-                      placeholder="Condition of sainage"
-                      />
-                    </FormGroup>
                     <FormGroup className="col-md-6">
                       <Input
                         type="text"
@@ -233,4 +224,4 @@ const Forms = (props) => {
   );
 };
 
-export default Forms;
+export default Cyclewayform;

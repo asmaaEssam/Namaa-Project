@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 const geometrySchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ["LineString"],
+    enum: ["Point"],
     required: true,
   },
   coordinates: {
-    type: [[Number]],
+    type: [Number],
     required: true,
   },
 });
 
-const cyclewaySchema = new mongoose.Schema({
+const stormwaterSchema = new mongoose.Schema({
   asset_name: {
     type: String,
     // required: [true,"Asset name is required"]
@@ -27,34 +27,38 @@ const cyclewaySchema = new mongoose.Schema({
     type: Date,
     // required: [true, "Date of saurvey is required"]
   },
-  Potholes: {
+  maintenance_of_hole: {
     type: Number,
-    // required: [true, "Potholes is required"]
+    // required: [true, maintenance_of_hole is required]
   },
-  surfaceCracking: {
+  groutmiss_around: {
     type: Number,
-    // required: [true, "surfaceCracking is required"]
+  //  required: true
   },
-  qualityOfSinage: {
+  exposed_rebar: {
     type: Number,
-    // required: [true, "Quality of sinage is required"]
+   // required: true
   },
-  overhangingVegetation: {
+  hydrogensulfide_damage: {
     type: Number,
-    // required: [true, "Over hanging vegetation is required"]
+   // required: true
   },
- 
-  widthRestrictions: {
+  hole_bricks_missing: {
     type: Number,
-    // required: [true, "width restrictions is required"]
+    //required: true,
   },
-  qualityOfLighting: {
+
+  infiltration_around_barreljoints: {
     type: Number,
-    // required: [true, "Quality of lighting is required"]
+    //required: true
   },
-  wornLines: {
+  object_restrict_flow: {
     type: Number,
-    // required: [true, "warn lines condition is required"]
+   // required: true
+  },
+  checklid_frame_forcracks: {
+    type: Number,
+    //required: true
   },
   Oper_statu: {
     type: String,
@@ -78,5 +82,5 @@ const cyclewaySchema = new mongoose.Schema({
   }
 });
 
-const Cycleway = mongoose.model("Cycleway", cyclewaySchema);
-module.exports = Cycleway;
+const StormWater = mongoose.model("StormWater", stormwaterSchema);
+module.exports = StormWater;

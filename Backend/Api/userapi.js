@@ -1,5 +1,4 @@
 const express = require("express");
-//const auth = require("../validation/authorization");
 const User = require("../models/usermodel");
 const { JWT_SECRET } = require("../configuration");
 const bcrypt = require("bcryptjs");
@@ -140,84 +139,55 @@ userRouter.post(
     }
   }
 );
-
+//get all users
 userRouter.get("/", (req, res, next) => {
-  const token = req.headers.authorization;
-  jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
-    const _id = decoded._id;
-    const user = await User.findOne({ _id: _id }).exec();
-
-    try {
-      if (user.role != "admin") {
-        throw new Error("User is not authorized");
-      } else {
-        User.find(
-          {},
-          { name: 1, id: 1, username: 1, role: 1, password: 1 },
-          (err, data) => {
-            if (err) {
-              return next(err);
-            }
-            res.send(data);
-          }
-        );
+  try {
+    User.find(
+      {},
+      { name: 1, id: 1, username: 1, role: 1, password: 1 },
+      (err, data) => {
+        if (err) {
+          return next(err);
+        }
+        res.send(data);
       }
-    } catch (err) {
-      next(err);
-    }
-  });
+    );
+  } catch (err) {
+    next(err);
+  }
 });
-
+//delete user
 userRouter.delete("/:id", (req, res, next) => {
-  const token = req.headers.authorization;
-  jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
-    const _id = decoded._id;
-    const user = await User.findOne({ _id: _id }).exec();
-
-    try {
-      if (user.role != "admin") {
-        throw new Error("User is not authorized");
+  try {
+    User.findByIdAndDelete({ _id: req.params.id }, async (err, data) => {
+      if (err) {
+        return next(err);
       } else {
-        User.findByIdAndDelete({ _id: req.params.id }, async (err, data) => {
-          if (err) {
-            return next(err);
-          } else {
-            const users = await User.find();
-            res.send(users);
-          }
-        });
-      }
-    } catch (err) {
-      next(err);
-    }
-  });
-});
-userRouter.patch("/:id", async (req, res, next) => {
-  const token = req.headers.authorization;
-  jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
-    const _id = decoded._id;
-    const user = await User.findOne({ _id: _id }).exec();
-
-    try {
-      if (user.role != "admin") {
-        throw new Error("User is not authorized");
-      } else {
-        const update = {
-          username: req.body.username,
-          name: req.body.name,
-          role: req.body.role,
-        };
-        await User.findByIdAndUpdate({ _id: req.params.id }, update, {
-          runValidators: true,
-        }).exec();
-
         const users = await User.find();
-
         res.send(users);
       }
-    } catch (err) {
-      next(err);
-    }
-  });
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+//edit user
+userRouter.patch("/:id", async (req, res, next) => {
+  try {
+    const update = {
+      username: req.body.username,
+      name: req.body.name,
+      role: req.body.role,
+    };
+    await User.findByIdAndUpdate({ _id: req.params.id }, update, {
+      runValidators: true,
+    }).exec();
+
+    const users = await User.find();
+
+    res.send(users);
+  } catch (error) {
+    next(error);
+  }
 });
 module.exports = userRouter;

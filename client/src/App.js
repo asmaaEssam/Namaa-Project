@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import  Dataentrypublictransport from './layouts/Dataebtrypublictransport'
+import Dataentrystormwater from'./layouts/Dataentrystormwater'
 import Bar from "./components/Bar";
 import VerticalMenu from "./components/VerticalMenu";
 import ProjectsMap from "./components/projectsMap";
@@ -16,6 +18,7 @@ import ExamplesNavbar from "./components/ExamplesNavbar";
 import AdminProjects from "./layouts/AdminProjects";
 import Footer from "./components/Footer";
 import Departments from "./layouts/Departments";
+import DataentryCycleway from './layouts/DataentryCycleway';
 function App() {
   const [state, setState] = useState({
     columns: [
@@ -52,6 +55,9 @@ function App() {
           />
 
           <Route path="/dataEntry" render={() => <DataEntry />} />
+          {/* <Route path="/dataEntry/asset/cycleway" render={() => <DataentryCycleway/>} /> */}
+          {/* <Route path="/dataEntry/asset/publictransport" render={() => <Dataentrypublictransport/>} /> */}
+          {/* <Route path="/dataEntry/asset/stormwater" render={() => <Dataentrystormwater/>} /> */}
           <Route path="/admin/departments" component={Departments} />
 
           <Route
