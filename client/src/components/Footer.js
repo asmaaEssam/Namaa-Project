@@ -32,7 +32,15 @@ import {
 class Footer extends React.Component {
   render() {
     return (
-      <footer className="footer">
+      <footer
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+        className="section"
+        className="footer"
+      >
         <Container>
           <Row>
             <Col md="3">

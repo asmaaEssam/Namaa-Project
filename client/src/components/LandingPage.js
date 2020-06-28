@@ -49,8 +49,16 @@ class LandingPage extends React.Component {
     return (
       <>
         <div className="wrapper">
-          <section className="section section-lg">
-            <section className="section">
+          <section
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "70px",
+            }}
+            className="section section-lg"
+          >
+            <section>
               <img alt="..." className="path" src={"path4.png"} />
               <Container>
                 <Row className="row-grid justify-content-between">
@@ -59,7 +67,7 @@ class LandingPage extends React.Component {
                     md="6"
                     style={{ paddingTop: "50px" }}
                   >
-                    <img src={"eg-04.png"} alt=""></img>
+                    <img src={"lattice.png"} alt=""></img>
                   </Col>
                   <Col lg="6">
                     <h1 className="text-center">Your best benefit</h1>
@@ -69,12 +77,12 @@ class LandingPage extends React.Component {
                           <div className="icon icon-primary">
                             <i className="tim-icons icon-money-coins" />
                           </div>
-                          <h4 className="info-title">Low Commission</h4>
+                          <h4 className="info-title">Optimized Budget</h4>
                           <hr className="line-primary" />
                           <p>
-                            Divide details about your work into parts. Write a
-                            few lines about each one. A paragraph describing a
-                            feature will.
+                            We help you find the best way to spend your budget
+                            by optimizing the decision making process and making
+                            it as seamless as possible.
                           </p>
                         </div>
                       </Col>
@@ -83,12 +91,12 @@ class LandingPage extends React.Component {
                           <div className="icon icon-warning">
                             <i className="tim-icons icon-chart-pie-36" />
                           </div>
-                          <h4 className="info-title">High Incomes</h4>
+                          <h4 className="info-title">Customized Assets </h4>
                           <hr className="line-warning" />
                           <p>
-                            Divide details about your product or agency work
-                            into parts. Write a few lines about each one. A
-                            paragraph describing feature will be a feature.
+                            Each asset has its own profile in our app which
+                            makes it modularized and easy to use. Just choose
+                            the asset you're mose concerned with.
                           </p>
                         </div>
                       </Col>
@@ -97,12 +105,13 @@ class LandingPage extends React.Component {
                           <div className="icon icon-success">
                             <i className="tim-icons icon-single-02" />
                           </div>
-                          <h4 className="info-title">Verified People</h4>
+                          <h4 className="info-title">Effortless Use</h4>
                           <hr className="line-success" />
                           <p>
-                            Divide details about your product or agency work
-                            into parts. Write a few lines about each one. A
-                            paragraph describing be enough.
+                            Our app is designed to be used by all professionals
+                            in the team; from the collectors all the way to
+                            decision makers. Making it an all-inclusive solution
+                            to your asset management needs.
                           </p>
                         </div>
                       </Col>
@@ -147,11 +156,11 @@ class LandingPage extends React.Component {
                   <Col md="6" style={{ marginTop: "30px" }}>
                     <div className="px-md-5">
                       <hr className="line-success" />
-                      <h3>Awesome features</h3>
+                      <h3>Our Projects</h3>
                       <p>
-                        The design system comes with three pre-built pages to
-                        help you get started faster. You can change the text and
-                        images and you're good to go.
+                        We worked on multiple projects across the globe for all
+                        different assets you could possible imagine. Always
+                        leavng our client satisfied and loyal to our service.
                       </p>
                       <ul className="list-unstyled mt-5">
                         <li className="py-2">
@@ -160,7 +169,7 @@ class LandingPage extends React.Component {
                               <i className="tim-icons icon-vector" />
                             </div>
                             <div className="ml-3">
-                              <h6>Carefully crafted components</h6>
+                              <h6>Madinaty Footpaths</h6>
                             </div>
                           </div>
                         </li>
@@ -170,7 +179,7 @@ class LandingPage extends React.Component {
                               <i className="tim-icons icon-tap-02" />
                             </div>
                             <div className="ml-3">
-                              <h6>Amazing page examples</h6>
+                              <h6>Madinaty Cycleways</h6>
                             </div>
                           </div>
                         </li>
@@ -180,7 +189,17 @@ class LandingPage extends React.Component {
                               <i className="tim-icons icon-single-02" />
                             </div>
                             <div className="ml-3">
-                              <h6>Super friendly support team</h6>
+                              <h6>Madinaty Stormwater</h6>
+                            </div>
+                          </div>
+                        </li>
+                        <li className="py-2">
+                          <div className="d-flex align-items-center">
+                            <div className="icon icon-success mb-2">
+                              <i className="tim-icons icon-single-02" />
+                            </div>
+                            <div className="ml-3">
+                              <h6>Madinaty Public transport</h6>
                             </div>
                           </div>
                         </li>
@@ -240,20 +259,29 @@ class LandingPage extends React.Component {
               </Container>
             </section>
           </section>
-          <section className="section section-lg section-coins">
+          <section
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "0px",
+            }}
+            className="section"
+            className="section section-lg section-coins"
+          >
             <img alt="..." className="path" src={"path3.png"} />
             <Container>
               <Row>
                 <Col md="4">
                   <hr className="line-info" />
                   <h1>
-                    Choose the coin{" "}
+                    Choose the Asset{" "}
                     <span className="text-info">that fits your needs</span>
                   </h1>
                 </Col>
               </Row>
               <Row>
-                <Col md="4">
+                <Col md="3">
                   <Card className="card-coin card-plain">
                     <CardHeader>
                       <img
@@ -265,27 +293,29 @@ class LandingPage extends React.Component {
                     <CardBody>
                       <Row>
                         <Col className="text-center" md="12">
-                          <h4 className="text-uppercase">Light Coin</h4>
-                          <span>Plan</span>
+                          <h4 className="text-uppercase">Footpaths</h4>
+                          <span>Description</span>
                           <hr className="line-primary" />
                         </Col>
                       </Row>
                       <Row>
                         <ListGroup>
-                          <ListGroupItem>50 messages</ListGroupItem>
-                          <ListGroupItem>100 emails</ListGroupItem>
-                          <ListGroupItem>24/7 Support</ListGroupItem>
+                          <ListGroupItem>Footpath data entry</ListGroupItem>
+                          <ListGroupItem>
+                            Footpath decision making
+                          </ListGroupItem>
+                          <ListGroupItem>Footpath asset analysis</ListGroupItem>
                         </ListGroup>
                       </Row>
                     </CardBody>
                     <CardFooter className="text-center">
                       <Button className="btn-simple" color="primary">
-                        Get plan
+                        Get Asset solution
                       </Button>
                     </CardFooter>
                   </Card>
                 </Col>
-                <Col md="4">
+                <Col md="3">
                   <Card className="card-coin card-plain">
                     <CardHeader>
                       <img
@@ -297,27 +327,31 @@ class LandingPage extends React.Component {
                     <CardBody>
                       <Row>
                         <Col className="text-center" md="12">
-                          <h4 className="text-uppercase">Dark Coin</h4>
-                          <span>Plan</span>
+                          <h4 className="text-uppercase">Cycleways</h4>
+                          <span>Description</span>
                           <hr className="line-success" />
                         </Col>
                       </Row>
                       <Row>
                         <ListGroup>
-                          <ListGroupItem>150 messages</ListGroupItem>
-                          <ListGroupItem>1000 emails</ListGroupItem>
-                          <ListGroupItem>24/7 Support</ListGroupItem>
+                          <ListGroupItem>Cycleway data entry</ListGroupItem>
+                          <ListGroupItem>
+                            Cycleway decision making
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            Cycleway Asset management
+                          </ListGroupItem>
                         </ListGroup>
                       </Row>
                     </CardBody>
                     <CardFooter className="text-center">
                       <Button className="btn-simple" color="success">
-                        Get plan
+                        Get Asset Solution
                       </Button>
                     </CardFooter>
                   </Card>
                 </Col>
-                <Col md="4">
+                <Col md="3">
                   <Card className="card-coin card-plain">
                     <CardHeader>
                       <img
@@ -329,22 +363,62 @@ class LandingPage extends React.Component {
                     <CardBody>
                       <Row>
                         <Col className="text-center" md="12">
-                          <h4 className="text-uppercase">Bright Coin</h4>
+                          <h4 className="text-uppercase">Public Transport</h4>
                           <span>Plan</span>
                           <hr className="line-info" />
                         </Col>
                       </Row>
                       <Row>
                         <ListGroup>
-                          <ListGroupItem>350 messages</ListGroupItem>
-                          <ListGroupItem>10K emails</ListGroupItem>
-                          <ListGroupItem>24/7 Support</ListGroupItem>
+                          <ListGroupItem>
+                            Public Transport data entry
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            Public Transport Decision Making
+                          </ListGroupItem>
+                          <ListGroupItem>Public Transport Asset</ListGroupItem>
                         </ListGroup>
                       </Row>
                     </CardBody>
                     <CardFooter className="text-center">
                       <Button className="btn-simple" color="info">
-                        Get plan
+                        Get Asset Solution
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </Col>
+                <Col md="3">
+                  <Card className="card-coin card-plain">
+                    <CardHeader>
+                      <img
+                        alt="..."
+                        className="img-center img-fluid"
+                        src={"ripp.png"}
+                      />
+                    </CardHeader>
+                    <CardBody>
+                      <Row>
+                        <Col className="text-center" md="12">
+                          <h4 className="text-uppercase">Stormwater</h4>
+                          <span>Plan</span>
+                          <hr className="line-info" />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <ListGroup>
+                          <ListGroupItem>Stormwater data entry</ListGroupItem>
+                          <ListGroupItem>
+                            Stormwater Decision Making
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            Stormwater Asset Management
+                          </ListGroupItem>
+                        </ListGroup>
+                      </Row>
+                    </CardBody>
+                    <CardFooter className="text-center">
+                      <Button className="btn-simple" color="info">
+                        Get Asset Solution
                       </Button>
                     </CardFooter>
                   </Card>
