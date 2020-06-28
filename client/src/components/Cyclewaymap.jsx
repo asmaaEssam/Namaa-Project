@@ -59,10 +59,10 @@ console.log(feature)
         }}
       >
         <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
-        {state.map((p) => (
+        {/* {state.map((p) => (
             <Popup{...p} coordinates={p.geometry.coordinates[0]} onClick={()=>handleClick(p)}  anchor="top-right" offset={[9,0]} />
        
-           ) )}
+           ) )} */}
           
         <Layer
         

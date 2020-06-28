@@ -1,12 +1,14 @@
 import React from 'react'
 import Users from '../components/Userui.jsx'
-import AdminNavbar from '../components/ExamplesNavbar.js';
+import ExamplesNavbar from '../components/ExamplesNavbar.js';
 import {Card, CardBody } from 'reactstrap';
 import Footer from '../components/Footer'
 
 const Departments = () => {
     return ( 
         <>
+      <ExamplesNavbar/>
+
         <div className='page-header container' id='adminProjects'>
             <Card>
                 <CardBody>

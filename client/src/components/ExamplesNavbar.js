@@ -135,7 +135,7 @@ class PagesNavbar extends React.Component {
               </NavItem>
               {(localStorage.getItem('token'))?
               <NavItem>
-              <Link to={"/home"}>
+              <Link to={"/"}>
                 <Button
                   className="nav-link d-none d-lg-block"
                   color="primary"
@@ -152,7 +152,7 @@ class PagesNavbar extends React.Component {
              <Link to={"/login"}>
                <Button
                  className="nav-link d-none d-lg-block"
-                 color="secondery"
+                 color="primary"
                  target="_blank"
                >
                 Login
@@ -171,17 +171,17 @@ class PagesNavbar extends React.Component {
                }
                {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
               
-                <NavLink tag={Link} to="/project" className="inactive" activeClassName="active">
+                <NavLink tag={Link} to="/project/publictransport" className="inactive" activeClassName="active">
                   Public Transport
                 </NavLink> : null
                }
                {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
-                <NavLink tag={Link} to="/project" className="inactive" activeClassName="active">
+                <NavLink tag={Link} to="/project/footpath" className="inactive" activeClassName="active">
                   Footpath & Cycleway
                 </NavLink>: null
                }
                {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
-                <NavLink tag={Link} to="/project" className="inactive" activeClassName="active">
+                <NavLink tag={Link} to="/project/stormwater" className="inactive" activeClassName="active">
                   Storm water
                 </NavLink>: null
                }

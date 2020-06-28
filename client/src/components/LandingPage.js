@@ -48,6 +48,7 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
+      <ExamplesNavbar/>
         <div className="wrapper">
           <section className="section section-lg">
             <section className="section">
