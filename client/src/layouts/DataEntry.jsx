@@ -18,7 +18,8 @@ const DataEntry = (props) => {
    
     console.log(props)
     return ( 
-    <div>        
+    <div>   
+      <ExamplesNavbar/>
                 <div className="page-header container" id='dataentry'>
                     <Card id="dataentryMap">
                         <CardBody>

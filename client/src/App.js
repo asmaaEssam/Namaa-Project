@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import  Dataentrypublictransport from './layouts/Dataebtrypublictransport'
-import Dataentrystormwater from'./layouts/Dataentrystormwater'
-import Bar from "./components/Bar";
-import VerticalMenu from "./components/VerticalMenu";
+import  Dataentrypublictransport from './layouts/Dataebtrypublictransport.jsx'
+import Dataentrystormwater from'./layouts/Dataentrystormwater.jsx'
 import ProjectsMap from "./components/projectsMap";
 import LandingPage from "./components/LandingPage";
-import UserProject from "./components/userProjects";
-import ProjectProfile from "./components/ProjectProfile";
 import DecisionMaker from "./layouts/decisionMaker";
 import DataEntry from "./layouts/DataEntry";
 import Login from "./layouts/Login";
 import Admin from "./layouts/Admin.jsx";
 import "./index.css";
-import ExamplesNavbar from "./components/ExamplesNavbar";
 // import ProjectsMap from './components/projectsMap'
 import AdminProjects from "./layouts/AdminProjects";
 import Footer from "./components/Footer";
 import Departments from "./layouts/Departments";
-import DataentryCycleway from './layouts/DataentryCycleway';
+import DataentryCycleway from './layouts/DataentryCycleway.jsx';
 function App() {
   const [state, setState] = useState({
     columns: [
@@ -37,7 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-      <ExamplesNavbar/>
+      {/* <ExamplesNavbar/> */}
         <Switch>
           <Route path="/dashboard" render={() => <DecisionMaker />} />
           <Route path="/login" render={(props) => <Login {...props} />}></Route>
@@ -45,8 +40,12 @@ function App() {
           {/* render={() => <UserProject></UserProject>}
         /> */}
           <Route exact path="/admin" render={(props) => <Admin />} />
-          <Route path="/project/:projectid" component={ProjectProfile} />
+          {/* <Route path="/project/:projectid" component={ProjectProfile} /> */}
           <Route path="/project" render={(props) => <ProjectsMap {...props} />} />
+          <Route path="/project/publictransport" render={(props) => <ProjectsMap {...props} />} />
+          <Route path="/project/footpath" render={(props) => <ProjectsMap {...props} />} />
+          <Route path="/project/stormwater" render={(props) => <ProjectsMap {...props} />} />
+
           <Route
             path="/admin/projects"
             render={(props) => (
@@ -54,10 +53,10 @@ function App() {
             )}
           />
 
-          <Route path="/dataEntry" render={() => <DataEntry />} />
-          {/* <Route path="/dataEntry/asset/cycleway" render={() => <DataentryCycleway/>} /> */}
-          {/* <Route path="/dataEntry/asset/publictransport" render={() => <Dataentrypublictransport/>} /> */}
-          {/* <Route path="/dataEntry/asset/stormwater" render={() => <Dataentrystormwater/>} /> */}
+          {/* <Route path="/dataEntry" render={() => <DataEntry />} /> */}
+          <Route path="/dataEntry/footpath" render={() => <DataentryCycleway/>} />
+          <Route path="/dataEntry/publictransport" render={() => <Dataentrypublictransport/>} />
+          <Route path="/dataEntry/stormwater" render={() => <Dataentrystormwater/>} />
           <Route path="/admin/departments" component={Departments} />
 
           <Route

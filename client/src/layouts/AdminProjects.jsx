@@ -1,7 +1,7 @@
 import React from 'react'
 import Table from '../components/Table'
 import Map from '../components/Map';
-import AdminNavbar from '../components/ExamplesNavbar';
+import ExamplesNavbar from '../components/ExamplesNavbar';
 // import Footer from '../components/Footer'
 import {Card,Row, CardBody, Col } from 'reactstrap';
 import Footer from '../components/Footer';
@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 const AdminProjects = (props) => {
     return ( 
         <>
+      <ExamplesNavbar/>
         <div className='page-header container'  id='adminProjects'>
                 <Row>
                     <Col lg='8'>

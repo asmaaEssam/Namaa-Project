@@ -49,6 +49,7 @@ const ProjectsMap = (props) => {
   return (
     // in render()
     <React.Fragment>
+      <ExamplesNavbar/>
       <div style={{marginTop: "10%", marginBottom:"5%", display:"flex", justifyContent:'center'}}>
       <Box>
         <Map
@@ -87,9 +88,16 @@ const ProjectsMap = (props) => {
               <Popup
                 onClick={() => {
                   console.log(props.history)
-                  if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry')
+                  console.log(props.history)
+                  console.log(props.history.location.pathname)
+                  if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry'&&props.history.location.pathname === '/project/publictransport')
                   {
-                    props.history.push("/dataEntry");
+                    props.history.push("/dataEntry/publictransport");
+                  }
+                  else if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry'&&props.history.location.pathname === '/project/footpath'){
+                    props.history.push('/dataEntry/footpath');
+                  }else if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry'&&props.history.location.pathname === '/project/stormwater'){
+                    props.history.push('/dataEntry/stormwater');
                   } else if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DecisionMaker')
                   {
                     props.history.push("/dashboard");

@@ -5,6 +5,8 @@ import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import { useEffect, useState} from "react";
 import axios from "axios";
 import { Layer,Feature, Popup} from "react-mapbox-gl";
+import "../assets/scss/blk-design-system-react.scss";
+import "../assets/css/nucleo-icons.css";
 
 const Map = ReactMapboxGl({
   accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
@@ -64,17 +66,14 @@ console.log(feature)
         
         // eslint-disable-next-line
         type="symbol"
-        >
+        id="marker"
+        layout={{ "icon-image": "marker-15" }}>
         
-        
-          {state.map((p,) => (
-            <Feature{...p} coordinates={p.geometry.coordinates} onClick={()=>handleClick(p)}  />
-       
-           ) )
-          
-          
-          }
-         
+        {
+          state.map(feature => 
+            <Feature coordinates={feature.geometry.coordinates} onClick={()=>handleClick(feature)}/>
+        )
+        }
         </Layer>
       </Map>
     </div>

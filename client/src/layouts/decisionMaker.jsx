@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNavbar from '../components/ExamplesNavbar';
+import ExamplesNavbar from '../components/ExamplesNavbar';
 import Dashboard from '../views/Dashboard';
 // core components
 
@@ -11,6 +11,8 @@ class DecisionMaker extends React.Component {
   render() {
     return (
       <>
+      <ExamplesNavbar/>
+
         <div className="wrapper">
           <div
             className="main-panel"
