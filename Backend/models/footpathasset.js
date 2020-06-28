@@ -6,27 +6,23 @@ const lineSchema = new mongoose.Schema({
    required: true
   },
   coordinates: {
-    type: [Number],
+    type: [[Number]],
     required: true
-  },
+  }
 });
 
 const Schema = new mongoose.Schema({
-  assetname: {
+  asset_name: {
     type: String,   //required: [true],
   },
-  location: {
+  geometry: {
     type: lineSchema,
     //required: [true],
   },
-  projectname: [
-    { type: mongoose.Schema.ObjectId, ref: "Project" },
-    { required: [true, "Surveyor's name is required"] },
-  ],
 surveyorname:{
 type:String
 },
-  dateofsurvey: {
+Rating_Dat: {
     type: Date,
    // required: [true, "Date of aurvey is required"],
   },
@@ -67,10 +63,27 @@ type:String
     type: Number,
    // required: [true, "Quality degree of pedestrians sinage is required"],
   },
-  generalCondition: {
-    type: Number,
-    //required: [true, "General condition is required"],
+  Oper_statu:{
+type:String,
+//required: [true, "Operation status is required"]
   },
+  Asset_age:{
+    type: Number,
+    //required: [true, "Asset age is required"]
+  },
+  general_co: {
+    type: Number,
+    //required: [true, "General condition is required"]
+  },
+  Overall_ra:{
+    type: Number,
+    //required: [true, "Overall rate is required"]
+  },
+  Remain_lif:{
+    type: Number,
+    //required: [true, "Remaining life is required"]
+  }
+  
 });
 const FootPath = mongoose.model("FootPath", Schema);
 module.exports = FootPath;

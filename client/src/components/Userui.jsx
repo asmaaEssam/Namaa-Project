@@ -1,157 +1,87 @@
-import React, {useState ,useEffect} from 'react';
-import MaterialTable, { MTableCell } from 'material-table';
-import axios from 'axios';
-const client= axios.create ();
-client.interceptors.response.use(res=>res,err=>{
-  throw new Error(err.response.data.message)
-})
+import React, { useState, useEffect } from "react";
+import MaterialTable, { MTableCell } from "material-table";
+import axios from "axios";
 export default function MaterialTableDemo() {
-
-  //const [err,setErr] = useState({})
   const [state, setState] = useState({
     columns: [
-      { title: 'Name', field: 'name' },
-      { title: 'User Name', field: 'username' },
-      { title: 'Password', field: 'password' },
+      { title: "Name", field: "name" },
+      { title: "User Name", field: "username" },
+      { title: "Password", field: "password" },
       {
-        title: 'User role',
-        field: 'role',
-        
-        
+        title: "User role",
+        field: "role",
       },
     ],
-    data: [
-     
-    ],
+    data: [],
   });
-  // if(err!={}){alert(err);}
-  //console.log(err);
   useEffect(() => {
-    const token= localStorage.getItem("token")
-    console.log(token)
-    const headers =  {Authorization:token}
-    console.log(headers)
     const fetchData = async () => {
-      const result = await axios.get(
-        'http://localhost:9000/users/', {headers}      
-      );
- if (!{headers}){
-      alert(result.data.message)
-      
- }
-      //console.log(result.data.message)
-      setState({columns: state.columns,
-    data: result.data});
+      const result = await axios.get("http://localhost:9000/users/");
+
+      setState({ columns: state.columns, data: result.data });
     };
- 
     fetchData();
   }, []);
 
-  async function addUser (newuser){
-    const token= localStorage.getItem("token")
-    console.log(token)
-    const headers =  {Authorization:token}
-    console.log(headers)
- const result = await axios.post(
-   'http://localhost:9000/users/register',newuser,{headers}
- )
- alert(result.data.message)
- ///console.log(result.data.message)
- setState({columns: state.columns,
-data:[...state.data , result.data]});
-};
+  async function addUser(newuser) {
+    const result = await axios.post(
+      "http://localhost:9000/users/register",
+      newuser
+    );
+    if (result.data.message) {
+      alert(result.data.message);
+    } else {
+      setState({ columns: state.columns, data: [...state.data, result.data] });
+    }
+  }
 
-async function deleteUser (id){
-  const token= localStorage.getItem("token")
-    console.log(token)
-    const headers =  {Authorization:token}
-    console.log(headers)
-const result = await axios.delete(
- `http://localhost:9000/users/${id}`,{headers}
-);
-alert(result.data.message)
-console.log(result.data)
-setState({columns: state.columns,
-  data: result.data});
-};
+  async function deleteUser(id) {
+    const result = await axios.delete(`http://localhost:9000/users/${id}`);
+    console.log(result.data);
+    setState({ columns: state.columns, data: result.data });
+  }
 
- async function editUser (id,editedUser){
-  const token= localStorage.getItem("token")
-    console.log(token)
-    const headers =  {Authorization:token}
-    console.log(headers)
-  const result =  await axios.patch(
-   `http://localhost:9000/users/${id}`,editedUser,{headers}
-  )
-  alert(result.data.message)
-//  if(result.data.message!={}){
-//    setErr(result.data.message);
-   
-//  }
- 
-  setState({columns: state.columns,
-    data: result.data})
-  
+  async function editUser(id, editedUser) {
+    const result = await axios.patch(
+      `http://localhost:9000/users/${id}`,
+      editedUser
+    );
+
+    console.log(result.data.message);
+    setState({ columns: state.columns, data: result.data });
+    //alert(result.data.message);
+
   }
 
   return (
     <MaterialTable
-      title="Users"
       columns={state.columns}
       data={state.data}
       editable={{
         onRowAdd: (newData) =>
           new Promise((resolve) => {
-           
-              resolve();
-              addUser(newData);
-              // setState((prevState) => {
-              //   const data = [...prevState.data];
-              //   data.push(newData);
-              //   return { ...prevState, data };
-              // });
-            
+            resolve();
+            addUser(newData);
           }),
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve) => {
-            
-           
-              const id= oldData._id
-              resolve();
-              
-              // if (newData.password==""||newData.name==""||newData.username==""||newData.role==""){
-              // alert("menna")
-              // }
-              
-              editUser(id,newData,oldData)
-              // if (oldData) {
-              //   setState((prevState) => {
-              //     const data = [...prevState.data];
-              //     data[data.indexOf(oldData)] = newData;
-              //     console.log(MTableCell)
-              //     return { ...prevState, data };
-              //   });
-              // }
-           
+            const id = oldData._id;
+            resolve();
+
+            editUser(id, newData, oldData);
           }),
         onRowDelete: (oldData) =>
           new Promise((resolve) => {
-            
-              const id= oldData._id
-              resolve();
-             
-              deleteUser(id,oldData)
-              // setState((prevState) => {
-              //   const data = [...prevState.data];
-              //   data.splice(data.indexOf(oldData), 1);
-              //   return { ...prevState, data };
-              // });
-           
+            const id = oldData._id;
+            resolve();
+
+            deleteUser(id, oldData);
           }),
       }}
     />
   );
 }
+
 
 
  

@@ -11,7 +11,7 @@ const Map = ReactMapboxGl({
 });
 
 
-function Maps(props) {
+function Publictransportmap(props) {
   console.log(props.setStateToFeature)
   const [state, setState] = useState([]);
 
@@ -19,7 +19,7 @@ function Maps(props) {
    const fetchData= async () => {
 
      await axios
-       .get("http://localhost:9000/footpath/",{})
+       .get("http://localhost:9000/publictrans/",{})
        .then((res) => {
          console.log(res.data);
          setState(res.data)
@@ -46,12 +46,12 @@ console.log(feature)
   const onDrawUpdate = ({ features }) => {
     console.log(features);
   };
-
+  
   return (
     <div>
       <Map
       center={[31.6306, 30.0917]}
-      zoom={[14]}
+      zoom={[13]}
         style='mapbox://styles/mapbox/satellite-v9' // eslint-disable-line
         containerStyle={{
           height: "39.5vw",
@@ -59,28 +59,16 @@ console.log(feature)
         }}
       >
         <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
-        {state.map((p) => (
-            <Popup{...p} coordinates={p.geometry.coordinates[0]} onClick={()=>handleClick(p)}  anchor="top-right" offset={[9,0]} />
        
-           ) )}
-          
         <Layer
         
-          type="line"
-          layout={{
-            "line-join": "round",
-            "line-cap": "round",
-          }}
-          paint={{
-            "line-color": "blue",
-            "line-width": 3,
-            
-          }}// eslint-disable-next-line
-          
+        // eslint-disable-next-line
+        type="symbol"
         >
         
+        
           {state.map((p,) => (
-            <Feature{...p} coordinates={p.geometry.coordinates}  />
+            <Feature{...p} coordinates={p.geometry.coordinates} onClick={()=>handleClick(p)}  />
        
            ) )
           
@@ -92,4 +80,4 @@ console.log(feature)
     </div>
   );
 }
-export default Maps;
+export default Publictransportmap;

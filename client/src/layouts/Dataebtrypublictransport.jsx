@@ -1,8 +1,8 @@
 import React from 'react'
 import ExamplesNavbar from '../components/ExamplesNavbar'
 import Footer from '../components/Footer'
-import Maps from '../components/maps';
-import Forms from '../components/Forms'
+ import Publictransportform from '../components/Publictransportform'
+ import Publictransportmap from'../components/Publictransportmap'
 import './layoutStyles.css';
 import DashboardMap from '../components/Map';
 import {
@@ -14,7 +14,7 @@ import {
     Col,
   } from "reactstrap";
 
-const DataEntry = (props) => {
+const  Dataentrypublictransport = (props) => {
    
     console.log(props)
     return ( 
@@ -22,14 +22,14 @@ const DataEntry = (props) => {
                 <div className="page-header container" id='dataentry'>
                     <Card id="dataentryMap">
                         <CardBody>
-                            <Maps />
+                            <Publictransportmap />
                         </CardBody>
                     </Card> 
-                    <Forms/>
+                    <Publictransportform/>
                 </div>
         <Footer/>
         </div>
      );
 }
  
-export default DataEntry;
+export default Dataentrypublictransport;
