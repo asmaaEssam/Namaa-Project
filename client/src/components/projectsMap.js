@@ -38,7 +38,7 @@ const ProjectsMap = (props) => {
     //TODO currentUser in context or redux
     const fetchData = async () => {
       const { data } = await axios.get(`http://localhost:9000/projects`, {});
-      console.log(data)
+      console.log(data);
       setState(data);
     };
     console.log(state);
@@ -49,26 +49,33 @@ const ProjectsMap = (props) => {
   return (
     // in render()
     <React.Fragment>
-      <ExamplesNavbar/>
-      <div style={{marginTop: "10%", marginBottom:"5%", display:"flex", justifyContent:'center'}}>
-      <Box>
-        <Map
-          style="mapbox://styles/mapbox/light-v10"
-          containerStyle={{
-            position: "relative",
-            height: "50vh",
-            width: "70vw",
-            borderRadius: "10px",
-          }}
-          center={[31.6306, 30.0917]}
-          zoom={[13]}
-        >
-          <Layer
-            type="symbol"
-            id="marker"
-            layout={{ "icon-image": "marker-15" }}
-          ></Layer>
-          {/* <Popup
+      <ExamplesNavbar />
+      <div
+        style={{
+          marginTop: "10%",
+          marginBottom: "5%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box>
+          <Map
+            style="mapbox://styles/mapbox/light-v10"
+            containerStyle={{
+              position: "relative",
+              height: "50vh",
+              width: "70vw",
+              borderRadius: "10px",
+            }}
+            center={[31.6306, 30.0917]}
+            zoom={[13]}
+          >
+            <Layer
+              type="symbol"
+              id="marker"
+              layout={{ "icon-image": "marker-15" }}
+            ></Layer>
+            {/* <Popup
             coordinates={[31.6306, 30.0917]}
             offset={{
               "bottom-left": [12, -38],
@@ -83,29 +90,59 @@ const ProjectsMap = (props) => {
               alt="Smiley face"
             />
           </Popup> */}
-          {state[0] !== undefined ? (
-            state.map((p, i) => (
+            {state[0] !== undefined ? (
+              state.map((p, i) => (
+                <Popup
+                  onClick={() => {
+                    console.log(props.history);
+                    console.log(props.history);
+                    console.log(props.history.location.pathname);
+                    if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DataEntry" &&
+                      props.history.location.pathname ===
+                        "/project/publictransport"
+                    ) {
+                      props.history.push("/dataEntry/publictransport");
+                    } else if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DataEntry" &&
+                      props.history.location.pathname === "/project/footpath"
+                    ) {
+                      props.history.push("/dataEntry/footpath");
+                    } else if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DataEntry" &&
+                      props.history.location.pathname === "/project/stormwater"
+                    ) {
+                      props.history.push("/dataEntry/stormwater");
+                    } else if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DecisionMaker"
+                    ) {
+                      props.history.push("/dashboard");
+                    } else {
+                      props.history.push("/home");
+                    }
+                  }}
+                  coordinates={p.location.coordinates}
+                  offset={{
+                    "bottom-left": [12, -38],
+                    bottom: [0, -38],
+                    "bottom-right": [-12, -38],
+                  }}
+                >
+                  <img
+                    src={`project${i}.jpg`}
+                    width="100px"
+                    height="100px"
+                    alt="Smiley face"
+                  />
+                </Popup>
+              ))
+            ) : (
               <Popup
-                onClick={() => {
-                  console.log(props.history)
-                  console.log(props.history)
-                  console.log(props.history.location.pathname)
-                  if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry'&&props.history.location.pathname === '/project/publictransport')
-                  {
-                    props.history.push("/dataEntry/publictransport");
-                  }
-                  else if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry'&&props.history.location.pathname === '/project/footpath'){
-                    props.history.push('/dataEntry/footpath');
-                  }else if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DataEntry'&&props.history.location.pathname === '/project/stormwater'){
-                    props.history.push('/dataEntry/stormwater');
-                  } else if(localStorage.getItem('token')&&localStorage.getItem('role')=== 'DecisionMaker')
-                  {
-                    props.history.push("/dashboard");
-                  } else {
-                    props.history.push("/home");
-                  }
-                }}
-                coordinates={p.location.coordinates}
+                coordinates={[31.6306, 30.0917]}
                 offset={{
                   "bottom-left": [12, -38],
                   bottom: [0, -38],
@@ -113,34 +150,17 @@ const ProjectsMap = (props) => {
                 }}
               >
                 <img
-                  src={`project${i}.jpg`}
+                  src="n08A8NO.jpg"
                   width="100px"
                   height="100px"
                   alt="Smiley face"
                 />
               </Popup>
-            ))
-          ) : (
-            <Popup
-              coordinates={[31.6306, 30.0917]}
-              offset={{
-                "bottom-left": [12, -38],
-                bottom: [0, -38],
-                "bottom-right": [-12, -38],
-              }}
-            >
-              <img
-                src="n08A8NO.jpg"
-                width="100px"
-                height="100px"
-                alt="Smiley face"
-              />
-            </Popup>
-          )}
-        </Map>
-      </Box>
+            )}
+          </Map>
+        </Box>
       </div>
-      <Footer/>
+      <Footer />
     </React.Fragment>
   );
 };

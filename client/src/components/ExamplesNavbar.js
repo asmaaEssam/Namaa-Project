@@ -1,7 +1,6 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-import '../assets/css/style.css'
+import "../assets/css/style.css";
 // reactstrap components
 import {
   Button,
@@ -17,8 +16,12 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faFacebook, faInstagram,faTwitter } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 class PagesNavbar extends React.Component {
   constructor(props) {
@@ -29,7 +32,7 @@ class PagesNavbar extends React.Component {
     };
   }
   componentDidMount() {
-    console.log(this.props)
+    console.log(this.props);
     window.addEventListener("scroll", this.changeColor);
   }
   componentWillUnmount() {
@@ -75,6 +78,10 @@ class PagesNavbar extends React.Component {
         color-on-scroll="100"
         expand="lg"
       >
+        <NavbarBrand to={"/"} id="navbar-brand" tag={Link}>
+          <span style={{ fontSize: "30px" }}>EMAF• </span>
+        </NavbarBrand>
+
         <Container>
           <Collapse
             className={"justify-content-end " + this.state.collapseOut}
@@ -85,6 +92,10 @@ class PagesNavbar extends React.Component {
           >
             <div className="navbar-collapse-header">
               <Row>
+                <Col md="3">
+                  <h1 className="title">BLK•</h1>
+                </Col>
+
                 <Col className="collapse-close text-right" xs="6">
                   <button
                     aria-expanded={this.state.collapseOpen}
@@ -133,73 +144,103 @@ class PagesNavbar extends React.Component {
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
               </NavItem>
-              {(localStorage.getItem('token'))?
-              <NavItem>
-              <Link to={"/"}>
-                <Button
-                  className="nav-link d-none d-lg-block"
-                  color="primary"
-                  target="_blank"
-                  onClick={()=>{localStorage.removeItem('token')
-                  localStorage.removeItem('role')
-                  }}
+
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "Admin" ? (
+                <NavLink
+                  tag={Link}
+                  to="/admin/projects"
+                  activeClassName="active"
                 >
-                 Logout
-                </Button>
-              </Link>
-            </NavItem>: 
-             <NavItem>
-             <Link to={"/login"}>
-               <Button
-                 className="nav-link d-none d-lg-block"
-                 color="primary"
-                 target="_blank"
-               >
-                Login
-               </Button>
-             </Link>
-           </NavItem>}
-              {(localStorage.getItem('token') && localStorage.getItem('role') === "Admin")? 
-                <NavLink tag={Link} to="/admin/projects" activeClassName = 'active'>
                   Projects
-                </NavLink>: null
-               }
-               {(localStorage.getItem('token') && localStorage.getItem('role') === "Admin")? 
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "Admin" ? (
                 <NavLink tag={Link} to="/admin/departments">
                   Departments
-                </NavLink>: null
-               }
-               {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
-              
-                <NavLink tag={Link} to="/project/publictransport" className="inactive" activeClassName="active">
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DataEntry" ? (
+                <NavLink
+                  tag={Link}
+                  to="/project/publictransport"
+                  className="inactive"
+                  activeClassName="active"
+                >
                   Public Transport
-                </NavLink> : null
-               }
-               {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
-                <NavLink tag={Link} to="/project/footpath" className="inactive" activeClassName="active">
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DataEntry" ? (
+                <NavLink
+                  tag={Link}
+                  to="/project/footpath"
+                  className="inactive"
+                  activeClassName="active"
+                >
                   Footpath & Cycleway
-                </NavLink>: null
-               }
-               {(localStorage.getItem('token') && localStorage.getItem('role') === "DataEntry")? 
-                <NavLink tag={Link} to="/project/stormwater" className="inactive" activeClassName="active">
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DataEntry" ? (
+                <NavLink
+                  tag={Link}
+                  to="/project/stormwater"
+                  className="inactive"
+                  activeClassName="active"
+                >
                   Storm water
-                </NavLink>: null
-               }
-               {(localStorage.getItem('token') && localStorage.getItem('role') === "DecisionMaker")? 
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DecisionMaker" ? (
                 <NavLink tag={Link} to="/project">
                   Public Transport
-                </NavLink>: null
-               }
-               {(localStorage.getItem('token') && localStorage.getItem('role') === "DecisionMaker")? 
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DecisionMaker" ? (
                 <NavLink tag={Link} to="/project">
                   Footpath & Cycleway
-                </NavLink>: null
-               }
-               {(localStorage.getItem('token') && localStorage.getItem('role') === "DecisionMaker")? 
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DecisionMaker" ? (
                 <NavLink tag={Link} to="/project">
                   Storm water
-                </NavLink>: null
-               }
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") ? (
+                <NavItem>
+                  <Link to={"/"}>
+                    <Button
+                      className="nav-link d-none d-lg-block"
+                      color="primary"
+                      target="_blank"
+                      onClick={() => {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("role");
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </Link>
+                </NavItem>
+              ) : (
+                <NavItem>
+                  <Link to={"/login"}>
+                    <Button
+                      className="nav-link d-none d-lg-block"
+                      color="primary"
+                      target="_blank"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Container>

@@ -63,20 +63,15 @@ class LoginPage extends React.Component {
       axios
         .post(`http://localhost:9000/users/login`, user)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           localStorage.setItem("token", response.data.token);
-          localStorage.setItem("role", response.data.user.role)
-          if(response.data.user.role==="DecisionMaker")
-          {
-            this.props.history.push("/project", {data: response.data});
-          }
-          else if (response.data.user.role==="DataEntry")
-          {
-            this.props.history.push("/project");
-          }
-          else
-          {
-            this.props.history.push("/admin",{data: response.data});
+          localStorage.setItem("role", response.data.user.role);
+          if (response.data.user.role === "DecisionMaker") {
+            this.props.history.push("/project", { data: response.data });
+          } else if (response.data.user.role === "DataEntry") {
+            this.props.history.push("/project/footpath");
+          } else {
+            this.props.history.push("/admin", { data: response.data });
           }
         })
         .catch((error) => {
