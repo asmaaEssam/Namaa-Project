@@ -212,6 +212,22 @@ class PagesNavbar extends React.Component {
                   Storm water
                 </NavLink>
               ) : null}
+              <NavLink
+                tag={Link}
+                to="/about"
+                className="inactive"
+                activeClassName="active"
+              >
+                About
+              </NavLink>
+              <NavLink
+                tag={Link}
+                to="/contact"
+                className="inactive"
+                activeClassName="active"
+              >
+                Contact us
+              </NavLink>
               {localStorage.getItem("token") ? (
                 <NavItem>
                   <Link to={"/"}>
@@ -229,7 +245,7 @@ class PagesNavbar extends React.Component {
                   </Link>
                 </NavItem>
               ) : (
-                <NavItem>
+                <NavItem style={{ marginRight: "5vw" }}>
                   <Link to={"/login"}>
                     <Button
                       className="nav-link d-none d-lg-block"
