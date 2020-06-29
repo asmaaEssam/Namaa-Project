@@ -4,21 +4,22 @@ import confirm from "reactstrap-confirm";
 import { FormGroup, Input, Button, Card, CardBody, CardHeader, CardFooter } from "reactstrap";
 import axios from "axios";
 const Forms = (props) => {
+  console.log(props)
   const [state, setState] = useState({
 });
   const inputHandler = (e) => {
-    setState({
+  setState({
       ...state,
       [e.target.name]: e.target.value
       
     });
     
   };
-  const setStateToFeature = (feature) => {
-    props.setState(feature);
-    console.log(feature)
+  // const setStateToFeature = (feature) => {
+  // props. setState(feature);
+  //   console.log(feature)
     
-  };
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();

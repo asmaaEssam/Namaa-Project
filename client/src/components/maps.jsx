@@ -1,18 +1,18 @@
 import React from "react";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import { useEffect, useState} from "react";
 import axios from "axios";
 import { Layer,Feature, Popup} from "react-mapbox-gl";
-
+import'../index.css'
 const Map = ReactMapboxGl({
   accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
 });
 
 
 function Maps(props) {
-  console.log(props.setStateToFeature)
+  console.log(props)
   const [state, setState] = useState([]);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const handleClick=(feature)=>{
 props.setStateToFeature(feature)
 console.log(feature)
 }
- const onDrawCreate = ({ features }) => {
+ const onDrawCreate = ( {features} ) => {
    console.log(features);
  };
  
@@ -60,10 +60,11 @@ console.log(feature)
       >
         <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
         {state.map((p) => (
-            <Popup{...p} coordinates={p.geometry.coordinates[0]} onClick={()=>handleClick(p)}  anchor="top-right" offset={[9,0]} />
+            <Marker{...p} coordinates={p.geometry.coordinates[0]} onClick={()=>handleClick(p)}  anchor="bottom" offset={[14,0]}><div className="mapMarkerStyle" /></Marker>
        
            ) )}
-          
+
+     
         <Layer
         
           type="line"
@@ -79,8 +80,8 @@ console.log(feature)
           
         >
         
-          {state.map((p,) => (
-            <Feature{...p} coordinates={p.geometry.coordinates}  />
+          {state.map((p) => (
+            <Feature{...p} coordinates={p.geometry.coordinates} />
        
            ) )
           
