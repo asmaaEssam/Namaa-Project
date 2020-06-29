@@ -66,40 +66,7 @@ import { Link } from "react-router-dom";
 //   },
 // ];
 
-let ps = null;
-
 class Contact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tabs: 1,
-    };
-  }
-  componentDidMount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.className += " perfect-scrollbar-on";
-      document.documentElement.classList.remove("perfect-scrollbar-off");
-      let tables = document.querySelectorAll(".table-responsive");
-      for (let i = 0; i < tables.length; i++) {
-        ps = new PerfectScrollbar(tables[i]);
-      }
-    }
-    document.body.classList.toggle("profile-page");
-  }
-  componentWillUnmount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps.destroy();
-      document.documentElement.className += " perfect-scrollbar-off";
-      document.documentElement.classList.remove("perfect-scrollbar-on");
-    }
-    document.body.classList.toggle("profile-page");
-  }
-  toggleTabs = (e, stateName, index) => {
-    e.preventDefault();
-    this.setState({
-      [stateName]: index,
-    });
-  };
   render() {
     return (
       <>
