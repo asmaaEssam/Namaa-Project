@@ -9,7 +9,7 @@ import "../assets/scss/blk-design-system-react.scss";
 import "../assets/css/nucleo-icons.css";
 
 const Map = ReactMapboxGl({
-  accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
+  accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA",
 });
 
 
@@ -54,7 +54,7 @@ console.log(feature)
       <Map
       center={[31.6306, 30.0917]}
       zoom={[13]}
-        style='mapbox://styles/mapbox/satellite-v9' // eslint-disable-line
+        style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re" // eslint-disable-line
         containerStyle={{
           height: "39.5vw",
           
@@ -62,12 +62,12 @@ console.log(feature)
       >
         <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
        
-        <Layer
-        
-        // eslint-disable-next-line
-        type="symbol"
-        id="marker"
-        layout={{ "icon-image": "marker-15" }}>
+        <Layer type="circle" id="marker" paint={{
+  'circle-color': "#e14eca",
+  'circle-stroke-width': 1,
+  'circle-stroke-color': '#fff',
+  'circle-stroke-opacity': 1
+ }}>
         
         {
           state.map(feature => 

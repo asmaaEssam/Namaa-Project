@@ -150,6 +150,7 @@ class PagesNavbar extends React.Component {
                 <NavLink
                   tag={Link}
                   to="/admin/projects"
+                  className="inactive"
                   activeClassName="active"
                 >
                   Projects
@@ -157,7 +158,8 @@ class PagesNavbar extends React.Component {
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "Admin" ? (
-                <NavLink tag={Link} to="/admin/departments">
+                <NavLink tag={Link} to="/admin/departments" className="inactive"
+                activeClassName="active">
                   Departments
                 </NavLink>
               ) : null}
@@ -196,19 +198,22 @@ class PagesNavbar extends React.Component {
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
-                <NavLink tag={Link} to="/project">
+                <NavLink tag={Link} to="/project" className="inactive"
+                activeClassName="active">
                   Public Transport
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
-                <NavLink tag={Link} to="/project">
+                <NavLink tag={Link} to="/project" className="inactive"
+                activeClassName="active">
                   Footpath & Cycleway
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
-                <NavLink tag={Link} to="/project">
+                <NavLink tag={Link} to="/project" className="inactive"
+                activeClassName="active">
                   Storm water
                 </NavLink>
               ) : null}

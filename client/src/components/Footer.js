@@ -29,6 +29,13 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+
 class Footer extends React.Component {
   render() {
     return (
@@ -104,7 +111,7 @@ class Footer extends React.Component {
                   id="tooltip622135962"
                   target="_blank"
                 >
-                  <i className="fab fa-twitter" />
+                  <FontAwesomeIcon icon={faTwitter} />
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip622135962">
                   Follow us
@@ -116,7 +123,7 @@ class Footer extends React.Component {
                   id="tooltip230450801"
                   target="_blank"
                 >
-                  <i className="fab fa-facebook-square" />
+                  <FontAwesomeIcon icon={faFacebook} />
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip230450801">
                   Like us
@@ -128,7 +135,7 @@ class Footer extends React.Component {
                   id="tooltip318450378"
                   target="_blank"
                 >
-                  <i className="fab fa-dribbble" />
+                  <FontAwesomeIcon icon={faInstagram} />
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip318450378">
                   Follow us
