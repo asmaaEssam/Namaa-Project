@@ -64,62 +64,62 @@ footpathRouter.post("/addfeatures", async (req, res, next) => {
     next(error);
   }
 });
-footpathRouter.post("/adddraw", async (req, res, next) => {
-  try {
-    const {
-      asset_name,
-      geometry,
-      Rating_Dat,
-      surveyorname,
-      pothole,
-      cracks,
-      erosion,
-      slipperySurface,
-      fallenBranches,
-      QualityOfCurbing,
-      degreeOfCleanliness,
-      conditionofDrains,
-      pedestrians_Sainage_Condition,
-      Oper_statu,
-      Asset_age,
-      general_co,
-      Overall_ra,
-      Remain_lif,
-    } = req.body;
-    const newdata = {
-      asset_name: asset_name,
-      geometry: geometry,
-      Rating_Dat: Rating_Dat,
-      surveyorname: surveyorname,
-      pothole: pothole,
-      cracks: cracks,
-      erosion: erosion,
-      slipperySurface: slipperySurface,
-      fallenBranches: fallenBranches,
-      QualityOfCurbing: QualityOfCurbing,
-      degreeOfCleanliness: degreeOfCleanliness,
-      conditionofDrains: conditionofDrains,
-      pedestrians_Sainage_Condition: pedestrians_Sainage_Condition,
-      general_co: general_co,
-      Oper_statu: Oper_statu,
-      Asset_age: Asset_age,
-      Overall_ra: Overall_ra,
-      Remain_lif: Remain_lif,
-    };
+// footpathRouter.post("/adddraw", async (req, res, next) => {
+//   try {
+//     const {
+//       asset_name,
+//       geometry,
+//       Rating_Dat,
+//       surveyorname,
+//       pothole,
+//       cracks,
+//       erosion,
+//       slipperySurface,
+//       fallenBranches,
+//       QualityOfCurbing,
+//       degreeOfCleanliness,
+//       conditionofDrains,
+//       pedestrians_Sainage_Condition,
+//       Oper_statu,
+//       Asset_age,
+//       general_co,
+//       Overall_ra,
+//       Remain_lif,
+//     } = req.body;
+//     const newdata = {
+//       asset_name: asset_name,
+//       geometry: geometry,
+//       Rating_Dat: Rating_Dat,
+//       surveyorname: surveyorname,
+//       pothole: pothole,
+//       cracks: cracks,
+//       erosion: erosion,
+//       slipperySurface: slipperySurface,
+//       fallenBranches: fallenBranches,
+//       QualityOfCurbing: QualityOfCurbing,
+//       degreeOfCleanliness: degreeOfCleanliness,
+//       conditionofDrains: conditionofDrains,
+//       pedestrians_Sainage_Condition: pedestrians_Sainage_Condition,
+//       general_co: general_co,
+//       Oper_statu: Oper_statu,
+//       Asset_age: Asset_age,
+//       Overall_ra: Overall_ra,
+//       Remain_lif: Remain_lif,
+//     };
 
-    Footpath.create(newdata)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((error) => {
-        req.statusCode = 405;
-        next(error);
-      });
-  } catch (error) {
-    req.statusCode = 405;
-    next(error);
-  }
-});
+//     Footpath.create(newdata)
+//       .then((data) => {
+//         res.send(data);
+//       })
+//       .catch((error) => {
+//         req.statusCode = 405;
+//         next(error);
+//       });
+//   } catch (error) {
+//     req.statusCode = 405;
+//     next(error);
+//   }
+// });
 // add data of features to database
 footpathRouter.post("/add", async (req, res, next) => {
   try {
@@ -165,15 +165,27 @@ footpathRouter.post("/add", async (req, res, next) => {
       Overall_ra: Overall_ra,
       Remain_lif: Remain_lif,
     };
-
-    Footpath.updateOne({ _id }, newdata)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((error) => {
-        req.statusCode = 405;
-        next(error);
-      });
+    Footpath.exists({ _id }).then((data) => {
+      if (data) {
+        Footpath.updateOne({ _id }, newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      } else {
+        Footpath.create(newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      }
+    });
   } catch (error) {
     req.statusCode = 405;
     next(error);
