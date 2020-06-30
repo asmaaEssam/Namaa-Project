@@ -9,6 +9,7 @@ import ComponentsNavbar from "../components/IndexNavbar";
 import Footer from "./Footer";
 import Carousel from "react-bootstrap/Carousel";
 import ExamplesNavbar from "./ExamplesNavbar.js";
+import { Card,CardBody } from "reactstrap";
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
 
 const Map = ReactMapboxGl({
   accessToken:
-    "pk.eyJ1IjoiZmFkd2FtYWhtb3VkIiwiYSI6ImNrYW94djcwaDB2MGsycnBmNzk2b2drOG4ifQ.PheG-NUHPUAizAxxdUNJZA",
+    "pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA",
 });
 const ProjectsMap = (props) => {
   const classes = useStyles();
@@ -50,7 +51,7 @@ const ProjectsMap = (props) => {
     // in render()
     <React.Fragment>
       <ExamplesNavbar />
-      <div
+      <div className='container'
         style={{
           marginTop: "10%",
           marginBottom: "5%",
@@ -58,13 +59,15 @@ const ProjectsMap = (props) => {
           justifyContent: "center",
         }}
       >
-        <Box>
+        <Card>
+          <CardBody>
+          <Box>
           <Map
-            style="mapbox://styles/mapbox/light-v10"
+            style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re"
             containerStyle={{
               position: "relative",
               height: "50vh",
-              width: "70vw",
+              // width: "70vw",
               borderRadius: "10px",
             }}
             center={[31.6306, 30.0917]}
@@ -159,6 +162,8 @@ const ProjectsMap = (props) => {
             )}
           </Map>
         </Box>
+          </CardBody>
+          </Card>
       </div>
       <Footer />
     </React.Fragment>

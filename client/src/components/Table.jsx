@@ -5,8 +5,8 @@ import TablePagination from 'material-table';
 import { useHistory } from "react-router-dom";
 
 export default function MaterialTableDemo(props) {
-
-  const {state,setState} = props ;
+  
+  const {state,setState} = props
 
   const fetchData = async () => {
     const result = await axios.get(
@@ -18,6 +18,8 @@ export default function MaterialTableDemo(props) {
 
   useEffect(() => {
     fetchData();
+    
+      // console.log(state)
   }, []);
 
    async function addProject (newProject){
@@ -25,7 +27,13 @@ export default function MaterialTableDemo(props) {
       'http://localhost:9000/projects/add',newProject
     );
     setState({columns: state.columns,
-  data:[...state.data , result.data]});
+  data:[...state.data , result.data],
+      tableRef: React.createRef(),
+      selected: false,
+      selectedRowId: null,
+      c: "blue",
+      currentRow: {}});
+      console.log(state)
   };
 
   const [page, setPage] = useState(0);
@@ -56,9 +64,37 @@ export default function MaterialTableDemo(props) {
       project: result.data});
   }
 
+  function handleStyle(rowData) {
+    console.log(rowData);
+      //  setState({ currentRow: rowData });
+      console.log(state)
+      // console.log(state.currentRow)
+      //   console.log(state.tableRef);
+      //   console.log(rowData.tableData.id)
+        // if (rowData.tableData.id === state.selectedRowId) {
+        //  setState({ selected: false });
+        //  setState({ selectedRowId: null });
+        //  console.log("yes")
+        // } else {
+        //  setState({ selected: true,
+        //             selectedRowId: rowData.tableData.id  });
+        //  console.log("no")
+        // console.log(state.selected)
+        // }
+  }
+
 
   return (
     <MaterialTable
+      options={{
+        rowStyle: rowData => ({
+          backgroundColor:
+           state.selected &&
+            rowData.tableData.id ===state.selectedRowId
+              ?state.c
+              : "#fff"
+        })
+      }}
       title="All Projects"
       columns={state.columns}
       data={state.data}
@@ -83,6 +119,10 @@ export default function MaterialTableDemo(props) {
               });
             }, 600);
           }),
+      }}
+      onRowClick={(event, rowData) => {
+        // if the rowData.tableDate.id could be used on condidtional render
+        handleStyle(rowData);
       }}
       
       localization={{
