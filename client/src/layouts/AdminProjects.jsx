@@ -31,33 +31,30 @@ const AdminProjects = (props) => {
       fetchData();
     }, []);
   
-    //  async function addProject (newProject){
-    //   const result = await axios.post(
-    //     'http://localhost:9000/projects/add',newProject
-    //   );
-    //   setState({columns: state.columns,
-    // data:[...state.data , result.data]});
-    // };
-
-const handleClick=(feature)=>{
-props.setStateToFeature(feature)
-console.log(feature)
-}
 async function addProject (newProject){
     const result = await axios.post(
       'http://localhost:9000/projects/add',newProject
     );
-    setState([...state , result.data]);
   };
+  async function deleteProject(id) {
+    const result = await axios.get(`http://localhost:9000/projects/delete/${id}`);
+    fetchData();
+  }
+
+  async function editProject(id,updatedProject) {
+    const {data} = await axios.patch(
+      `http://localhost:9000/projects/edit/${id}`,
+      updatedProject
+    );
+    fetchData();
+  }
  const onDrawCreate = ( {features} ) => {
    console.log(features);
-   const project = {category:"",name:"",}
-
+   const project = {category:"",name:"",owner:"",manager:"",status:"",start_date:"",end_date:"",location:features[0].geometry}
+   addProject(project)
+   fetchData()
  };
  
-  const onDrawUpdate = ({ features }) => {
-    console.log(features);
-  };
     return ( 
         <>
       <ExamplesNavbar/>
@@ -66,7 +63,7 @@ async function addProject (newProject){
                     <Col lg='8'>
                     <Card>
                         <CardBody>
-                            <Table state={props.state} setState={props.setState} style={{width:"100%"}} />
+                            <Table state={props.state} setState={props.setState} data={state} editProject={editProject} deleteProject={deleteProject} style={{width:"100%"}} />
                         </CardBody>
                     </Card>
                     </Col>
@@ -74,33 +71,26 @@ async function addProject (newProject){
                     <Card>
                         <CardBody>
                         <Map
-      center={[31.6306, 30.0917]}
-      zoom={[13]}
-        style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re" // eslint-disable-line
-        containerStyle={{
-          height: "39.5vw",
-          
-        }}
-      >
-        <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
-       
-        {/* <Layer type="circle" id="marker" paint={{
-  'circle-color': "#e14eca",
-  'circle-stroke-width': 1,
-  'circle-stroke-color': '#fff',
-  'circle-stroke-opacity': 1
- }}>
-        
-        {
-          state.map(feature => 
-            <Feature coordinates={feature.location.coordinates} onClick={()=>handleClick(feature)}/>
-        )
-        }
-        </Layer> */}
+                          center={[31.6306, 30.0917]}
+                          zoom={[13]}
+                          style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re" // eslint-disable-line
+                          containerStyle={{
+                            height: "39.5vw",}}>
+                          <DrawControl onDrawCreate={onDrawCreate}/>
+                        
+                          <Layer type="circle" id="marker" paint={{
+                                                                    'circle-color': "#e14eca",
+                                                                    'circle-stroke-width': 1,
+                                                                    'circle-stroke-color': '#fff',
+                                                                    'circle-stroke-opacity': 1
+                                                                  }}>
+                                {state.map(feature => 
+                                    <Feature coordinates={feature.location.coordinates}/>)}
+                          </Layer>
       </Map>
-                        </CardBody>
-                    </Card>
-                    </Col>
+      </CardBody>
+      </Card>
+      </Col>
         </Row>
         </div>
         <Footer/>

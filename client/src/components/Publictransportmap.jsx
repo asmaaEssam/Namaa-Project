@@ -8,12 +8,10 @@ import { Layer,Feature, Popup} from "react-mapbox-gl";
 import "../assets/scss/blk-design-system-react.scss";
 import "../assets/css/nucleo-icons.css";
 
-const Map = ReactMapboxGl({
-  accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA",
-});
-
-
 function Publictransportmap(props) {
+  const Map = ReactMapboxGl({
+    accessToken: props.token
+  });
   console.log(props.setStateToFeature)
   const [state, setState] = useState([]);
 
@@ -52,11 +50,11 @@ console.log(feature)
   return (
     <div>
       <Map
-      center={[31.6306, 30.0917]}
+      center={props.center}
       zoom={[13]}
-        style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re" // eslint-disable-line
+        style={props.style} // eslint-disable-line
         containerStyle={{
-          height: "39.5vw",
+          height: props.height,
           
         }}
       >

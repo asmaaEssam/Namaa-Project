@@ -16,12 +16,6 @@ import {
 
 import '../assets/css/dashboard.css'
 // core components
-import {
-  chartExample1,
-  chartExample2,
-  chartExample3,
-  chartExample4
-} from "../variables/charts";
 
 import DashboardMap from '../components/Map';
 import Chart from '../components/chart';
@@ -29,6 +23,7 @@ import Donut from "../components/PieChart";
 import RadialChart from "../components/RadialChart";
 import SplineArea from "../components/splineArea";
 import PieWithImage from "../components/pieWithImage";
+import Publictransportmap from "../components/Publictransportmap";
 
 class Dashboard extends React.Component {
 
@@ -37,15 +32,20 @@ class Dashboard extends React.Component {
       geojson: [],
       series: {},
       seriesStatus: {},
-      performance: 0
+      performance: 0,
+      chartExample3: {},
+      factor1:{},
+      factor2:{},
+      factor3:{},
   }
   async componentDidMount(){
     await axios
     .get("http://localhost:9000/publictrans/",{})
     .then((res) => {
-      console.log(res.data)
+      console.log(res.data);
       this.setState({geojson:res.data})
       const series = this.state.geojson.map(f=> f.Overall_ra);
+      console.log(series)
       const computedSeries = {};
       const seriesStatus = this.state.geojson.map(f=> f.Oper_statu);
     
@@ -62,14 +62,104 @@ class Dashboard extends React.Component {
         computedSeriesStatus[key2] = 1
       }
     }
+    console.log(computedSeries)
+    console.log(computedSeries)
     const generalCondition = this.state.geojson.map(f=> f.general_co);
     const performance = generalCondition.reduce(function(a,b){
       return a+b
     },0);
+    let name = this.state.geojson.map(f=>f.asset_name)
+  let performanceCondition =this.state.geojson.map(f=>f.general_co)
+  const factor1 ={name: "bus punctuality"}
+  factor1.data = this.state.geojson.map(f=>f.bus_punctuality)
+  console.log(factor1.data)
+  const factor2 ={name: "perceived quality of service"}
+  factor2.data = this.state.geojson.map(f=>f.perceived_qualityof_service)
+  const factor3 ={name: "Degree of Cleanliness"}
+  factor3.data = this.state.geojson.map(f=>f.passengerDemand)
+  let chartExample3 = {
+    data: canvas => {
+      let ctx = canvas.getContext("2d");
+  
+      let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+  
+      gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
+      gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
+      gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+  
+      return {
+        labels: name,
+        datasets: [
+          {
+            label: "Performance",
+            fill: true,
+            backgroundColor: gradientStroke,
+            hoverBackgroundColor: gradientStroke,
+            borderColor: "#d048b6",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: performanceCondition
+          }
+        ]
+      };
+    },
+    options: {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: "#344675",
+        titleFontColor: "#e14eca",
+        bodyFontColor: "#f3f3f3",
+        bodySpacing: 4,
+        xPadding: 12,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest"
+      },
+      responsive: true,
+      scales: {
+        yAxes: [
+          {
+            gridLines: {
+              drawBorder: false,
+              color: "rgba(225,78,202,0.1)",
+              zeroLineColor: "transparent"
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 100,
+              padding: 20,
+              fontColor: "#9e9e9e"
+            }
+          }
+        ],
+        xAxes: [
+          {
+            gridLines: {
+              drawBorder: false,
+              color: "rgba(225,78,202,0.1)",
+              zeroLineColor: "transparent"
+            },
+            ticks: {
+              padding: 20,
+              fontColor: "#9e9e9e"
+            }
+          }
+        ]
+      }
+    }
+  };
         this.setState ({
       series : computedSeries,
       performance : performance/(generalCondition.length*100) * 100,
-      seriesStatus : computedSeriesStatus
+      seriesStatus : computedSeriesStatus,
+      chartExample3: chartExample3,
+      factor1:factor1,
+      factor2:factor2,
+      factor3:factor3
     })
     })
     .catch((error) => {
@@ -94,14 +184,13 @@ class Dashboard extends React.Component {
           <Card >
               <CardBody>
                 <RadialChart overallPerformance = {this.state.performance} />
-                {/* <h4 style= {{textAlign: 'center', color: "#1E80FF",alignSelf: 'center'}}>Performance</h4> */}
               </CardBody>
               </Card>
           </Col>
           <Col lg="6">
               <Card className="card-chart" id= "map">
               <CardBody>
-                <DashboardMap style ="mapbox://styles/asma163/ckbggndq8257h1irya7l12nzw" accessToken="pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA" height="44.5vh" />
+                <Publictransportmap style='mapbox://styles/asma163/ckbgkzh7457611io4q6k872re' token='pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA' height="44.5vh" center = {[31.6306, 30.0917]}/>
               </CardBody>
               </Card>
           </Col>
@@ -123,7 +212,7 @@ class Dashboard extends React.Component {
             <Col lg= '6'>
             <Card className="card-chart" id= "map">
               <CardBody>
-              <SplineArea assetName = {this.state.geojson.map(f=>f.stop_name)} />
+              <SplineArea factor1={this.state.factor1} factor2={this.state.factor2} factor3={this.state.factor3} assetName = {this.state.geojson.map(f=>f.asset_name)} />
               </CardBody>
               </Card>
             </Col>
@@ -137,12 +226,10 @@ class Dashboard extends React.Component {
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <div className="chart-area">
                     <Bar
-                      data={chartExample3.data}
-                      options={chartExample3.options}
+                      data={this.state.chartExample3.data}
+                      options={this.state.chartExample3.options}
                     />
-                  </div>
                 </CardBody>
               </Card>
             </Col>

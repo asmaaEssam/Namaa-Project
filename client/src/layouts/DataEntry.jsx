@@ -23,7 +23,7 @@ const DataEntry = (props) => {
                 <div className="page-header container" id='dataentry'>
                     <Card id="dataentryMap">
                         <CardBody>
-                            <Maps />
+                            <Maps style='mapbox://styles/mapbox/satellite-v9' token="pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA" height="39.5vw" center={[31.6306, 30.0917]} />
                         </CardBody>
                     </Card> 
                     <Forms/>

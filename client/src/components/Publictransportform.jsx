@@ -42,9 +42,9 @@ const Publictransportform = (props) => {
           <Card>
           <form onSubmit={handleSubmit}>
             <CardHeader>
-              <h2>
-                Feature Data
-              </h2>
+              <h3>
+                Public Transport Datasets
+              </h3>
             </CardHeader>
             <CardBody>
               

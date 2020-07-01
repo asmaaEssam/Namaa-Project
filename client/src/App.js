@@ -16,6 +16,10 @@ import Departments from "./layouts/Departments";
 import DataentryCycleway from "./layouts/DataentryCycleway.jsx";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import FootPathDashboard from "./layouts/footpathDashboard.jsx";
+import StormWaterDashboard from "./layouts/stormwaterDashboard.jsx";
+import CyclewayDashboard from './layouts/CyclewayDashboard'
+import PublicTransportDashboard from './layouts/PublicTransportDashboard'
 function App() {
   const [state, setState] = useState({
     columns: [
@@ -36,17 +40,17 @@ function App() {
       <div className="App">
         {/* <ExamplesNavbar/> */}
         <Switch>
-          <Route path="/dashboard" render={() => <DecisionMaker />} />
+          <Route path="/dashboard" exact render={() => <DecisionMaker />} />
           <Route path="/login" render={(props) => <Login {...props} />}></Route>
 
           {/* render={() => <UserProject></UserProject>}
         /> */}
           <Route exact path="/admin" render={(props) => <Admin />} />
           {/* <Route path="/project/:projectid" component={ProjectProfile} /> */}
-          <Route
+          {/* <Route
             path="/project"
             render={(props) => <ProjectsMap {...props} />}
-          />
+          /> */}
           <Route
             path="/project/publictransport"
             render={(props) => <ProjectsMap {...props} />}
@@ -59,18 +63,55 @@ function App() {
             path="/project/stormwater"
             render={(props) => <ProjectsMap {...props} />}
           />
-
+          <Route
+            path="/project/cycleway"
+            render={(props) => <ProjectsMap {...props} />}
+          />
+          <Route
+            path="/projects/publictransport"
+            render={(props) => <ProjectsMap {...props} />}
+          />
+          <Route
+            path="/projects/footpath"
+            render={(props) => <ProjectsMap {...props} />}
+          />
+          <Route
+            path="/projects/stormwater"
+            render={(props) => <ProjectsMap {...props} />}
+          />
+          <Route
+            path="/projects/cycleway"
+            render={(props) => <ProjectsMap {...props} />}
+          />
+          <Route
+            path="/dashboard/footpath" exact
+            render={()=> <FootPathDashboard/>}
+          />
+          <Route
+            path="/dashboard/stormwater" exact
+            render={()=> <StormWaterDashboard/>}
+          />
+          <Route
+            path="/dashboard/cycleway" exact
+            render={()=> <CyclewayDashboard/>}
+          />
+          <Route
+            path="/dashboard/publictransport" exact
+            render={()=> <PublicTransportDashboard/>}
+          />
           <Route
             path="/admin/projects"
             render={(props) => (
               <AdminProjects {...props} state={state} setState={setState} />
             )}
           />
-
-          {/* <Route path="/dataEntry" render={() => <DataEntry />} /> */}
+          <Route
+            path="/dataEntry/cycleway"
+            render={() => <DataentryCycleway />}
+          />
           <Route
             path="/dataEntry/footpath"
-            render={() => <DataentryCycleway />}
+            render={() => <DataEntry/>}
           />
           <Route
             path="/dataEntry/publictransport"

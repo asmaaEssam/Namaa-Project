@@ -182,7 +182,18 @@ class PagesNavbar extends React.Component {
                   className="inactive"
                   activeClassName="active"
                 >
-                  Footpath & Cycleway
+                  Footpath
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DataEntry" ? (
+                <NavLink
+                  tag={Link}
+                  to="/project/cycleway"
+                  className="inactive"
+                  activeClassName="active"
+                >
+                  Cycleway
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
@@ -198,21 +209,28 @@ class PagesNavbar extends React.Component {
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
-                <NavLink tag={Link} to="/project" className="inactive"
+                <NavLink tag={Link} to="/projects/publictransport" className="inactive"
                 activeClassName="active">
                   Public Transport
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
-                <NavLink tag={Link} to="/project" className="inactive"
+                <NavLink tag={Link} to="/projects/footpath" className="inactive"
                 activeClassName="active">
-                  Footpath & Cycleway
+                  Footpath
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
-                <NavLink tag={Link} to="/project" className="inactive"
+                <NavLink tag={Link} to="/projects/cycleway" className="inactive"
+                activeClassName="active">
+                  Cycleway
+                </NavLink>
+              ) : null}
+              {localStorage.getItem("token") &&
+              localStorage.getItem("role") === "DecisionMaker" ? (
+                <NavLink tag={Link} to="/projects/stormwater" className="inactive"
                 activeClassName="active">
                   Storm water
                 </NavLink>

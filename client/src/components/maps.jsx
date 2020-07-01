@@ -6,12 +6,10 @@ import { useEffect, useState} from "react";
 import axios from "axios";
 import { Layer,Feature, Popup} from "react-mapbox-gl";
 
-const Map = ReactMapboxGl({
-  accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
-});
-
-
 function Maps(props) {
+  const Map = ReactMapboxGl({
+    accessToken:props.token
+  });
   console.log(props.setStateToFeature)
   const [state, setState] = useState([]);
 
@@ -50,11 +48,11 @@ console.log(feature)
   return (
     <div>
       <Map
-      center={[31.6306, 30.0917]}
+      center={props.center}
       zoom={[14]}
-        style='mapbox://styles/mapbox/satellite-v9' // eslint-disable-line
+        style={props.style} // eslint-disable-line
         containerStyle={{
-          height: "39.5vw",
+          height: props.height,
           
         }}
       >

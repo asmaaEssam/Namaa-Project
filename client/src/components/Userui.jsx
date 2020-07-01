@@ -49,7 +49,6 @@ export default function MaterialTableDemo() {
 
     console.log(result.data.message);
     setState({ columns: state.columns, data: result.data });
-    //alert(result.data.message);
 
   }
 

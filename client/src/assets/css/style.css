@@ -4,3 +4,11 @@
 .inactive{
     color: lightgray
 }
+.apexcharts-tooltip {
+    background:#344675 ;
+    color: #f3f3f3;
+  }
+.apexcharts-toolbar-tools-download {
+    background:#344675 ;
+    color: #f3f3f3;
+  }

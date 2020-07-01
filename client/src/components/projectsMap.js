@@ -78,27 +78,10 @@ const ProjectsMap = (props) => {
               id="marker"
               layout={{ "icon-image": "marker-15" }}
             ></Layer>
-            {/* <Popup
-            coordinates={[31.6306, 30.0917]}
-            offset={{
-              "bottom-left": [12, -38],
-              bottom: [0, -38],
-              "bottom-right": [-12, -38],
-            }}
-          >
-            <img
-              src="n08A8NO.jpg"
-              width="100px"
-              height="100px"
-              alt="Smiley face"
-            />
-          </Popup> */}
             {state[0] !== undefined ? (
               state.map((p, i) => (
                 <Popup
                   onClick={() => {
-                    console.log(props.history);
-                    console.log(props.history);
                     console.log(props.history.location.pathname);
                     if (
                       localStorage.getItem("token") &&
@@ -113,7 +96,13 @@ const ProjectsMap = (props) => {
                       props.history.location.pathname === "/project/footpath"
                     ) {
                       props.history.push("/dataEntry/footpath");
-                    } else if (
+                    }  else if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DataEntry" &&
+                      props.history.location.pathname === "/project/cycleway"
+                    ) {
+                      props.history.push("/dataEntry/cycleway");
+                    }else if (
                       localStorage.getItem("token") &&
                       localStorage.getItem("role") === "DataEntry" &&
                       props.history.location.pathname === "/project/stormwater"
@@ -121,11 +110,30 @@ const ProjectsMap = (props) => {
                       props.history.push("/dataEntry/stormwater");
                     } else if (
                       localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DecisionMaker"
+                      localStorage.getItem("role") === "DecisionMaker" &&
+                      props.history.location.pathname === "/projects/stormwater"
                     ) {
-                      props.history.push("/dashboard");
+                      props.history.push("/dashboard/stormwater");
+                    }else if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DecisionMaker" &&
+                      props.history.location.pathname === "/projects/cycleway"
+                    ) {
+                      props.history.push("/dashboard/cycleway");
+                    }else if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DecisionMaker" &&
+                      props.history.location.pathname === "/projects/footpath"
+                    ) {
+                      props.history.push("/dashboard/footpath");
+                    }else if (
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("role") === "DecisionMaker" &&
+                      props.history.location.pathname === "/projects/publictransport"
+                    ) {
+                      props.history.push("/dashboard/publictransport");
                     } else {
-                      props.history.push("/home");
+                      props.history.push("/");
                     }
                   }}
                   coordinates={p.location.coordinates}
@@ -136,7 +144,7 @@ const ProjectsMap = (props) => {
                   }}
                 >
                   <img
-                    src={`project${i}.jpg`}
+                    src={`/project${i}.jpg`}
                     width="100px"
                     height="100px"
                     alt="Smiley face"

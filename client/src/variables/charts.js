@@ -48,6 +48,7 @@ let chart1_2_options = {
     ]
   }
 };
+
 let geoJson = {
   type:"FeatureCollection", features: [
     {type:"Feature",geometry:{type:"Point",coordinates:[31.613116,30.089831]},properties:{"FID_1":"04bbb223d23feaa00d3676bd025ff2c5",stop_name:"station_0",Overall_ra:1,Rating_Dat:"1899-11-30T00:00:00.000Z",ACR_distri:0,Oper_statu:"in use",general_co:50,Remain_lif:5,Asset_age:20}},
@@ -211,9 +212,9 @@ let chartExample3 = {
       display: false
     },
     tooltips: {
-      backgroundColor: "#f5f5f5",
-      titleFontColor: "#333",
-      bodyFontColor: "#666",
+      backgroundColor: "#344675",
+      titleFontColor: "#e14eca",
+      bodyFontColor: "#f3f3f3",
       bodySpacing: 4,
       xPadding: 12,
       mode: "nearest",
