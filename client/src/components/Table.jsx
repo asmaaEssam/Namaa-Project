@@ -26,15 +26,8 @@ export default function MaterialTableDemo(props) {
     const result = await axios.post(
       'http://localhost:9000/projects/add',newProject
     );
-    setState({columns: state.columns,
-  data:[...state.data , result.data],
-      tableRef: React.createRef(),
-      selected: false,
-      selectedRowId: null,
-      c: "blue",
-      currentRow: {}});
-      console.log(state)
-  };
+    setState({data:[...state.data , result.data]});
+   }
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -52,77 +45,34 @@ export default function MaterialTableDemo(props) {
     setPage(0);
   };
 
-  const history = useHistory();
-
-  async function handleClick(project) {
-    history.push(`/project/${project._id}`);
-    const result = await axios.get(
-      'http://localhost:9000/projects/' + project._id,
-    );
-    console.log(result)
-    setState({
-      project: result.data});
-  }
-
-  function handleStyle(rowData) {
-    console.log(rowData);
-      //  setState({ currentRow: rowData });
-      console.log(state)
-      // console.log(state.currentRow)
-      //   console.log(state.tableRef);
-      //   console.log(rowData.tableData.id)
-        // if (rowData.tableData.id === state.selectedRowId) {
-        //  setState({ selected: false });
-        //  setState({ selectedRowId: null });
-        //  console.log("yes")
-        // } else {
-        //  setState({ selected: true,
-        //             selectedRowId: rowData.tableData.id  });
-        //  console.log("no")
-        // console.log(state.selected)
-        // }
-  }
-
-
   return (
     <MaterialTable
-      options={{
-        rowStyle: rowData => ({
-          backgroundColor:
-           state.selected &&
-            rowData.tableData.id ===state.selectedRowId
-              ?state.c
-              : "#fff"
-        })
-      }}
       title="All Projects"
       columns={state.columns}
-      data={state.data}
-      onRowClick={(event, rowData) => {
-        handleClick(rowData);
-      }}
+      data={props.data}
+      // onRowClick={(event, rowData) => {
+      //   handleClick(rowData);
+      // }}
       editable={{
         onRowAdd: (newData) =>
           new Promise((resolve) => {
             resolve();
             addProject(newData);
           }),
-          // ToDo onDelete from database
+          onRowUpdate: (newData, oldData) =>
+          new Promise((resolve) => {
+            resolve();
+            props.editProject(oldData._id, newData);
+          }),
           onRowDelete: (oldData) =>
           new Promise((resolve) => {
-            setTimeout(() => {
               resolve();
-              setState((prevState) => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
-            }, 600);
+              props.deleteProject(oldData._id)
           }),
       }}
       onRowClick={(event, rowData) => {
         // if the rowData.tableDate.id could be used on condidtional render
-        handleStyle(rowData);
+        
       }}
       
       localization={{

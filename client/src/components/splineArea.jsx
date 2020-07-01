@@ -1,29 +1,82 @@
 import React, { useState,useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import axios from 'axios';
+import '../assets/css/style.css'
 
 const SplineArea =(props)=> {
+  console.log(props)
     const [state,setState] = useState(
         {
       
-            series: [{
-              name: 'factor 1',
-              data: [31, 40, 28, 51, 42, 109, 100,31, 40, 28, 51, 42, 109, 100,31, 40, 28, 51, 42, 109, 100,31, 40, 28, 51, 42, 109, 100,31, 40, 28, 51, 42, 109, 100]
-            }, {
-              name: 'factor 2',
-              data: [11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41]
-            },{
-                name: 'factor 3',
-                data: [31, 40, 38, 21, 32, 90, 80,31, 40, 38, 21, 32, 90, 80,31, 40, 38, 21, 32, 90, 80,31, 40, 38, 21, 32, 90, 80,31, 40, 38, 21, 32, 90, 80]
-              }, {
-                name: 'factor 4',
-                data: [11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41,11, 32, 45, 32, 34, 52, 41]
-              }],
+            series: [],
             options: {
               chart: {
+                toolbar: {
+                  show: true,
+                  offsetX: 0,
+                  offsetY: 0,
+                  tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true | '<img src="/static/icons/reset.png" width="20">',
+                    customIcons: []
+                  },
+                  export: {
+                    csv: {
+                      filename: undefined,
+                      columnDelimiter: ',',
+                      headerCategory: 'category',
+                      headerValue: 'value',
+                      dateFormatter(timestamp) {
+                        return new Date(timestamp).toDateString()
+                      }
+                    }
+                  },
+                  autoSelected: 'zoom' 
+                },
                 height: 350,
                 type: 'area'
-              },
+              },tooltip: {
+                enabled: true,
+                enabledOnSeries: undefined,
+                shared: true,
+                followCursor: false,
+                intersect: false,
+                inverseOrder: false,
+                custom: undefined,
+                fillSeriesColor: false,
+                theme: false,
+                style: {
+                  fontSize: '12px',
+                  fontFamily: undefined,
+                },
+                onDatasetHover: {
+                    highlightDataSeries: false,
+                },
+                x: {
+                    show: true,
+                    formatter: undefined,
+                },
+                y: {
+                    formatter: undefined,
+                    title: {
+                        formatter: (seriesName) => seriesName,
+                    },
+                },
+                marker: {
+                    show: true,
+                },
+                fixed: {
+                    enabled: false,
+                    position: 'topRight',
+                    offsetX: 0,
+                    offsetY: 0,
+                },
+            },
               dataLabels: {
                 enabled: false
               },
@@ -43,7 +96,7 @@ const SplineArea =(props)=> {
               },
               xaxis: {
                 type: 'string',
-                categories: props.assetName,
+                categories: [],
                 labels: {
                     show: true,
                     rotate: -45,
@@ -78,9 +131,9 @@ const SplineArea =(props)=> {
     inverseOrder: false,
     width: undefined,
     height: undefined,
-    tooltipHoverFormatter: undefined,
+    tooltipHoverFormatter: false,
     offsetX: 0,
-    offsetY: 0,
+    offsetY: 5,
     labels: {
         colors: ["#9e9e9e"],
         useSeriesColors: false
@@ -107,14 +160,31 @@ const SplineArea =(props)=> {
     onItemHover: {
         highlightDataSeries: true
     },
-}
-
-            }
-        })
+  }}})
+  useEffect(() => {
+    setState({
+      series : [{
+        name: props.factor1.name,
+        data: props.factor1.data
+      }, {
+        name: props.factor2.name,
+        data: props.factor2.data
+      },{
+        name: props.factor3.name,
+        data: props.factor3.data
+        }],
+        options : {
+          xaxis: {
+            type: 'string',
+            categories: props.assetName
+        }
+      }
+    })
+  }, [props])
 
         return (
             <div id="chart">
-            <Chart options={state.options} series={state.series} type="area" height={265} />
+            <Chart options={state.options} series={state.series} type="area" height={325} />
             </div>
         )
 }

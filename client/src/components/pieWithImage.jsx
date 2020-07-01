@@ -2,14 +2,9 @@ import React, { useState,useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
 const PieWithImage =(props)=> {
-    let arr = [props.series["in use"],props.series["dismissed"],props.series["removed"]];
-    const sum = arr.reduce(function(a, b){
-      return a + b;
-      }, 0)
-      const seriesArr = arr.map(x=> parseInt((x/sum) *100))
     const [state,setState] = useState( {
       
-        series: seriesArr,
+        series: [],
         options: {
           labels: ['In-Use', 'Dismissed', 'Removed'],
           chart: {
@@ -17,15 +12,6 @@ const PieWithImage =(props)=> {
             type: 'pie',
           },
           colors: [ '#E5C6A0', '#669DB5', '#94A74A'],
-          fill: {
-            type: 'image',
-            opacity: 0.85,
-            image: {
-               src: ['./inuse.jpg','./inuse.jpg','../assets/img/julie.jpeg'],
-              width: 25,
-              imagedHeight: 25
-            },
-          },
           stroke: {
             width: 4
           },
@@ -59,7 +45,14 @@ const PieWithImage =(props)=> {
           }]
         }
       })
-
+useEffect(() => {
+  let arr = [props.series["in use"],props.series["dismissed"],props.series["removed"]];
+  const sum = arr.reduce(function(a, b){
+    return a + b;
+    }, 0)
+    const seriesArr = arr.map(x=> parseInt((x/sum) *100))
+    setState({series:seriesArr})
+}, [props])
       return (
         
 

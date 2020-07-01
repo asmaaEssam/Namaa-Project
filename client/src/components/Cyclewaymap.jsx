@@ -6,12 +6,10 @@ import { useEffect, useState} from "react";
 import axios from "axios";
 import { Layer,Feature, Popup} from "react-mapbox-gl";
 
-const Map = ReactMapboxGl({
-  accessToken:"pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
-});
-
-
 function Cyclewaymap(props) {
+  const Map = ReactMapboxGl({
+    accessToken: props.token
+  });
   console.log(props.setStateToFeature)
   const [state, setState] = useState([]);
 
@@ -50,20 +48,15 @@ console.log(feature)
   return (
     <div>
       <Map
-      center={[31.6306, 30.0917]}
-      zoom={[13]}
-        style='mapbox://styles/mapbox/satellite-v9' // eslint-disable-line
+      center={props.center}
+      zoom={[15]}
+        style={props.style} // eslint-disable-line
         containerStyle={{
-          height: "39.5vw",
+          height: props.height,
           
         }}
       >
         <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
-        {/* {state.map((p) => (
-            <Popup{...p} coordinates={p.geometry.coordinates[0]} onClick={()=>handleClick(p)}  anchor="top-right" offset={[9,0]} />
-       
-           ) )} */}
-          
         <Layer
         
           type="line"
