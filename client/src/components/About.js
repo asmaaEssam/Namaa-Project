@@ -75,23 +75,23 @@ class About extends React.Component {
     };
   }
   componentDidMount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.className += " perfect-scrollbar-on";
-      document.documentElement.classList.remove("perfect-scrollbar-off");
-      let tables = document.querySelectorAll(".table-responsive");
-      for (let i = 0; i < tables.length; i++) {
-        ps = new PerfectScrollbar(tables[i]);
-      }
-    }
-    document.body.classList.toggle("profile-page");
+    // if (navigator.platform.indexOf("Win") > -1) {
+    //   document.documentElement.className += " perfect-scrollbar-on";
+    //   document.documentElement.classList.remove("perfect-scrollbar-off");
+    //   let tables = document.querySelectorAll(".table-responsive");
+    //   for (let i = 0; i < tables.length; i++) {
+    //     ps = new PerfectScrollbar(tables[i]);
+    //   }
+    // }
+    // document.body.classList.toggle("profile-page");
   }
   componentWillUnmount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps.destroy();
-      document.documentElement.className += " perfect-scrollbar-off";
-      document.documentElement.classList.remove("perfect-scrollbar-on");
-    }
-    document.body.classList.toggle("profile-page");
+    // if (navigator.platform.indexOf("Win") > -1) {
+    //   ps.destroy();
+    //   document.documentElement.className += " perfect-scrollbar-off";
+    //   document.documentElement.classList.remove("perfect-scrollbar-on");
+    // }
+    // document.body.classList.toggle("profile-page");
   }
   toggleTabs = (e, stateName, index) => {
     e.preventDefault();
@@ -146,17 +146,6 @@ class About extends React.Component {
                             Our Model
                           </NavLink>
                         </NavItem>
-                        {/* <NavItem>
-                          <NavLink
-                            className={classnames({
-                              active: this.state.tabs === 3,
-                            })}
-                            onClick={(e) => this.toggleTabs(e, "tabs", 3)}
-                            href="#pablo"
-                          >
-                            News
-                          </NavLink>
-                        </NavItem> */}
                       </Nav>
                       <TabContent
                         className="tab-subcategories"
