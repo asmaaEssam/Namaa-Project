@@ -323,7 +323,7 @@ class Dashboard extends React.Component {
                       <thead>
                         <tr>
                           <th className="text-center">#</th>
-                          <th>Asset Name</th>
+                          <th className="text-center">Asset Name</th>
 
                           <th className="text-center">General Condition</th>
                         </tr>
