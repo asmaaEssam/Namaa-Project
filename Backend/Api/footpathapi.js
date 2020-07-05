@@ -110,14 +110,27 @@ footpathRouter.post("/add", async (req, res, next) => {
       Remain_lif: Remain_lif,
     };
 
-    Footpath.updateOne({ _id }, newdata)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((error) => {
-        req.statusCode = 405;
-        next(error);
-      });
+    Footpath.exists({ _id }).then((data) => {
+      if (data) {
+        Footpath.updateOne({ _id }, newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      } else {
+        Footpath.create(newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      }
+    });
   } catch (error) {
     req.statusCode = 405;
     next(error);

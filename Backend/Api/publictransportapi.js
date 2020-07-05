@@ -40,15 +40,15 @@ publictransRouter.post("/addfeature", async (req, res, next) => {
       surveyorname,
       Rating_Dat,
       LevelOf_modal_integration_service,
-        bus_punctuality,
-        train_punctuality,
-        ferry_punctuality,
-        perceived_qualityof_service,
-        acess_passenger_info,
-        avail_infowith_ptservice,
-        mobilityofInhabitant,
-        passengerDemand,
-        serviceEffeciency,
+      bus_punctuality,
+      train_punctuality,
+      ferry_punctuality,
+      perceived_qualityof_service,
+      acess_passenger_info,
+      avail_infowith_ptservice,
+      mobilityofInhabitant,
+      passengerDemand,
+      serviceEffeciency,
       Oper_statu,
       Asset_age,
       general_co,
@@ -88,35 +88,48 @@ publictransRouter.post("/add", async (req, res, next) => {
     } = req.body;
     console.log(_id);
     const newdata = {
-        asset_name:asset_name,
-        geometry:geometry,
-        surveyorname:surveyorname,
-        Rating_Dat:Rating_Dat,
-        LevelOf_modal_integration_service:LevelOf_modal_integration_service,
-        bus_punctuality:bus_punctuality,
-        train_punctuality:train_punctuality,
-        ferry_punctuality:ferry_punctuality,
-        perceived_qualityof_service:perceived_qualityof_service,
-        acess_passenger_info:acess_passenger_info,
-        avail_infowith_ptservice:avail_infowith_ptservice,
-        mobilityofInhabitant:mobilityofInhabitant,
-        passengerDemand:passengerDemand,
-        serviceEffeciency:serviceEffeciency,
-        Oper_statu:Oper_statu,
-        Asset_age:Asset_age,
-        general_co:general_co,
-        Overall_ra:Overall_ra,
-        Remain_lif:Remain_lif,
+      asset_name: asset_name,
+      geometry: geometry,
+      surveyorname: surveyorname,
+      Rating_Dat: Rating_Dat,
+      LevelOf_modal_integration_service: LevelOf_modal_integration_service,
+      bus_punctuality: bus_punctuality,
+      train_punctuality: train_punctuality,
+      ferry_punctuality: ferry_punctuality,
+      perceived_qualityof_service: perceived_qualityof_service,
+      acess_passenger_info: acess_passenger_info,
+      avail_infowith_ptservice: avail_infowith_ptservice,
+      mobilityofInhabitant: mobilityofInhabitant,
+      passengerDemand: passengerDemand,
+      serviceEffeciency: serviceEffeciency,
+      Oper_statu: Oper_statu,
+      Asset_age: Asset_age,
+      general_co: general_co,
+      Overall_ra: Overall_ra,
+      Remain_lif: Remain_lif,
     };
 
-    Publictransport.updateOne({ _id }, newdata)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((error) => {
-        req.statusCode = 405;
-        next(error);
-      });
+    Publictransport.exists({ _id }).then((data) => {
+      if (data) {
+        Publictransport.updateOne({ _id }, newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      } else {
+        Publictransport.create(newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      }
+    });
   } catch (error) {
     req.statusCode = 405;
     next(error);

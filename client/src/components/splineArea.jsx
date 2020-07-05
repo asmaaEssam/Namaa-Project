@@ -1,8 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import axios from 'axios';
 import '../assets/css/style.css'
-
 const SplineArea =(props)=> {
   console.log(props)
     const [state,setState] = useState(
