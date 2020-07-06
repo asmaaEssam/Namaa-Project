@@ -96,15 +96,27 @@ cyclewayRouter.post("/add", async (req, res, next) => {
       Overall_ra: Overall_ra,
       Remain_lif: Remain_lif,
     };
-
-    Cycleway.updateOne({ _id }, newdata)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((error) => {
-        req.statusCode = 405;
-        next(error);
-      });
+    Cycleway.exists({ _id }).then((data) => {
+      if (data) {
+        Cycleway.updateOne({ _id }, newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      } else {
+        Cycleway.create(newdata)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((error) => {
+            req.statusCode = 405;
+            next(error);
+          });
+      }
+    });
   } catch (error) {
     req.statusCode = 405;
     next(error);

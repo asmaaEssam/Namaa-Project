@@ -1,36 +1,39 @@
-import React from 'react'
-import ExamplesNavbar from '../components/ExamplesNavbar'
-import Footer from '../components/Footer'
-import Maps from '../components/maps';
-import Forms from '../components/Forms'
-import './layoutStyles.css';
-import DashboardMap from '../components/Map';
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardTitle,
-    Row,
-    Col,
-  } from "reactstrap";
+import React, { useState } from "react";
+import ExamplesNavbar from "../components/ExamplesNavbar";
+import Footer from "../components/Footer";
+import Maps from "../components/maps";
+import Forms from "../components/Forms";
+import "./layoutStyles.css";
+import { Card, CardBody } from "reactstrap";
 
 const DataEntry = (props) => {
-   
-    console.log(props)
-    return ( 
-    <div>   
-      <ExamplesNavbar/>
-                <div className="page-header container" id='dataentry'>
-                    <Card id="dataentryMap">
-                        <CardBody>
-                            <Maps style='mapbox://styles/mapbox/satellite-v9' token="pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA" height="39.5vw" center={[31.6306, 30.0917]} />
-                        </CardBody>
-                    </Card> 
-                    <Forms/>
-                </div>
-        <Footer/>
-        </div>
-     );
-}
- 
+  const [state, setState] = useState([]);
+
+  const setStateToFeature = (feature) => {
+    // 3: state is the selected feature
+
+    setState(feature);
+  };
+  console.log(props);
+  return (
+    <div>
+      <ExamplesNavbar />
+      <div className="page-header container" id="dataentry">
+        <Card id="dataentryMap">
+          <CardBody>
+            <Maps
+              setStateToFeature={setStateToFeature}
+              style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re"
+              height="39.5vw"
+              center={[31.639448, 30.101757]}
+            />
+          </CardBody>
+        </Card>
+        <Forms stateFromDataEntry={state} />
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
 export default DataEntry;

@@ -2,69 +2,72 @@ import React from "react";
 import ReactMapboxGl from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Layer,Feature, Popup} from "react-mapbox-gl";
+import { Layer, Feature } from "react-mapbox-gl";
 
+const Map = ReactMapboxGl({
+  accessToken:
+    "pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA",
+});
 function Stormwatermap(props) {
-  const Map = ReactMapboxGl({
-    accessToken:props.token
-  });
-  console.log(props.setStateToFeature)
+  console.log(props.setStateToFeature);
   const [state, setState] = useState([]);
 
   useEffect(() => {
-   const fetchData= async () => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:9000/stormwater/", {})
+        .then((res) => {
+          console.log(res.data);
+          setState(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchData();
 
-     await axios
-       .get("http://localhost:9000/stormwater/",{})
-       .then((res) => {
-         console.log(res.data);
-         setState(res.data)
-        
-       })
-       .catch((error) => {
-         console.log(error);
-       });
-      
-   };
-   fetchData();
-   
- console.log(state)
- }, []);
+    console.log(state);
+  }, []);
 
-const handleClick=(feature)=>{
-props.setStateToFeature(feature)
-console.log(feature)
-}
- const onDrawCreate = ({ features }) => {
-   console.log(features);
- };
- 
-  const onDrawUpdate = ({ features }) => {
-    console.log(features);
+  const handleClick = (feature) => {
+    props.setStateToFeature(feature);
+    console.log(feature);
   };
-  
+  const onDrawCreate = ({ features }) => {
+    console.log({ ...features });
+    props.setStateToFeature(features[0]);
+  };
+
   return (
     <div>
       <Map
-      center={props.center}
-      zoom={[13]}
-        style= {props.style} // eslint-disable-line
+        center={props.center}
+        zoom={[13]}
+        style={props.style} // eslint-disable-line
         containerStyle={{
           height: props.height,
-          
         }}
       >
-        <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
-        <Layer type="circle" id="marker" paint={{
-                  'circle-color': "#e14eca",
-                  'circle-stroke-width': 1,
-                  'circle-stroke-color': '#fff',
-                  'circle-stroke-opacity': 1
-                }}>
-          {state.map((p,) => (
-            <Feature{...p} coordinates={p.geometry.coordinates} onClick={()=>handleClick(p)}  />))}
+        <DrawControl onDrawCreate={onDrawCreate} />
+        <Layer
+          type="circle"
+          id="marker"
+          paint={{
+            "circle-color": "#e14eca",
+            "circle-stroke-width": 1,
+            "circle-stroke-color": "#fff",
+            "circle-stroke-opacity": 1,
+          }}
+        >
+          {state.map((p) => (
+            <Feature
+              {...p}
+              coordinates={p.geometry.coordinates}
+              onClick={() => handleClick(p)}
+            />
+          ))}
         </Layer>
       </Map>
     </div>

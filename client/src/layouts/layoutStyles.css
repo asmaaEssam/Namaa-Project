@@ -3,6 +3,8 @@
     flex-direction: row;
     margin-top: 10%;
     justify-content: space-around;
+    margin-left: 10%;
+
 }
 #adminProjects{
     margin-top: 10%;
@@ -60,3 +62,4 @@ border-radius: 15px;
     margin-left: 20px;
     margin-right: 20px;
   }
+ 

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import ReactMapboxGl, { Layer, Popup, Feature } from "react-mapbox-gl";
+import React, {useState } from "react";
+import ReactMapboxGl from "react-mapbox-gl";
 import "../assets/scss/blk-design-system-react.scss";
 import "../assets/css/nucleo-icons.css";
 
