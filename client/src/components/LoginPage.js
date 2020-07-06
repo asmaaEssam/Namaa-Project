@@ -66,13 +66,9 @@ class LoginPage extends React.Component {
           console.log(response);
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("role", response.data.user.role);
-          if (response.data.user.role === "DecisionMaker") {
-            this.props.history.push("/projects/publictransport");
-          } else if (response.data.user.role === "DataEntry") {
-            this.props.history.push("/project/publictransport");
-          } else {
-            this.props.history.push("/admin/projects");
-          }
+            this.props.history.push("/");
+
+
         })
         .catch((error) => {
           console.log(error);
