@@ -35,7 +35,6 @@ function Publictransportmap(props) {
 
   const handleClick = (feature) => {
     props.setStateToFeature(feature);
-    console.log(feature);
   };
   const onDrawCreate = ({ features }) => {
     console.log({ ...features });

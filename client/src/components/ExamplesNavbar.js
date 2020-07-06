@@ -151,7 +151,7 @@ class PagesNavbar extends React.Component {
                   tag={Link}
                   to="/admin/projects"
                   className="inactive"
-                  activeClassName="active"
+                  activeclassname="active"
                 >
                   Projects
                 </NavLink>
@@ -159,7 +159,7 @@ class PagesNavbar extends React.Component {
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "Admin" ? (
                 <NavLink tag={Link} to="/admin/departments" className="inactive"
-                activeClassName="active">
+                activeclassname="active">
                   Departments
                 </NavLink>
               ) : null}
@@ -169,7 +169,7 @@ class PagesNavbar extends React.Component {
                   tag={Link}
                   to="/project/publictransport"
                   className="inactive"
-                  activeClassName="active"
+                  activeclassname="active"
                 >
                   Public Transport
                 </NavLink>
@@ -180,7 +180,7 @@ class PagesNavbar extends React.Component {
                   tag={Link}
                   to="/project/footpath"
                   className="inactive"
-                  activeClassName="active"
+                  activeclassname="active"
                 >
                   Footpath
                 </NavLink>
@@ -191,7 +191,7 @@ class PagesNavbar extends React.Component {
                   tag={Link}
                   to="/project/cycleway"
                   className="inactive"
-                  activeClassName="active"
+                  activeclassname="active"
                 >
                   Cycleway
                 </NavLink>
@@ -202,7 +202,7 @@ class PagesNavbar extends React.Component {
                   tag={Link}
                   to="/project/stormwater"
                   className="inactive"
-                  activeClassName="active"
+                  activeclassname="active"
                 >
                   Storm water
                 </NavLink>
@@ -210,28 +210,28 @@ class PagesNavbar extends React.Component {
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
                 <NavLink tag={Link} to="/projects/publictransport" className="inactive"
-                activeClassName="active">
+                activeclassname="active">
                   Public Transport
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
                 <NavLink tag={Link} to="/projects/footpath" className="inactive"
-                activeClassName="active">
+                activeclassname="active">
                   Footpath
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
                 <NavLink tag={Link} to="/projects/cycleway" className="inactive"
-                activeClassName="active">
+                activeclassname="active">
                   Cycleway
                 </NavLink>
               ) : null}
               {localStorage.getItem("token") &&
               localStorage.getItem("role") === "DecisionMaker" ? (
                 <NavLink tag={Link} to="/projects/stormwater" className="inactive"
-                activeClassName="active">
+                activeclassname="active">
                   Storm water
                 </NavLink>
               ) : null}
@@ -239,7 +239,7 @@ class PagesNavbar extends React.Component {
                 tag={Link}
                 to="/about"
                 className="inactive"
-                activeClassName="active"
+                activeclassname="active"
               >
                 About
               </NavLink>
@@ -247,7 +247,7 @@ class PagesNavbar extends React.Component {
                 tag={Link}
                 to="/contact"
                 className="inactive"
-                activeClassName="active"
+                activeclassname="active"
               >
                 Contact us
               </NavLink>

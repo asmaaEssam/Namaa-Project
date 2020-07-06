@@ -81,6 +81,7 @@ const ProjectsMap = (props) => {
             {state[0] !== undefined ? (
               state.map((p, i) => (
                 <Popup
+                key = {i}
                   onClick={() => {
                     console.log(props.history.location.pathname);
                     if (
