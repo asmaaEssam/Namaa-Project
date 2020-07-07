@@ -31,7 +31,7 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
-      <ExamplesNavbar/>
+        <ExamplesNavbar />
         <div className="wrapper">
           <section
             style={{
@@ -80,7 +80,7 @@ class LandingPage extends React.Component {
                           <p>
                             Each asset has its own profile in our app which
                             makes it modularized and easy to use. Just choose
-                            the asset you're mose concerned with.
+                            the asset you're most concerned with.
                           </p>
                         </div>
                       </Col>
