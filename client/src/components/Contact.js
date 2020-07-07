@@ -76,8 +76,10 @@ class Contact extends React.Component {
             <Container>
               <Row>
                 <Col md="6">
-                  <h1 className="profile-title text-left">Contact</h1>
-                  <h5 className="text-on-back">Us</h5>
+                  <h1 className="profile-title text-left"></h1>
+                  <h5 className="text-on-back" style={{ fontSize: "60px" }}>
+                    Contact Us
+                  </h5>
                   <Card className="card-plain">
                     <CardHeader></CardHeader>
                     <CardBody>
@@ -147,7 +149,7 @@ class Contact extends React.Component {
                     <CardHeader></CardHeader>
                     <CardBody>
                       <div
-                        style={{ paddingTop: "29vh  " }}
+                        style={{ paddingTop: "129px  " }}
                         className="info info-horizontal"
                       >
                         <div className="icon icon-primary">

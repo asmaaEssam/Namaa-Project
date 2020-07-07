@@ -152,7 +152,7 @@ class About extends React.Component {
                         activeTab={"tab" + this.state.tabs}
                       >
                         <TabPane tabId="tab1">
-                          <Table className="tablesorter" responsive>
+                          <Table className="tablesorter">
                             <tbody>
                               <p>
                                 {" "}

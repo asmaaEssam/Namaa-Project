@@ -9,7 +9,7 @@ import ComponentsNavbar from "../components/IndexNavbar";
 import Footer from "./Footer";
 import Carousel from "react-bootstrap/Carousel";
 import ExamplesNavbar from "./ExamplesNavbar.js";
-import { Card,CardBody } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 
 const useStyles = makeStyles({
   root: {
@@ -51,7 +51,8 @@ const ProjectsMap = (props) => {
     // in render()
     <React.Fragment>
       <ExamplesNavbar />
-      <div className='container'
+      <div
+        className=""
         style={{
           marginTop: "10%",
           marginBottom: "5%",
@@ -61,120 +62,127 @@ const ProjectsMap = (props) => {
           marginRight:"auto",
         }}
       >
-        <Card>
+        <Card style={{ width: "80%", height: "" }}>
           <CardBody>
-          <Box>
-          <Map
-            style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re"
-            containerStyle={{
-              position: "relative",
-              height: "50vh",
-              // width: "70vw",
-              borderRadius: "10px",
-            }}
-            center={[31.6306, 30.0917]}
-            zoom={[13]}
-          >
-            <Layer
-              type="symbol"
-              id="marker"
-              layout={{ "icon-image": "marker-15" }}
-            ></Layer>
-            {state[0] !== undefined ? (
-              state.map((p, i) => (
-                <Popup
-                key = {i}
-                  onClick={() => {
-                    console.log(props.history.location.pathname);
-                    if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DataEntry" &&
-                      props.history.location.pathname ===
-                        "/project/publictransport"
-                    ) {
-                      props.history.push("/dataEntry/publictransport");
-                    } else if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DataEntry" &&
-                      props.history.location.pathname === "/project/footpath"
-                    ) {
-                      props.history.push("/dataEntry/footpath");
-                    }  else if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DataEntry" &&
-                      props.history.location.pathname === "/project/cycleway"
-                    ) {
-                      props.history.push("/dataEntry/cycleway");
-                    }else if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DataEntry" &&
-                      props.history.location.pathname === "/project/stormwater"
-                    ) {
-                      props.history.push("/dataEntry/stormwater");
-                    } else if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DecisionMaker" &&
-                      props.history.location.pathname === "/projects/stormwater"
-                    ) {
-                      props.history.push("/dashboard/stormwater");
-                    }else if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DecisionMaker" &&
-                      props.history.location.pathname === "/projects/cycleway"
-                    ) {
-                      props.history.push("/dashboard/cycleway");
-                    }else if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DecisionMaker" &&
-                      props.history.location.pathname === "/projects/footpath"
-                    ) {
-                      props.history.push("/dashboard/footpath");
-                    }else if (
-                      localStorage.getItem("token") &&
-                      localStorage.getItem("role") === "DecisionMaker" &&
-                      props.history.location.pathname === "/projects/publictransport"
-                    ) {
-                      props.history.push("/dashboard/publictransport");
-                    } else {
-                      props.history.push("/");
-                    }
-                  }}
-                  coordinates={p.location.coordinates}
-                  offset={{
-                    "bottom-left": [12, -38],
-                    bottom: [0, -38],
-                    "bottom-right": [-12, -38],
-                  }}
-                >
-                  <img
-                    src={`/project${i}.jpg`}
-                    width="100px"
-                    height="100px"
-                    alt="Smiley face"
-                  />
-                </Popup>
-              ))
-            ) : (
-              <Popup
-                coordinates={[31.6306, 30.0917]}
-                offset={{
-                  "bottom-left": [12, -38],
-                  bottom: [0, -38],
-                  "bottom-right": [-12, -38],
+            <Box>
+              <Map
+                style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re"
+                containerStyle={{
+                  position: "relative",
+                  height: "80vh",
+                  // width: "70vw",
+                  borderRadius: "10px",
                 }}
+                center={[31.6306, 30.0917]}
+                zoom={[14]}
               >
-                <img
-                  src="n08A8NO.jpg"
-                  width="100px"
-                  height="100px"
-                  alt="Smiley face"
-                />
-              </Popup>
-            )}
-          </Map>
-        </Box>
+                <Layer
+                  type="symbol"
+                  id="marker"
+                  layout={{ "icon-image": "marker-15" }}
+                ></Layer>
+                {state[0] !== undefined ? (
+                  state.map((p, i) => (
+                    <Popup
+                      key={i}
+                      onClick={() => {
+                        console.log(props.history.location.pathname);
+                        if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DataEntry" &&
+                          props.history.location.pathname ===
+                            "/project/publictransport"
+                        ) {
+                          props.history.push("/dataEntry/publictransport");
+                        } else if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DataEntry" &&
+                          props.history.location.pathname ===
+                            "/project/footpath"
+                        ) {
+                          props.history.push("/dataEntry/footpath");
+                        } else if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DataEntry" &&
+                          props.history.location.pathname ===
+                            "/project/cycleway"
+                        ) {
+                          props.history.push("/dataEntry/cycleway");
+                        } else if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DataEntry" &&
+                          props.history.location.pathname ===
+                            "/project/stormwater"
+                        ) {
+                          props.history.push("/dataEntry/stormwater");
+                        } else if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DecisionMaker" &&
+                          props.history.location.pathname ===
+                            "/projects/stormwater"
+                        ) {
+                          props.history.push("/dashboard/stormwater");
+                        } else if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DecisionMaker" &&
+                          props.history.location.pathname ===
+                            "/projects/cycleway"
+                        ) {
+                          props.history.push("/dashboard/cycleway");
+                        } else if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DecisionMaker" &&
+                          props.history.location.pathname ===
+                            "/projects/footpath"
+                        ) {
+                          props.history.push("/dashboard/footpath");
+                        } else if (
+                          localStorage.getItem("token") &&
+                          localStorage.getItem("role") === "DecisionMaker" &&
+                          props.history.location.pathname ===
+                            "/projects/publictransport"
+                        ) {
+                          props.history.push("/dashboard/publictransport");
+                        } else {
+                          props.history.push("/");
+                        }
+                      }}
+                      coordinates={p.location.coordinates}
+                      offset={{
+                        "bottom-left": [12, -38],
+                        bottom: [0, -38],
+                        "bottom-right": [-12, -38],
+                      }}
+                    >
+                      <img
+                        src={`/project${i}.jpg`}
+                        width="100px"
+                        height="100px"
+                        alt="Smiley face"
+                      />
+                    </Popup>
+                  ))
+                ) : (
+                  <Popup
+                    coordinates={[31.6306, 30.0917]}
+                    offset={{
+                      "bottom-left": [12, -38],
+                      bottom: [0, -38],
+                      "bottom-right": [-12, -38],
+                    }}
+                  >
+                    <img
+                      src="n08A8NO.jpg"
+                      width="100px"
+                      height="100px"
+                      alt="Smiley face"
+                    />
+                  </Popup>
+                )}
+              </Map>
+            </Box>
           </CardBody>
-          </Card>
+        </Card>
       </div>
       <Footer />
     </React.Fragment>
