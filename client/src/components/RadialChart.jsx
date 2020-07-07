@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react';
 import Chart from 'react-apexcharts';
 
 const RadialChart=(props)=>{
+  console.log(props)
     const [state,setState] = useState({
             series: [],
             options: {
@@ -66,6 +67,7 @@ const RadialChart=(props)=>{
 
       useEffect(() => {
   const series = parseInt(props.overallPerformance)
+  console.log(series)
   setState({series:[series]})
       }, [props])
 

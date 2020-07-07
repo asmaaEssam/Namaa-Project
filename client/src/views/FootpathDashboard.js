@@ -83,15 +83,16 @@ class Dashboard extends React.Component {
         console.log(computedSeries);
         computedSeries["1"] = 0;
         console.log(computedSeries);
-        const generalCondition = this.state.geojson.map((f) => f.general_co);
+        const generalCondition = this.state.geojson.map((f) => f.general_co)
+        generalCondition.splice(0,1)
         const performance = generalCondition.reduce(function (a, b) {
           return a + b;
         }, 0);
+        console.log(performance)
         let name = this.state.geojson.map((f) => f.asset_name);
         let performanceCondition = this.state.geojson.map((f) => f.general_co);
         const factor1 = { name: "Cracks" };
         factor1.data = this.state.geojson.map((f) => f.cracks);
-        console.log(factor1.data);
         const factor2 = { name: "Erosion" };
         factor2.data = this.state.geojson.map((f) => f.erosion);
         const factor3 = { name: "Fallen Branches" };
@@ -180,6 +181,8 @@ class Dashboard extends React.Component {
           factor2: factor2,
           factor3: factor3,
         });
+      console.log(this.state.performance)
+
       })
       .catch((error) => {
         console.log(error);

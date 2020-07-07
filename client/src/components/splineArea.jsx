@@ -14,7 +14,7 @@ const SplineArea =(props)=> {
                   offsetX: 0,
                   offsetY: 0,
                   tools: {
-                    download: true,
+                    download:true,
                     selection: true,
                     zoom: true,
                     zoomin: true,

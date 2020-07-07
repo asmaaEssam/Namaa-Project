@@ -88,6 +88,7 @@ class Dashboard extends React.Component {
         }, 0);
         let name = this.state.geojson.map((f) => f.asset_name);
         let performanceCondition = this.state.geojson.map((f) => f.general_co);
+        console.log(performanceCondition)
         const factor1 = { name: "bus punctuality" };
         factor1.data = this.state.geojson.map((f) => f.bus_punctuality);
         console.log(factor1.data);
@@ -201,6 +202,9 @@ class Dashboard extends React.Component {
     e.preventDefault();
     this.setState({ ...this.state, [stateName]: index });
   };
+  handleCLick(f){
+    console.log(f)
+  }
   render() {
     return (
       <div id="dashboard">
@@ -251,6 +255,7 @@ class Dashboard extends React.Component {
                 <Card className="card-chart" id="map">
                   <CardBody>
                     <Publictransportmap
+                      setStateToFeature= {this.handleCLick}
                       style="mapbox://styles/asma163/ckbgkzh7457611io4q6k872re"
                       token="pk.eyJ1IjoiYXNtYTE2MyIsImEiOiJja2I0MnJwMm4wYnFvMnJvNnA2NjBmdnN2In0.QVk1j8vEHjmZA0YZOyv7VA"
                       height="44.5vh"
